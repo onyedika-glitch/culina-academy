@@ -1,0 +1,705 @@
+.cal-about-template-page .site-content,
+.cal-about-template-page #content,
+.cal-about-template-page #primary,
+.cal-about-template-page .content-area,
+.cal-about-template-page .site-main {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	max-width: 100%;
+}
+
+.cal-about-template-page .site-content,
+.cal-about-template-page #content {
+	display: block !important;
+}
+
+.cal-about-template-page #primary,
+.cal-about-template-page .content-area {
+	float: none !important;
+	flex: 0 0 100% !important;
+}
+
+.cal-about-template-page .inside-right-sidebar,
+.cal-about-template-page .inside-left-sidebar,
+.cal-about-template-page .sidebar,
+.cal-about-template-page #right-sidebar,
+.cal-about-template-page #left-sidebar {
+	display: none !important;
+}
+
+.cal-about-template-page .container.grid-container,
+.cal-about-template-page .site.grid-container {
+	width: 100%;
+	max-width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.cal-about-shell {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.cal-about-page .cal-text-center {
+	text-align: center;
+}
+
+/* Direct-child fallback when why-header wrapper is absent */
+.cal-about-why > .cal-about-shell > h2 {
+	color: #333;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 28px;
+	line-height: 36.4px;
+	font-weight: 600;
+	margin: 0 0 8px;
+	padding: 0;
+	text-align: center;
+}
+
+.cal-about-why > .cal-about-shell > p {
+	color: #606060;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 24px;
+	font-weight: 400;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+/* Body copy must stay regular weight in every language (headings carry emphasis). */
+.cal-about-page p,
+.cal-about-info-card p,
+.cal-about-story-content p,
+.cal-about-why-header p,
+.cal-about-review-card p {
+	font-weight: 400;
+}
+
+.cal-about-info-card h3,
+.cal-about-why-header h2,
+.cal-about-story-text h2,
+.cal-about-reviews h2,
+.cal-about-cta h2,
+.cal-about-title-banner h1 {
+	font-weight: 600;
+}
+
+.cal-about-page > section {
+	margin: 0;
+}
+
+.cal-about-title-banner {
+	background: #1a1c20;
+	padding: 24px 0 64px;
+}
+
+.cal-about-title-banner h1 {
+	position: relative;
+	margin: 0;
+	padding: 0 0 0 25px;
+	color: #fff;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 36px;
+	line-height: 46.8px;
+	font-weight: 600;
+	font-style: normal;
+	text-transform: none;
+	letter-spacing: normal;
+	text-align: left;
+}
+
+.cal-about-title-banner h1::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 4px;
+	bottom: 4px;
+	width: 2px;
+	background: #ffb703;
+}
+
+.cal-about-breadcrumb-bar {
+	background: #fff;
+	padding: 20px 0 38px;
+}
+
+.cal-about-breadcrumbs {
+	margin: 0;
+	padding: 0 0 18px;
+	border-bottom: 1px solid #e5e7eb;
+	color: #606060;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 24px;
+	font-weight: 400;
+	text-align: start;
+}
+
+.cal-about-breadcrumbs a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.cal-about-breadcrumbs a:hover {
+	color: #ffb606;
+}
+
+.cal-about-breadcrumb-sep {
+	margin: 0 12px;
+	color: #a5acb8;
+}
+
+.cal-about-hero-inner {
+	padding: 76px 0 0;
+	text-align: center;
+}
+
+.cal-about-hero-title {
+	color: #333;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 28px;
+	line-height: 36.4px;
+	font-weight: 600;
+	margin: 0 0 15px;
+	padding: 0;
+	text-align: center;
+}
+
+.cal-about-hero-sub {
+	color: #606060;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 24px;
+	font-weight: 400;
+	max-width: 620px;
+	margin: 0 auto;
+	padding: 0;
+	text-align: center;
+}
+
+/* Why Choose */
+.cal-about-why {
+	padding: 54px 0 18px;
+	background: #eef3fb;
+	text-align: center;
+}
+
+.cal-about-why-header {
+	max-width: 860px;
+	margin: 0 auto;
+}
+
+.cal-about-why-header h2 {
+	color: #333;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 28px;
+	line-height: 36.4px;
+	font-weight: 600;
+	margin: 0 0 8px;
+	padding: 0;
+	text-align: center;
+}
+
+.cal-about-why-header p {
+	color: #606060;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 24px;
+	font-weight: 400;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+/* Info Cards (Philosophy, Training, Pathways) */
+.cal-about-info {
+	background: #eef3fb;
+	padding: 20px 0 52px;
+}
+
+.cal-about-info-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 30px;
+}
+
+.cal-about-info-card {
+	text-align: left;
+	padding: 0;
+}
+
+.cal-about-info-icon {
+	margin-bottom: 0;
+}
+
+.cal-about-info-icon img {
+	display: block;
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.cal-about-info-card h3 {
+	color: #333;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 18px;
+	line-height: 23.4px;
+	font-weight: 600;
+	margin: 15px 0 0;
+	padding: 0;
+	text-align: left;
+	letter-spacing: normal;
+}
+
+.cal-about-info-card p {
+	color: #6c6c6c;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 24px;
+	font-weight: 400;
+	margin: 0 0 10px;
+	padding: 0;
+	text-align: left;
+}
+
+@media (max-width: 768px) {
+	.cal-about-info-grid {
+		grid-template-columns: 1fr;
+		gap: 40px;
+	}
+}
+
+/* Features Grid */
+.cal-about-features {
+	background: #f5f8fc;
+	padding: 40px 0 60px;
+}
+
+.cal-about-features-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 30px;
+}
+
+.cal-about-feature-card {
+	background: #fff;
+	border-radius: 8px;
+	padding: 36px 28px;
+	text-align: center;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.cal-about-feature-icon {
+	margin-bottom: 20px;
+}
+
+.cal-about-feature-icon img {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.cal-about-feature-card h3 {
+	font-size: 15px;
+	font-weight: 700;
+	color: #1a1a1a;
+	margin: 0 0 12px;
+	letter-spacing: 0.5px;
+}
+
+.cal-about-feature-card p {
+	font-size: 14px;
+	line-height: 1.7;
+	color: #555;
+	margin: 0;
+}
+
+/* Story Section */
+.cal-about-story {
+	padding: 64px 0 42px;
+	background: #fff;
+}
+
+.cal-about-story-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 52px;
+	align-items: stretch;
+	border-top: 1px solid #e5e7eb;
+	padding-top: 10px;
+}
+
+.cal-about-story-text h2 {
+	color: #222;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 28px;
+	line-height: 36.4px;
+	font-weight: 600;
+	margin: 20px 0;
+	padding: 0;
+	text-align: start;
+}
+
+.cal-about-story-content p {
+	color: #444;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	line-height: 27.2px;
+	font-weight: 400;
+	margin: 0 0 15px;
+	padding: 0;
+	text-align: start;
+}
+
+.cal-about-story-content p:last-child {
+	margin-bottom: 0;
+}
+
+.cal-about-story-content {
+	max-height: none;
+	overflow: visible;
+}
+
+.cal-about-read-more {
+	display: none;
+	margin-top: 16px;
+	padding: 10px 24px;
+	background: #FFB606;
+	color: #444;
+	border: none;
+	border-radius: 4px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.cal-about-read-more:hover {
+	background: #e5a300;
+}
+
+.cal-about-hidden {
+	display: none;
+}
+
+.cal-about-story-video {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 11;
+	overflow: hidden;
+	background: #000;
+	border-radius: 0;
+}
+
+.cal-about-story-video iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+.cal-about-cta {
+	background: #f5f5f5;
+	text-align: center;
+	padding: 42px 20px 58px;
+}
+
+.cal-about-cta h2 {
+	color: #333;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 28px;
+	line-height: 24px;
+	font-weight: 600;
+	margin: 0 0 24px;
+	padding: 0;
+	text-align: center;
+}
+
+.cal-about-cta-btn {
+	display: inline-block;
+	padding: 12px 36px;
+	background: #FFB606;
+	color: #000;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height: 22.5px;
+	font-weight: 500;
+	text-decoration: none;
+	text-transform: uppercase;
+	border-radius: 3px;
+	transition: background 0.2s;
+}
+
+.cal-about-cta-btn:hover {
+	background: #e5a300;
+	color: #000;
+}
+
+.cal-about-reviews {
+	background: #fff;
+	padding: 54px 0 92px;
+	text-align: center;
+}
+
+.cal-about-reviews h2 {
+	color: #333;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 28px;
+	line-height: 36.4px;
+	font-weight: 600;
+	margin: 0 0 70px;
+	padding: 0;
+	text-align: center;
+}
+
+.cal-about-reviews-slider {
+	position: relative;
+	margin-bottom: 58px;
+	padding: 0 44px;
+}
+
+.cal-about-reviews-viewport {
+	overflow: hidden;
+}
+
+.cal-about-reviews-track {
+	display: flex;
+	align-items: flex-start;
+	transition: transform 0.35s ease;
+	will-change: transform;
+}
+
+.cal-about-review-card {
+	flex: 0 0 25%;
+	padding: 0 24px;
+	text-align: center;
+}
+
+.cal-about-reviews-arrow {
+	position: absolute;
+	top: 84px;
+	z-index: 2;
+	display: grid;
+	place-items: center;
+	width: 36px;
+	height: 36px;
+	padding: 0;
+	border: 1px solid #d8dce5;
+	border-radius: 50%;
+	background: #fff;
+	color: #333;
+	font-size: 28px;
+	line-height: 1;
+	cursor: pointer;
+	transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.cal-about-reviews-arrow:hover,
+.cal-about-reviews-arrow:focus-visible {
+	background: #ffb606;
+	border-color: #ffb606;
+	color: #000;
+	outline: none;
+}
+
+.cal-about-reviews-arrow:disabled {
+	opacity: 0.35;
+	cursor: default;
+}
+
+.cal-about-reviews-arrow:disabled:hover {
+	background: #fff;
+	border-color: #d8dce5;
+	color: #333;
+}
+
+.cal-about-reviews-prev {
+	left: 0;
+}
+
+.cal-about-reviews-next {
+	right: 0;
+}
+
+.cal-about-review-image {
+	display: block;
+	width: 190px;
+	height: 190px;
+	margin: 0 auto 34px;
+	padding: 8px;
+	border: 2px dashed #d7d4ff;
+	border-radius: 50%;
+	background: #f6f6f6;
+	text-decoration: none;
+}
+
+.cal-about-review-image img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	object-fit: contain;
+	background: #f6f6f6;
+}
+
+.cal-about-review-card h3 {
+	color: #333;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 16.5px;
+	line-height: 24px;
+	font-weight: 500;
+	margin: 0 0 8px;
+	padding: 0;
+	text-align: center;
+}
+
+.cal-about-review-card p {
+	color: #606060;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 24px;
+	font-weight: 400;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+.cal-about-reviews-btn {
+	display: inline-block;
+	padding: 12px 38px;
+	background: #ffb606;
+	color: #000;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height: 22.5px;
+	font-weight: 500;
+	text-transform: uppercase;
+	text-decoration: none;
+	border-radius: 6px;
+}
+
+.cal-about-reviews-btn:hover {
+	background: #e5a300;
+	color: #000;
+}
+
+
+@media (max-width: 1024px) {
+	.cal-about-features-grid {
+		gap: 20px;
+	}
+
+	.cal-about-review-card {
+		flex-basis: 33.3333%;
+		padding: 0 18px;
+	}
+}
+
+@media (max-width: 768px) {
+	.cal-about-title-banner {
+		padding: 24px 0 42px;
+	}
+
+	.cal-about-title-banner h1 {
+		font-size: 30px;
+		line-height: 39px;
+	}
+
+	.cal-about-breadcrumb-bar {
+		padding: 16px 0 30px;
+	}
+
+	.cal-about-hero-inner {
+		padding-top: 50px;
+	}
+
+	.cal-about-features-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.cal-about-story-grid {
+		grid-template-columns: 1fr;
+		gap: 32px;
+	}
+
+	.cal-about-story {
+		padding: 46px 0 36px;
+	}
+
+	.cal-about-story-content {
+		max-height: 120px;
+		overflow: hidden;
+		position: relative;
+		transition: max-height 0.4s ease;
+	}
+
+	.cal-about-story-content.cal-about-story-open {
+		max-height: 2000px;
+	}
+
+	.cal-about-read-more {
+		display: inline-block;
+	}
+
+	.cal-about-cta {
+		padding: 40px 20px;
+	}
+
+	.cal-about-reviews {
+		padding: 44px 0 70px;
+	}
+
+	.cal-about-reviews h2 {
+		margin-bottom: 44px;
+	}
+
+	.cal-about-reviews-slider {
+		padding: 0 36px;
+	}
+
+	.cal-about-review-card {
+		flex-basis: 50%;
+		padding: 0 14px;
+	}
+}
+
+@media (max-width: 480px) {
+	.cal-about-shell {
+		padding: 0 16px;
+	}
+
+	.cal-about-title-banner h1,
+	.cal-about-hero-title,
+	.cal-about-why-header h2,
+	.cal-about-story-text h2,
+	.cal-about-cta h2 {
+		font-size: 26px;
+		line-height: 33.8px;
+	}
+
+	.cal-about-info-icon img {
+		width: 58px;
+		height: 58px;
+	}
+
+	.cal-about-reviews-slider {
+		padding: 0 30px;
+	}
+
+	.cal-about-review-card {
+		flex-basis: 100%;
+		padding: 0 10px;
+	}
+
+	.cal-about-review-image {
+		width: 170px;
+		height: 170px;
+		margin-bottom: 24px;
+	}
+}

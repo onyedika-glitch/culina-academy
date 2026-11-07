@@ -1,0 +1,1372 @@
+:root {
+	--iti-path-flags-1x: url("https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/img/flags.webp");
+	--iti-path-flags-2x: url("https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/img/flags@2x.webp");
+	--iti-path-globe-1x: url("https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/img/globe.webp");
+	--iti-path-globe-2x: url("https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/img/globe@2x.webp");
+}
+
+.cal-home-template-page #page,
+.page-template-template-home #page {
+	max-width: none;
+	width: 100%;
+}
+
+.cal-home-template-page #content,
+.page-template-template-home #content {
+	display: block;
+	padding: 0;
+}
+
+.cal-home-template-page.separate-containers .site-content,
+.cal-home-template-page.one-container .site-content,
+.cal-home-template-page.separate-containers .site-main,
+.page-template-template-home.separate-containers .site-content,
+.page-template-template-home.one-container .site-content,
+.page-template-template-home.separate-containers .site-main,
+.cal-home-template-page #primary,
+.cal-home-template-page .content-area,
+.page-template-template-home #primary,
+.page-template-template-home .content-area {
+	margin: 0;
+	padding: 0;
+}
+
+.cal-home-template-page.separate-containers .site-main > *,
+.page-template-template-home.separate-containers .site-main > * {
+	margin-bottom: 0;
+}
+
+.cal-home-template {
+	width: 100%;
+	overflow: hidden;
+	font-family: Montserrat, Arial, Helvetica, sans-serif;
+	color: #32383f;
+}
+
+.wpcul-slider {
+	position: relative;
+	width: 100%;
+	height: 860px;
+	min-height: 640px;
+	max-height: calc(100vh - 0px);
+	overflow: hidden;
+	background-color: #0a0d14;
+	font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+
+.wpcul-track {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.wpcul-slide {
+	min-width: 100%;
+	height: 100%;
+	position: relative;
+	display: flex;
+	align-items: center;
+	padding: 128px 8% 76px;
+}
+
+.wpcul-slide-bg,
+.cal-enquiry-bg-img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 0;
+}
+
+.wpcul-slide::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(90deg, rgba(10, 13, 20, 0.88) 0%, rgba(10, 13, 20, 0.5) 48%, rgba(10, 13, 20, 0.74) 100%);
+	z-index: 1;
+}
+
+.wpcul-content {
+	position: relative;
+	z-index: 2;
+	color: #fff;
+	max-width: 560px;
+	animation: wpculFadeUp 1s ease forwards;
+}
+
+.wpcul-content h1 span,
+.wpcul-content h2 span {
+	display: block;
+	font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+	font-style: italic;
+	font-weight: 700;
+	font-size: 18px;
+	color: #ffb703;
+	margin-bottom: 14px;
+	letter-spacing: 0;
+	text-transform: none;
+}
+
+.wpcul-content h1,
+.wpcul-content h2 {
+	font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+	font-size: 63px;
+	line-height: 1.02;
+	margin: 0 0 22px;
+	text-transform: uppercase;
+	color: #f5f5f5;
+	font-weight: 700;
+	letter-spacing: 0;
+	text-shadow: 0 3px 12px rgba(0, 0, 0, 0.45);
+}
+
+.wpcul-content p {
+	font-size: 14px;
+	line-height: 1.55;
+	margin-bottom: 31px;
+	color: rgba(255, 255, 255, 0.86);
+	max-width: 500px;
+	text-shadow: 0 3px 12px rgba(0, 0, 0, 0.45);
+}
+
+.wpcul-btn {
+	display: inline-block;
+	background: #ffb703;
+	color: #fff;
+	padding: 12px 32px;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 20px;
+	letter-spacing: 1.25px;
+	text-transform: uppercase;
+	border-radius: 4px;
+	transition: all 0.35s ease;
+}
+
+.wpcul-btn:hover {
+	color: #000;
+	background: #ffb703;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(241, 180, 0, 0.4);
+}
+
+.wpcul-nav {
+	position: absolute;
+	bottom: 45px;
+	right: 52px;
+	z-index: 10;
+	display: flex;
+	gap: 16px;
+}
+
+.wpcul-nav button {
+	position: relative;
+	background: rgba(255, 255, 255, 0.12);
+	border: 1px solid rgba(255, 255, 255, 0.25);
+	color: #fff;
+	width: 58px;
+	height: 58px;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.wpcul-nav button::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 12px;
+	height: 12px;
+	border-top: 2px solid #fff;
+	border-left: 2px solid #fff;
+}
+
+.wpcul-prev::before {
+	transform: translate(-35%, -50%) rotate(-45deg);
+}
+
+.wpcul-next::before {
+	transform: translate(-65%, -50%) rotate(135deg);
+}
+
+.wpcul-nav button:hover {
+	background: rgba(255, 255, 255, 0.25);
+}
+
+.wpcul-dots {
+	position: absolute;
+	bottom: 28px;
+	left: 62px;
+	display: flex;
+	gap: 22px;
+	z-index: 10;
+}
+
+.wpcul-dot {
+	width: 8px;
+	height: 8px;
+	border: 0;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.3);
+	cursor: pointer;
+	transition: 0.3s;
+	padding: 0;
+}
+
+.wpcul-dot.active {
+	background: #ffb703;
+	width: 18px;
+	border-radius: 10px;
+	transform: none;
+}
+
+.cal-home-carousel-section {
+	width: 100%;
+}
+
+.cal-home-carousel-section .cacx-section {
+	background: #0a0d14 !important;
+	padding: 84px 0 86px !important;
+	font-family: Montserrat, Arial, Helvetica, sans-serif !important;
+}
+
+.cal-home-carousel-section .cacx-section::before {
+	display: none !important;
+}
+
+.cal-home-carousel-section .cacx-header {
+	max-width: 1500px !important;
+	margin: 0 auto 44px !important;
+	padding: 0 44px !important;
+	align-items: flex-end !important;
+}
+
+.cal-home-carousel-section .cacx-eyebrow {
+	color: #ffb703 !important;
+	font-size: 11px !important;
+	font-weight: 800 !important;
+	letter-spacing: 0.08em !important;
+	margin-bottom: 13px !important;
+}
+
+.cal-home-carousel-section .cacx-title {
+	font-family: "Playfair Display", Georgia, "Times New Roman", serif !important;
+	font-size: 37px !important;
+	line-height: 1.12 !important;
+	color: #fff !important;
+	font-weight: 800 !important;
+}
+
+.cal-home-carousel-section .cacx-title em {
+	color: #ffb703 !important;
+	font-style: italic !important;
+	font-weight: 800 !important;
+}
+
+.cal-home-carousel-section .cacx-arrow {
+	width: 34px !important;
+	height: 34px !important;
+	border: 1px solid rgba(255, 183, 3, 0.55) !important;
+	color: #ffb703 !important;
+	background: transparent !important;
+	font-size: 13px !important;
+}
+
+.cal-home-carousel-section .cacx-arrow:hover {
+	background: #ffb703 !important;
+	color: #0a0d14 !important;
+	border-color: #ffb703 !important;
+}
+
+.cal-home-carousel-section .cacx-track-wrap {
+	max-width: 1500px !important;
+	margin: 0 auto !important;
+	padding: 0 44px !important;
+	overflow: visible !important;
+}
+
+.cal-home-carousel-section .cacx-track {
+	gap: 20px !important;
+}
+
+.cal-home-carousel-section .cacx-card {
+	background: #151922 !important;
+	border: 1px solid rgba(255, 255, 255, 0.08) !important;
+	border-radius: 4px !important;
+	box-shadow: none !important;
+}
+
+.cal-home-carousel-section .cacx-card:hover {
+	box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+.cal-home-carousel-section .cacx-img-wrap {
+	height: 210px !important;
+}
+
+.cal-home-carousel-section .cacx-img-overlay {
+	background: linear-gradient(to top, rgba(21, 25, 34, 0.88) 0%, rgba(21, 25, 34, 0.08) 60%, transparent 100%) !important;
+}
+
+.cal-home-carousel-section .cacx-badge {
+	top: 10px !important;
+	right: 0 !important;
+	background: #ffb703 !important;
+	color: #0a0d14 !important;
+	border-radius: 2px 0 0 2px !important;
+	padding: 5px 10px !important;
+	font-size: 10px !important;
+	font-family: Montserrat, Arial, Helvetica, sans-serif !important;
+	font-weight: 800 !important;
+}
+
+.cal-home-carousel-section .cacx-body {
+	padding: 19px 20px 20px !important;
+}
+
+.cal-home-carousel-section .cacx-name {
+	font-family: Montserrat, Arial, Helvetica, sans-serif !important;
+	font-size: 15px !important;
+	line-height: 1.35 !important;
+	font-weight: 800 !important;
+	color: #fff !important;
+	margin: 0 0 10px !important;
+}
+
+.cal-home-carousel-section .cacx-meta {
+	color: rgba(255, 255, 255, 0.58) !important;
+	font-size: 11px !important;
+	font-weight: 600 !important;
+}
+
+.cal-home-carousel-section .cacx-footer,
+.cal-home-carousel-section .cacx-card-footer {
+	display: flex !important;
+	justify-content: space-between !important;
+	align-items: center !important;
+	border-top: 0 !important;
+	margin-top: 18px !important;
+	padding-top: 0 !important;
+}
+
+.cal-home-carousel-section .cacx-price {
+	font-family: "Playfair Display", Georgia, "Times New Roman", serif !important;
+	color: #ffb703 !important;
+	font-size: 18px !important;
+	font-weight: 800 !important;
+}
+
+.cal-home-carousel-section .cacx-cta {
+	color: rgba(255, 255, 255, 0.7) !important;
+	font-size: 11px !important;
+	font-weight: 700 !important;
+}
+
+.cal-home-carousel-section .cacx-card:hover .cacx-cta {
+	color: #ffb703 !important;
+}
+
+.cal-home-carousel-section .cacx-dot-btn {
+	background: rgba(255, 183, 3, 0.25) !important;
+	min-width: 44px !important;
+	min-height: 44px !important;
+	padding: 16px !important;
+	background-clip: content-box !important;
+}
+
+.cal-home-carousel-section .cacx-dot-btn.cacx-active {
+	background: #ffb703 !important;
+}
+
+.cal-home-carousel-section .cacx-more-btn {
+	background: #ffb703 !important;
+	border: 1px solid #ffb703 !important;
+	color: #0a0d14 !important;
+	border-radius: 3px !important;
+	font-family: Montserrat, Arial, Helvetica, sans-serif !important;
+	font-weight: 800 !important;
+	font-size: 11px !important;
+	letter-spacing: 0.08em !important;
+	padding: 17px 36px !important;
+}
+
+.cal-home-why {
+	background: #f7f8fa;
+	padding: 34px 24px 14px;
+}
+
+.cal-home-why-inner {
+	max-width: 1280px;
+	margin: 0 auto;
+}
+
+.cal-home-why-header {
+	text-align: center;
+	margin-bottom: 58px;
+}
+
+.cal-home-why-header h2 {
+	font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+	font-size: clamp(2rem, 3vw, 2.4rem);
+	color: #1c2633;
+	line-height: 1.15;
+	margin: 0 0 12px;
+	font-weight: 700;
+}
+
+.cal-home-why-header p {
+	margin: 0;
+	color: #3f4c5a;
+	font-size: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 0;
+}
+
+.cal-home-why-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 34px;
+	align-items: start;
+}
+
+.cal-home-why-card {
+	background: #fff;
+	min-height: 394px;
+	padding: 56px 46px 44px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.cal-home-why-icon {
+	width: 84px;
+	height: 84px;
+	object-fit: contain;
+	margin-bottom: 46px;
+}
+
+.cal-home-why-card h3 {
+	font-family: Montserrat, Arial, Helvetica, sans-serif;
+	font-size: 1.22rem;
+	line-height: 1.25;
+	text-transform: uppercase;
+	color: #1c2633;
+	margin: 0 0 20px;
+	font-weight: 700;
+}
+
+.cal-home-why-card p {
+	margin: 0;
+	color: #3f4c5a;
+	font-size: 1rem;
+	line-height: 1.55;
+}
+
+.cal-home-why-action {
+	text-align: center;
+	margin-top: 56px;
+}
+
+.cal-home-why-button {
+	display: inline-block;
+	background: #ffb703;
+	color: #000;
+	padding: 15px 34px;
+	min-width: 164px;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 0.9rem;
+}
+
+.cal-home-page-content {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 50px 24px;
+}
+
+@keyframes wpculFadeUp {
+	from {
+		opacity: 0;
+		transform: translateY(40px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Course Enquiry Section */
+.cal-enquiry-section {
+	width: 100%;
+}
+
+.cal-enquiry-bg {
+	background: #0a0d14;
+	position: relative;
+	min-height: 825px;
+	overflow: hidden;
+}
+
+.cal-enquiry-overlay {
+	position: absolute;
+	inset: 0;
+	background: rgba(10, 13, 20, 0.62);
+	z-index: 1;
+}
+
+.cal-enquiry-inner {
+	position: relative;
+	z-index: 2;
+	max-width: 1420px;
+	margin: 0 auto;
+	padding: 118px 24px;
+	display: flex;
+	gap: 80px;
+	align-items: center;
+	min-height: 825px;
+}
+
+.cal-enquiry-text {
+	flex: 0 0 48%;
+	max-width: 48%;
+	padding-left: 64px;
+}
+
+.cal-enquiry-eyebrow {
+	display: block;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0;
+	color: rgba(255, 255, 255, 0.7);
+	text-transform: uppercase;
+	margin-bottom: 12px;
+}
+
+.cal-enquiry-heading {
+	font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+	font-size: 44px;
+	font-weight: 700;
+	color: #fff;
+	margin: 0;
+	line-height: 1.1;
+	text-align: left;
+	text-transform: uppercase;
+}
+
+.cal-enquiry-form-wrap {
+	flex: 0 0 505px;
+	max-width: 505px;
+	margin-left: auto;
+	margin-right: 82px;
+}
+
+.cal-enquiry-form-header {
+	background: #ffb703;
+	padding: 30px 44px 5px;
+	position: relative;
+	text-align: center;
+	overflow: hidden;
+}
+
+.cal-enquiry-form-header p {
+	position: relative;
+	z-index: 1;
+	margin: 0;
+	color: #fff;
+	font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+	font-size: 22px;
+	line-height: 1.35;
+	font-weight: 700;
+	text-align: center;
+}
+
+.cal-enquiry-form-body {
+	background: #fff;
+	padding: 46px 25px 36px;
+}
+
+.cal-enquiry-form {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.cal-enquiry-field input,
+.cal-enquiry-phone-wrap input {
+	width: 100%;
+	height: 43px;
+	padding: 11px 14px;
+	border: 1px solid #e6e6e6;
+	border-radius: 0;
+	font-size: 13px;
+	color: #333;
+	background: #fff;
+	box-sizing: border-box;
+}
+
+.cal-enquiry-field label {
+	display: block;
+	margin-bottom: 6px;
+	color: #172033;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.cal-enquiry-field input:focus,
+.cal-enquiry-phone-wrap input:focus {
+	outline: none;
+	border-color: #ffb703;
+	box-shadow: 0 0 0 3px rgba(255, 183, 3, 0.12);
+}
+
+.cal-enquiry-field.ca-phone-row input {
+	width: 100%;
+	height: 43px;
+	padding: 11px 14px;
+	border: 1px solid #e6e6e6;
+	border-radius: 0;
+	font-size: 13px;
+	color: #333;
+	background: #fff;
+	box-sizing: border-box;
+}
+
+.cal-enquiry-field.ca-phone-row .iti {
+	display: block;
+	width: 100%;
+}
+
+.cal-enquiry-field.ca-phone-row .iti input[type="tel"] {
+	width: 100% !important;
+	height: 43px !important;
+	min-height: 43px !important;
+	padding-left: 108px !important;
+	box-sizing: border-box !important;
+}
+
+.cal-enquiry-field.ca-phone-row input:focus {
+	outline: none;
+	border-color: #ffb703;
+	box-shadow: 0 0 0 3px rgba(255, 183, 3, 0.12);
+}
+
+.cal-enquiry-field.ca-phone-row .iti__selected-country {
+	width: auto !important;
+	min-width: 78px;
+	height: 42px;
+	min-height: 42px;
+	margin: 0 !important;
+	padding: 0 10px !important;
+	background: #fff !important;
+	color: #333 !important;
+	border: 0 !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+}
+
+.cal-enquiry-field.ca-phone-row .iti__selected-dial-code {
+	color: #333;
+	font-weight: 500;
+}
+
+.cal-enquiry-field.ca-phone-row .iti__dropdown-content {
+	max-width: min(420px, calc(100vw - 32px));
+}
+
+.cal-enquiry-submit {
+	width: 100%;
+	height: 46px;
+	padding: 0 24px;
+	background: #151922;
+	color: #fff;
+	border: none;
+	border-radius: 0;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.cal-enquiry-submit:hover {
+	background: #333;
+}
+
+.cal-enquiry-submit:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+.cal-enquiry-note {
+	margin-top: 4px;
+	font-size: 14px;
+	text-align: center;
+	min-height: 20px;
+}
+
+.cal-enquiry-note.cal-enquiry-note-ok {
+	color: #16a34a;
+}
+
+.cal-enquiry-note.cal-enquiry-note-er {
+	color: #dc2626;
+}
+
+/* Why Choose Us Section */
+.cal-why-choose-section {
+	background: #f7f8fa;
+	padding: 88px 24px 108px;
+}
+
+.cal-why-choose-inner {
+	max-width: 1420px;
+	margin: 0 auto;
+}
+
+.cal-why-choose-header {
+	text-align: center;
+	margin-bottom: 64px;
+}
+
+.cal-why-choose-header h2 {
+	font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+	font-size: 32px;
+	font-weight: 700;
+	color: #3b3f45;
+	margin: 0 0 10px;
+	text-align: center;
+}
+
+.cal-why-choose-subtitle {
+	margin: 0;
+	font-size: 13px;
+	color: #59616b;
+	font-weight: 600;
+	letter-spacing: 0;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.cal-why-choose-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 36px;
+	max-width: 1080px;
+	margin: 0 auto;
+}
+
+.cal-why-choose-card {
+	background: #fff;
+	border-radius: 0;
+	min-height: 430px;
+	padding: 62px 46px 44px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.cal-why-choose-icon {
+	width: 72px;
+	height: 72px;
+	margin-bottom: 42px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #ffb703;
+}
+
+.cal-why-choose-icon svg {
+	display: block;
+	width: 72px;
+	height: 72px;
+}
+
+.cal-why-choose-icon img {
+	display: block;
+	width: 72px;
+	height: 72px;
+	object-fit: contain;
+}
+
+.cal-why-choose-card h3 {
+	font-family: Montserrat, Arial, Helvetica, sans-serif;
+	font-size: 17px;
+	line-height: 1.22;
+	font-weight: 700;
+	color: #3b3f45;
+	margin: 0 0 16px;
+	letter-spacing: 0;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.cal-why-choose-card p {
+	font-size: 14px;
+	color: #656d75;
+	line-height: 1.55;
+	margin: 0;
+	text-align: center;
+	max-width: 300px;
+}
+
+.cal-why-choose-action {
+	text-align: center;
+	margin-top: 72px;
+}
+
+.cal-why-choose-button {
+	display: inline-block;
+	background: #ffb703;
+	color: #1d1f24;
+	padding: 15px 34px;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	border-radius: 0;
+	transition: background 0.2s, color 0.2s;
+}
+
+.cal-why-choose-button:hover {
+	background: #ffaa00;
+	color: #1d1f24;
+}
+
+/* Testimonials / Reviews Section */
+.reviews-section {
+	background: #f7f8fa;
+	padding: 104px 24px 118px;
+}
+
+.reviews-header {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.reviews-heading {
+	font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+	font-size: 34px;
+	font-weight: 700;
+	color: #3b3f45;
+	text-align: center;
+	margin: 0 0 54px;
+	position: relative;
+	line-height: 1.1;
+}
+
+.reviews-heading::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: -24px;
+	width: 68px;
+	height: 3px;
+	background: #ffb703;
+	transform: translateX(-50%);
+}
+
+.reviews-slider-wrapper {
+	max-width: 1080px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.reviews-slider-track {
+	display: flex;
+	gap: 34px;
+	transition: transform 0.5s ease;
+}
+
+.review-card {
+	flex: 0 0 calc((100% - 68px) / 3);
+	box-sizing: border-box;
+}
+
+.review-content {
+	background: #ededed;
+	border-left: 0;
+	box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+	padding: 30px 30px 26px;
+	display: flex;
+	flex-direction: column;
+	min-height: 230px;
+	height: 100%;
+	color: #333333;
+}
+
+.review-card:first-child .review-content {
+	border-left: 5px solid #ffb703;
+}
+
+.review-text {
+	font-size: 14px;
+	font-style: italic;
+	color: #3e4650;
+	line-height: 1.65;
+	margin: 0 0 24px;
+	flex: 1;
+	text-align: left;
+}
+
+.review-author {
+	border-top: 1px solid #c9c9c9;
+	padding-top: 18px;
+}
+
+.author-name {
+	display: block;
+	font-size: 13px;
+	font-weight: 700;
+	color: #343a40;
+	margin: 0 0 3px;
+	text-align: left;
+}
+
+.author-country {
+	display: block;
+	font-size: 11px;
+	color: #6d747c;
+	font-weight: 700;
+	letter-spacing: 0.8px;
+	margin: 0;
+	text-align: left;
+}
+
+.slider-dots {
+	display: flex;
+	justify-content: center;
+	gap: 18px;
+	margin-top: 46px;
+}
+
+.slider-dot {
+	width: 8px;
+	height: 8px;
+	border: none;
+	border-radius: 50%;
+	background: #d1d5db;
+	cursor: pointer;
+	padding: 0;
+	transition: background 0.2s;
+}
+
+.slider-dot.active {
+	background: #ffb703;
+	width: 18px;
+	border-radius: 10px;
+}
+
+.reviews-footer,
+.reviews-cta {
+	text-align: center;
+	margin-top: 48px;
+}
+
+.reviews-cta-btn,
+.reviews-cta-button {
+	display: inline-block;
+	background: #ffb703;
+	color: #1d1f24;
+	padding: 15px 34px;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	border-radius: 0;
+	transition: background 0.2s, color 0.2s;
+}
+
+.reviews-cta-btn:hover,
+.reviews-cta-button:hover {
+	background: #ffaa00;
+	color: #1d1f24;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+	.cal-enquiry-inner {
+		flex-direction: column;
+		min-height: 0;
+		padding: 56px 20px;
+		gap: 40px;
+	}
+
+	.cal-enquiry-text,
+	.cal-enquiry-form-wrap {
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+
+	.cal-enquiry-text {
+		padding-left: 0;
+	}
+
+	.cal-enquiry-form-wrap {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.cal-enquiry-heading {
+		font-size: 32px;
+	}
+
+	.cal-why-choose-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.reviews-slider-track {
+		gap: 20px;
+	}
+
+	.review-card {
+		flex: 0 0 calc(100% - 20px);
+	}
+}
+
+@media (max-width: 768px) {
+	.wpcul-content p {
+		font-size: 14px;
+		line-height: 20px;
+	}
+
+	.wpcul-btn {
+		padding: 10px 24px;
+		font-size: 13px;
+	}
+
+	.wpcul-nav {
+		right: 20px;
+		bottom: 32px;
+	}
+
+	.wpcul-dots {
+		left: 24px;
+	}
+
+	.cal-home-why {
+		padding: 32px 16px;
+	}
+
+	.cal-enquiry-heading {
+		font-size: 28px;
+	}
+
+	.cal-why-choose-section,
+	.reviews-section {
+		padding: 48px 16px;
+	}
+
+	/* Mobile carousel fixes - reduce price and CTA spacing */
+	.cal-home-carousel-section .cacx-body {
+		padding: 12px 15px 15px !important;
+	}
+
+	.cal-home-carousel-section .cacx-footer,
+	.cal-home-carousel-section .cacx-card-footer {
+		flex-direction: column !important;
+		gap: 10px !important;
+		align-items: flex-start !important;
+		margin-top: 12px !important;
+	}
+
+	.cal-home-carousel-section .cacx-price {
+		font-size: 16px !important;
+	}
+
+	.cal-home-carousel-section .cacx-cta {
+		font-size: 10px !important;
+		align-self: flex-start;
+	}
+
+	.cal-home-carousel-section .cacx-track-wrap {
+		padding: 0 20px !important;
+	}
+
+	.cal-home-carousel-section .cacx-name {
+		font-size: 13px !important;
+	}
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+	.review-card {
+		flex: 0 0 calc((100% - 34px) / 2);
+	}
+}
+
+/* Final home typography pass matched to the original reference. */
+.cal-home-template {
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+.wpcul-content h1 span,
+.wpcul-content h2 span {
+	color: #f1b400;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 18px;
+	line-height: 18.9px;
+	font-weight: 500;
+	font-style: italic;
+	letter-spacing: 1px;
+	margin: 0 0 12px;
+	text-transform: none;
+}
+
+.wpcul-content h1,
+.wpcul-content h2 {
+	color: #f5f5f5;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 63px;
+	line-height: 66px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	margin: 20px 0;
+	text-transform: uppercase;
+}
+
+.wpcul-content p {
+	color: rgba(255, 255, 255, 0.75);
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 16.5px;
+	line-height: 28.05px;
+	font-weight: 400;
+	margin: 0 0 35px;
+}
+
+.wpcul-btn,
+.wpcul-btn:visited {
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 700;
+	letter-spacing: 1.25px;
+	padding: 12px 32px;
+	border-radius: 4px;
+	text-transform: uppercase;
+}
+
+.cal-home-carousel-section .cacx-eyebrow {
+	color: #ffb606 !important;
+	font-family: Outfit, Arial, Helvetica, sans-serif !important;
+	font-size: 10.2px !important;
+	line-height: 24px !important;
+	font-weight: 600 !important;
+	letter-spacing: 1.632px !important;
+	margin: 0 0 8px !important;
+	text-transform: uppercase !important;
+}
+
+.cal-home-carousel-section .cacx-title {
+	color: #fff !important;
+	font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif !important;
+	font-size: 42px !important;
+	line-height: 48.3px !important;
+	font-weight: 700 !important;
+	letter-spacing: 0 !important;
+	margin: 0 !important;
+	text-transform: none !important;
+}
+
+.cal-enquiry-eyebrow {
+	color: #fff;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 24px;
+	font-weight: 400;
+	letter-spacing: 0;
+	margin: 0;
+	text-transform: uppercase;
+}
+
+.cal-enquiry-heading {
+	color: #fff;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 50px;
+	line-height: 55px;
+	font-weight: 600;
+	margin: 0 0 8px;
+	text-transform: uppercase;
+}
+
+
+
+.cal-enquiry-form-header p {
+	color: #fff;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 22px;
+	line-height: 34px;
+	font-weight: 600;
+	margin: 0 0 23px;
+	text-align: center;
+}
+
+.cal-why-choose-header h2 {
+	color: #333;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 28px;
+	line-height: 36.4px;
+	font-weight: 600;
+	margin: 0 0 8px;
+	text-align: center;
+	text-transform: none;
+}
+
+.cal-why-choose-subtitle {
+	color: #606060;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 24px;
+	font-weight: 400;
+	letter-spacing: 0;
+	margin: 0;
+	text-align: center;
+	text-transform: none;
+}
+
+.cal-why-choose-card h3 {
+	color: #333;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 18px;
+	line-height: 23.4px;
+	font-weight: 600;
+	letter-spacing: 0;
+	margin: 4px 0 15px;
+	text-align: center;
+	text-transform: none;
+}
+
+.cal-why-choose-card p {
+	color: #606060;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 24px;
+	font-weight: 400;
+	margin: 0;
+	text-align: center;
+}
+
+.cal-why-choose-button,
+.cal-why-choose-button:visited {
+	color: #000;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height: 22.5px;
+	font-weight: 500;
+	letter-spacing: 0;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.reviews-heading {
+	color: #333;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 36px;
+	line-height: 46.8px;
+	font-weight: 700;
+	margin: 0 0 54px;
+	text-align: center;
+	text-transform: none;
+}
+
+.review-text {
+	color: #333;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 24.75px;
+	font-weight: 400;
+	font-style: italic;
+	margin: 0 0 15px;
+	text-align: left;
+}
+
+.author-name {
+	color: #ffb606;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 24px;
+	font-weight: 600;
+	margin: 0 0 3px;
+	text-align: left;
+}
+
+.reviews-section .author-name {
+	color: #333333;
+}
+
+.author-country {
+	color: #606060;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 24px;
+	font-weight: 400;
+	letter-spacing: 0.5px;
+	margin: 0;
+	text-align: left;
+	text-transform: uppercase;
+}
+
+.reviews-cta-btn,
+.reviews-cta-btn:visited,
+.reviews-cta-button,
+.reviews-cta-button:visited {
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height: 22.5px;
+	font-weight: 500;
+	letter-spacing: 0;
+	text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+	.wpcul-content h1,
+	.wpcul-content h2 {
+		font-size: 54px;
+		line-height: 58px;
+	}
+
+	.cal-enquiry-heading {
+		font-size: 38px;
+		line-height: 43px;
+	}
+}
+
+@media (max-width: 768px) {
+	.wpcul-content h1,
+	.wpcul-content h2 {
+		font-size: 26px;
+		line-height: 30px;
+		margin: 10px 0;
+	}
+
+	.wpcul-content p {
+		font-size: 14px;
+		line-height: 20px;
+	}
+
+	.cal-home-carousel-section .cacx-title,
+	.cal-enquiry-heading,
+	.reviews-heading {
+		font-size: 32px !important;
+		line-height: 38px !important;
+	}
+
+	.cal-enquiry-form-header p {
+		font-size: 20px;
+		line-height: 30px;
+	}
+}

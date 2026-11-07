@@ -1,0 +1,281 @@
+.cal-rp-template-page .site-content,
+.cal-rp-template-page #content,
+.cal-rp-template-page #primary,
+.cal-rp-template-page .content-area,
+.cal-rp-template-page .site-main {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	max-width: 100%;
+}
+
+.cal-rp-template-page .site-content,
+.cal-rp-template-page #content {
+	display: block !important;
+}
+
+.cal-rp-template-page #primary,
+.cal-rp-template-page .content-area {
+	float: none !important;
+	flex: 0 0 100% !important;
+}
+
+.cal-rp-template-page .inside-right-sidebar,
+.cal-rp-template-page .inside-left-sidebar,
+.cal-rp-template-page .sidebar,
+.cal-rp-template-page #right-sidebar,
+.cal-rp-template-page #left-sidebar {
+	display: none !important;
+}
+
+.cal-rp-template-page .container.grid-container,
+.cal-rp-template-page .site.grid-container {
+	width: 100%;
+	max-width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.cal-rp-shell {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.cal-rp-hero {
+	background: #1d1f24;
+	padding: 48px 0 50px;
+	text-align: center;
+}
+
+.cal-rp-hero h1 {
+	margin: 0;
+	color: #fff;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: clamp(2rem, 4vw, 2.75rem);
+	line-height: 1.15;
+	font-weight: 700;
+	letter-spacing: 0.01em;
+}
+
+.cal-rp-content {
+	padding: 18px 0 56px;
+	background: #f4f4f4;
+}
+
+.cal-rp-breadcrumbs {
+	margin: 0 0 28px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid #e2e2e2;
+	color: #7a828c;
+	font-size: 12px;
+}
+
+.cal-rp-breadcrumbs a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.cal-rp-breadcrumbs a:hover {
+	color: #b5121b;
+}
+
+.cal-rp-breadcrumbs span {
+	margin: 0 6px;
+}
+
+.cal-rp-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 28px 24px;
+}
+
+.cal-rp-card {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background: #fff;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+	overflow: hidden;
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cal-rp-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+.cal-rp-card-header {
+	padding: 16px 18px 12px;
+	border-bottom: 1px solid #eee;
+}
+
+.cal-rp-card-title {
+	margin: 0;
+	color: #222;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 1.25rem;
+	line-height: 1.3;
+	font-weight: 700;
+	text-align: center;
+}
+
+.cal-rp-card-body {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	padding: 14px 18px 18px;
+}
+
+.cal-rp-card-media {
+	margin-bottom: 14px;
+	overflow: hidden;
+	border-radius: 3px;
+}
+
+.cal-rp-card-media img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+}
+
+.cal-rp-card-details {
+	flex: 1 1 auto;
+}
+
+.cal-rp-address {
+	margin: 0 0 12px;
+	color: #444;
+	font-size: 14px;
+	line-height: 1.65;
+}
+
+.cal-rp-awards {
+	margin: 0 0 8px;
+	color: #444;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.cal-rp-awards-label {
+	display: block;
+	margin-bottom: 4px;
+}
+
+.cal-rp-awards-icons img {
+	display: inline-block;
+	width: auto;
+	height: 15px;
+	margin: 0 4px 4px 0;
+	vertical-align: middle;
+	border: 0;
+}
+
+.cal-rp-map-link {
+	margin: 8px 0 0;
+}
+
+.cal-rp-map-link a,
+.cal-rp-website a {
+	color: #b5121b;
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.cal-rp-map-link a:hover,
+.cal-rp-website a:hover {
+	color: #8f0e16;
+	text-decoration: underline;
+}
+
+.cal-rp-website {
+	margin: 16px 0 0;
+	padding-top: 12px;
+	border-top: 1px solid #f0f0f0;
+	text-align: center;
+}
+
+.cal-rp-website a {
+	font-size: 14px;
+	word-break: break-word;
+}
+
+@media (max-width: 992px) {
+	.cal-rp-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 768px) {
+	.cal-rp-hero {
+		padding: 36px 0 38px;
+	}
+
+	.cal-rp-content {
+		padding-bottom: 40px;
+	}
+
+	.cal-rp-shell {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+
+	.cal-rp-grid {
+		grid-template-columns: 1fr;
+		gap: 22px;
+	}
+
+	.cal-rp-card-title {
+		font-size: 1.15rem;
+	}
+}
+
+/* Final typography normalization for this page. */
+.cal-rp-page,
+.cal-rp-page p,
+.cal-rp-page li,
+.cal-rp-page a {
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+.cal-rp-page .cal-rp-card-title {
+	color: #333;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 18px;
+	line-height: 23.4px;
+	font-weight: 600;
+	letter-spacing: 0;
+	text-align: center;
+}
+
+.cal-rp-page .cal-rp-address,
+.cal-rp-page .cal-rp-awards,
+.cal-rp-page .cal-rp-map-link a,
+.cal-rp-page .cal-rp-website a {
+	color: #606060;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height: 22px;
+	font-weight: 400;
+	letter-spacing: 0;
+}
+
+.cal-rp-page .cal-rp-map-link a,
+.cal-rp-page .cal-rp-website a {
+	color: #ffb606;
+	font-weight: 500;
+}
+
+.cal-rp-page .cal-rp-map-link a:hover,
+.cal-rp-page .cal-rp-website a:hover {
+	color: #d99a00;
+}
+
+.cal-rp-page .cal-rp-awards-label {
+	color: #333;
+	font-weight: 700;
+}

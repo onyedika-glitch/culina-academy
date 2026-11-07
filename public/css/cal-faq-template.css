@@ -1,0 +1,386 @@
+.cal-faq-template-page .site-content,
+.cal-faq-template-page #content,
+.cal-faq-template-page #primary,
+.cal-faq-template-page .content-area,
+.cal-faq-template-page .site-main {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	max-width: 100%;
+}
+
+.cal-faq-template-page .site-content,
+.cal-faq-template-page #content {
+	display: block !important;
+}
+
+.cal-faq-template-page #primary,
+.cal-faq-template-page .content-area {
+	float: none !important;
+	flex: 0 0 100% !important;
+}
+
+.cal-faq-template-page .inside-right-sidebar,
+.cal-faq-template-page .inside-left-sidebar,
+.cal-faq-template-page .sidebar,
+.cal-faq-template-page #right-sidebar,
+.cal-faq-template-page #left-sidebar {
+	display: none !important;
+}
+
+.cal-faq-template-page .container.grid-container,
+.cal-faq-template-page .site.grid-container {
+	width: 100%;
+	max-width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.cal-faq-shell {
+	max-width: 1280px;
+	margin: 0 auto;
+}
+
+.cal-faq-hero {
+	background: #1d1f24;
+	padding: 54px 20px 56px;
+}
+
+.cal-faq-hero h1 {
+	position: relative;
+	margin: 0;
+	padding-left: 18px;
+	color: #fff;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: clamp(2.2rem, 5vw, 3rem);
+	line-height: 1.08;
+	font-weight: 700;
+}
+
+.cal-faq-hero h1::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 4px;
+	bottom: 4px;
+	width: 3px;
+	background: #f0b400;
+}
+
+.cal-faq-content {
+	padding: 12px 20px 56px;
+	background: #fff;
+}
+
+.cal-faq-breadcrumbs {
+	max-width: 1120px;
+	margin: 0 auto 44px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid #ececec;
+	color: #8891a0;
+	font-size: 12px;
+}
+
+.cal-faq-breadcrumbs a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.cal-faq-breadcrumbs span {
+	margin: 0 8px;
+}
+
+.cal-faq-page {
+	--cal-primary: #ffb606;
+	--cal-secondary: #e6a303;
+	--cal-text: #333333;
+	--cal-muted: #606060;
+	--cal-accent: #868686;
+	--cal-green: #5ebb3e;
+	--cal-white: #ffffff;
+	--cal-black: #000000;
+	--cal-light: #eeeeee;
+	font-family: inherit;
+	color: var(--cal-text);
+	line-height: 1.65;
+	max-width: 1120px;
+	margin: 0 auto;
+}
+
+.cal-faq-page * {
+	box-sizing: border-box;
+}
+
+.cal-faq-page h1 {
+	font-size: clamp(30px, 4vw, 52px);
+	line-height: 1.1;
+	margin: 0 0 18px;
+	color: var(--cal-black);
+	letter-spacing: 0;
+}
+
+.cal-faq-intro {
+	font-size: 17px;
+	color: var(--cal-muted);
+	max-width: 980px;
+	margin: 0 0 30px;
+	font-weight: 400;
+}
+
+/* Body answers stay regular; only real <strong>/<b> are bold (same in every language). */
+.cal-faq-answer,
+.cal-faq-answer p {
+	font-weight: 400;
+}
+
+.cal-faq-answer strong,
+.cal-faq-answer b {
+	font-weight: 600;
+}
+
+.cal-category > summary h2 {
+	font-weight: 700;
+	line-height: 1.25;
+}
+
+.cal-faq-intro a,
+.cal-faq-answer a,
+.cal-faq-cta a:not(.cal-button) {
+	color: var(--cal-secondary);
+	font-weight: 700;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.cal-faq-categories {
+	display: grid;
+	gap: 14px;
+}
+
+.cal-category {
+	border: 1px solid var(--cal-light);
+	border-radius: 8px;
+	background: var(--cal-white);
+	box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+	overflow: hidden;
+}
+
+.cal-category[open] {
+	border-color: rgba(255, 182, 6, 0.6);
+}
+
+.cal-category > summary {
+	list-style: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 18px;
+	background: var(--cal-primary);
+	color: var(--cal-black);
+	font-weight: 800;
+	font-size: 18px;
+	padding: 18px 22px;
+}
+
+.cal-category > summary::-webkit-details-marker,
+.cal-question > summary::-webkit-details-marker {
+	display: none;
+}
+
+.cal-category > summary::after,
+.cal-question > summary::after {
+	content: "+";
+	flex: 0 0 auto;
+	width: 28px;
+	height: 28px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	font-weight: 800;
+	background: rgba(255, 255, 255, 0.7);
+	color: var(--cal-black);
+}
+
+.cal-category[open] > summary::after,
+.cal-question[open] > summary::after {
+	content: "-";
+}
+
+.cal-category h2,
+.cal-question h3 {
+	font-size: inherit;
+	line-height: 1.35;
+	margin: 0;
+	color: inherit;
+	letter-spacing: 0;
+}
+
+.cal-category-body {
+	padding: 16px;
+	background: #fff;
+}
+
+.cal-question {
+	border: 1px solid var(--cal-light);
+	border-radius: 8px;
+	margin: 0 0 10px;
+	background: #fff;
+	overflow: hidden;
+}
+
+.cal-question:last-child {
+	margin-bottom: 0;
+}
+
+.cal-question > summary {
+	list-style: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 16px 18px;
+	font-weight: 700;
+	color: var(--cal-text);
+	font-size: 16px;
+}
+
+.cal-question[open] > summary {
+	background: #fff9e8;
+	color: var(--cal-black);
+}
+
+.cal-question > summary::after {
+	background: var(--cal-light);
+	font-size: 16px;
+}
+
+.cal-faq-answer {
+	padding: 0 18px 18px;
+	color: var(--cal-muted);
+	font-size: 15.5px;
+}
+
+.cal-faq-answer p {
+	margin: 0 0 12px;
+}
+
+.cal-faq-answer p:last-child {
+	margin-bottom: 0;
+}
+
+.cal-faq-answer ul {
+	margin: 8px 0 14px;
+	padding-left: 22px;
+}
+
+.cal-faq-answer li {
+	margin: 4px 0;
+}
+
+.cal-faq-cta {
+	margin-top: 34px;
+	padding: 28px;
+	border-radius: 8px;
+	background: var(--cal-black);
+	color: var(--cal-white);
+}
+
+.cal-faq-cta h2 {
+	font-size: 28px;
+	line-height: 1.2;
+	margin: 0 0 10px;
+	color: var(--cal-white);
+	letter-spacing: 0;
+}
+
+.cal-faq-cta p {
+	margin: 0 0 14px;
+	color: #f4f4f4;
+}
+
+.cal-faq-cta a {
+	color: var(--cal-primary);
+}
+
+.cal-faq-cta a[href^="mailto:"],
+.cal-faq-cta a[href^="tel:"] {
+	color: #FFB703;
+}
+
+.cal-faq-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 18px;
+}
+
+.cal-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 44px;
+	padding: 11px 18px;
+	border-radius: 6px;
+	background: var(--cal-primary);
+	color: var(--cal-black) !important;
+	font-weight: 800;
+	text-decoration: none !important;
+}
+
+.cal-button.secondary {
+	background: transparent;
+	color: var(--cal-white) !important;
+	border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+@media (max-width: 767px) {
+	.cal-faq-hero {
+		padding: 40px 18px 42px;
+	}
+
+	.cal-faq-content {
+		padding-left: 14px;
+		padding-right: 14px;
+	}
+
+	.cal-faq-breadcrumbs {
+		margin-bottom: 28px;
+	}
+
+	.cal-faq-page h1 {
+		font-size: 2.2rem;
+	}
+
+	.cal-faq-intro {
+		font-size: 16px;
+	}
+
+	.cal-category > summary {
+		font-size: 16px;
+		padding: 16px;
+	}
+
+	.cal-question > summary {
+		font-size: 15px;
+		padding: 14px;
+	}
+
+	.cal-faq-answer {
+		padding: 0 14px 15px;
+	}
+
+	.cal-faq-cta {
+		padding: 22px 18px;
+	}
+
+	.cal-faq-cta h2 {
+		font-size: 23px;
+	}
+
+	.cal-button {
+		width: 100%;
+	}
+}

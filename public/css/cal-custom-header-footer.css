@@ -1,0 +1,1758 @@
+html {
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+.cal-course-page {
+	color: #1f2937;
+}
+
+.crisp-nav * {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.crisp-nav {
+	font-family: inherit;
+}
+
+.crisp-nav-topbar {
+	background: #1a1a1a;
+	color: #fff;
+	padding: 8px 0;
+	font-size: 14px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1002;
+}
+
+.crisp-nav-topbar-container {
+	max-width: 1440px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 20px;
+}
+
+.crisp-nav-contact-info {
+	display: flex;
+	list-style: none;
+	gap: 25px;
+	align-items: center;
+}
+
+.crisp-nav-contact-info li {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	white-space: nowrap;
+}
+
+.crisp-nav-contact-info svg,
+.crisp-nav-mobile-contact-item svg {
+	width: 14px;
+	height: 14px;
+	fill: #ffb703;
+}
+
+.crisp-nav-lang-switcher {
+	display: flex;
+	list-style: none;
+	gap: 10px;
+	align-items: center;
+}
+
+.crisp-nav-lang-switcher ul,
+.crisp-nav-mobile-lang ul {
+	display: flex;
+	list-style: none;
+	gap: 10px;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+}
+
+.crisp-nav-lang-switcher li,
+.crisp-nav-mobile-lang li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.crisp-nav-lang-switcher a,
+.crisp-nav-mobile-lang a {
+	display: block;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	overflow: hidden;
+	transition: transform 0.3s;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.crisp-nav-lang-switcher a:hover,
+.crisp-nav-lang-switcher a:focus,
+.crisp-nav-mobile-lang a:hover,
+.crisp-nav-mobile-lang a:focus {
+	transform: scale(1.15);
+	outline: 2px solid #ffb703;
+}
+
+.crisp-nav-lang-switcher img,
+.crisp-nav-mobile-lang img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	display: block;
+}
+
+.crisp-nav-language-shortcode {
+	width: auto;
+}
+
+.crisp-nav-language-shortcode .wpml-ls,
+.crisp-nav-language-shortcode .wpml-ls-legacy-list-horizontal {
+	border: 0;
+	padding: 0;
+}
+
+.crisp-nav-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: #fff;
+	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+	z-index: 1001;
+	transition: top 0.2s ease;
+}
+
+.crisp-nav-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 15px 20px;
+	gap: 28px;
+}
+
+.crisp-nav-logo {
+	height: 60px;
+	display: flex;
+	align-items: center;
+	flex: 0 0 auto;
+}
+
+.crisp-nav-logo-link {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	text-decoration: none;
+	transition: opacity 0.2s;
+}
+
+.crisp-nav-logo-link:hover,
+.crisp-nav-logo-link:focus {
+	opacity: 0.85;
+	outline-offset: 2px;
+}
+
+.crisp-nav-logo img {
+	height: 100%;
+	width: auto;
+	max-height: 60px;
+	display: block;
+}
+
+.crisp-nav-nav {
+	display: flex;
+	align-items: center;
+	min-width: 0;
+}
+
+.crisp-nav-list {
+	display: flex;
+	list-style: none;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+
+.crisp-nav-item {
+	position: relative;
+	margin: 0 8px;
+}
+
+.crisp-nav-link {
+	text-decoration: none;
+	color: #333;
+	font-family: inherit;
+	font-weight: 500;
+	font-size: 15px;
+	padding: 10px 0;
+	display: flex;
+	align-items: center;
+	transition: color 0.3s;
+	white-space: nowrap;
+	position: relative;
+	font-family: inherit;
+	line-height: 1.25;
+}
+
+.crisp-nav-link::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	height: 3px;
+	background-color: #ffb703;
+	transition: width 0.3s;
+}
+
+.crisp-nav-link:hover::after,
+.crisp-nav-link.active::after,
+.crisp-nav-link:focus-visible::after {
+	width: 100%;
+}
+
+.crisp-nav-link:hover,
+.crisp-nav-link.active,
+.crisp-nav-link:focus-visible {
+	color: #ffb703;
+	outline: none;
+}
+
+.crisp-nav-dropdown-icon {
+	margin-left: 5px;
+	transition: transform 0.3s;
+	display: inline-flex;
+	align-items: center;
+}
+
+.crisp-nav-dropdown-icon svg {
+	width: 12px;
+	height: 12px;
+	fill: currentColor;
+}
+
+.crisp-nav-item:hover .crisp-nav-dropdown-icon {
+	transform: rotate(180deg);
+}
+
+.crisp-nav-dropdown {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background: #fff;
+	min-width: 280px;
+	max-height: calc(100vh - 120px);
+	overflow-y: auto;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(10px);
+	transition: all 0.3s;
+	z-index: 100;
+	padding: 10px 0;
+}
+
+.crisp-nav-item:hover .crisp-nav-dropdown,
+.crisp-nav-item:focus-within .crisp-nav-dropdown {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+.crisp-nav-dropdown-item {
+	display: block;
+	padding: 12px 20px;
+	color: #333;
+	text-decoration: none;
+	transition: all 0.3s;
+	border-bottom: 1px solid #f0f0f0;
+	font-size: 14px;
+	line-height: 1.4;
+	font-family: inherit;
+	white-space: nowrap;
+}
+
+.crisp-nav-dropdown-item:hover,
+.crisp-nav-dropdown-item:focus-visible {
+	background: #f8f9fa;
+	color: #ffb703;
+	padding-left: 25px;
+	outline: none;
+}
+
+.crisp-nav-dropdown-item:last-child {
+	border-bottom: none;
+}
+
+.crisp-nav-mobile-toggle,
+.crisp-nav-mobile-close {
+	display: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 12px;
+	min-width: 48px;
+	min-height: 48px;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.3s;
+}
+
+.crisp-nav-mobile-toggle svg {
+	width: 24px;
+	height: 24px;
+	stroke: #333;
+	display: block;
+}
+
+.crisp-nav-mobile-close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 1003;
+	background: rgba(255,255,255,0.1);
+	border-radius: 50%;
+}
+
+.crisp-nav-mobile-close svg {
+	width: 28px;
+	height: 28px;
+	stroke: #fff;
+	display: block;
+}
+
+.crisp-nav-mobile-toggle:hover,
+.crisp-nav-mobile-toggle:focus-visible {
+	transform: scale(1.1);
+	outline: 2px solid #fcb900;
+}
+
+.crisp-nav-mobile-close:hover,
+.crisp-nav-mobile-close:focus-visible {
+	transform: rotate(90deg);
+	outline: 2px solid #fcb900;
+}
+
+.crisp-nav-mobile-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	z-index: 999;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.crisp-nav-mobile-overlay.active {
+	opacity: 1;
+}
+
+.crisp-nav-mobile-topbar {
+	display: none;
+	background: #1a1a1a;
+	padding: 20px 25px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	margin-bottom: 20px;
+}
+
+.crisp-nav-mobile-logo {
+	display: none;
+	width: 100%;
+	padding: 0 25px 22px;
+	margin: -46px 0 18px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.crisp-nav-mobile-logo-link {
+	display: inline-flex;
+	align-items: center;
+	text-decoration: none;
+}
+
+.crisp-nav-mobile-logo img {
+	display: block;
+	width: auto;
+	max-width: 210px;
+	max-height: 64px;
+	object-fit: contain;
+}
+
+.crisp-nav-mobile-contact {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-bottom: 15px;
+}
+
+.crisp-nav-mobile-contact-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	color: #fff;
+	font-size: 13px;
+}
+
+.crisp-nav-mobile-lang {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.crisp-nav-mobile-lang a {
+	width: 28px;
+	height: 28px;
+}
+
+.cal-custom-footer * {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.cal-custom-footer {
+	background-color: #000;
+	color: #fff;
+	font-family: inherit;
+	width: 100%;
+	line-height: 1.4;
+}
+
+.cal-footer-cta {
+	position: relative;
+	min-height: 0;
+	padding: 150px 20px;
+	text-align: center;
+	border-bottom: 1px solid #222;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.cal-footer-cta::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.75);
+	z-index: 1;
+}
+
+.cal-footer-cta-bg {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 0;
+}
+
+.cal-footer-cta-content {
+	position: relative;
+	z-index: 2;
+}
+
+.cal-footer-cta h2 {
+	color: #fff !important;
+	font-family: inherit;
+	font-size: 2rem;
+	line-height: 1.2;
+	text-transform: uppercase;
+	margin-bottom: 15px;
+	font-weight: 600;
+}
+
+.cal-footer-cta-button {
+	display: inline-block;
+	min-width: 0;
+	padding: 10px 25px;
+	border: 2px solid #fff;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 600;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+	font-size: 14px;
+}
+
+.cal-footer-cta-button:hover {
+	background-color: #fff;
+	color: #000;
+}
+
+.cal-footer-main {
+	padding: 50px 20px;
+	background: linear-gradient(115deg, #000 70%, #1a1a1a 70.1%);
+}
+
+.cal-footer-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 0.8fr 1.2fr 1.2fr 1fr;
+	gap: 30px;
+}
+
+.cal-footer-column h4 {
+	color: #fff !important;
+	font-family: inherit;
+	font-size: 1.5rem;
+	margin-bottom: 20px;
+	font-weight: 500;
+}
+
+.cal-gallery-slider {
+	position: relative;
+	max-width: 240px;
+	overflow: hidden;
+}
+
+.cal-gallery-track {
+	display: flex;
+	transition: transform 0.4s ease;
+}
+
+.cal-gallery-slide {
+	flex: 0 0 calc(100% / 3);
+	min-width: 0;
+}
+
+.cal-gallery-lightbox-link {
+	display: block;
+	cursor: zoom-in;
+	padding: 2px;
+}
+
+.cal-gallery-slide img {
+	width: 100%;
+	height: auto;
+	border: 2px solid #fff;
+	display: block;
+}
+
+.cal-gallery-prev,
+.cal-gallery-next {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 24px;
+	height: 24px;
+	border: none;
+	border-radius: 50%;
+	background: rgba(255,255,255,0.15);
+	cursor: pointer;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	font-size: 14px;
+	line-height: 1;
+	color: #fff;
+	transition: background 0.2s;
+}
+
+.cal-gallery-prev:hover,
+.cal-gallery-next:hover {
+	background: rgba(255,255,255,0.35);
+}
+
+.cal-gallery-prev::before { content: "\276E"; }
+.cal-gallery-next::before { content: "\276F"; }
+
+.cal-gallery-prev { left: 2px; }
+.cal-gallery-next { right: 2px; }
+
+.cal-footer-column p {
+	color: #fff;
+	font-size: 14px;
+	margin-bottom: 15px;
+	line-height: 1.6;
+}
+
+.cal-footer-links {
+	list-style: none;
+}
+
+.cal-footer-links li {
+	margin-bottom: 6px;
+}
+
+.cal-footer-links a {
+	color: #fff;
+	text-decoration: none;
+	font-size: 14px;
+	transition: opacity 0.2s;
+}
+
+.cal-footer-links a:hover {
+	text-decoration: underline;
+	opacity: 0.8;
+}
+
+.cal-contact-item {
+	font-size: 14px;
+	margin-bottom: 15px;
+	color: #fff;
+}
+
+.cal-contact-item a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.cal-contact-item a:hover {
+	color: #FFB703;
+}
+
+.cal-contact-label {
+	font-weight: bold;
+	display: block;
+	margin-bottom: 2px;
+}
+
+.cal-footer-bottom-line {
+	max-width: 1200px;
+	margin: 28px auto 0;
+	padding-top: 16px;
+	border-top: 1px solid #222;
+	color: #fff;
+	font-size: 13px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.cal-gallery-lightbox {
+	position: fixed;
+	inset: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+	background: rgba(0, 0, 0, 0.86);
+	z-index: 10000;
+}
+
+.cal-gallery-lightbox.active {
+	display: flex;
+}
+
+.cal-gallery-lightbox-image-wrap {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.cal-gallery-lightbox img {
+	display: block;
+	max-width: min(560px, 88vw);
+	max-height: 72vh;
+	width: auto;
+	height: auto;
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.cal-gallery-lightbox-close {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	width: 28px;
+	height: 28px;
+	border: 1px solid rgba(255, 255, 255, 0.6);
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+}
+
+.cal-gallery-lightbox-close::before,
+.cal-gallery-lightbox-close::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 14px;
+	height: 1.5px;
+	background: #fff;
+	transform-origin: center;
+}
+
+.cal-gallery-lightbox-close::before {
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.cal-gallery-lightbox-close::after {
+	transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.cal-gallery-lightbox-prev,
+.cal-gallery-lightbox-next {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 32px;
+	height: 32px;
+	border: 1px solid rgba(255,255,255,0.35);
+	border-radius: 50%;
+	background: rgba(0,0,0,0.3);
+	cursor: pointer;
+	z-index: 10001;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	font-size: 16px;
+	line-height: 1;
+	color: #fff;
+	transition: background 0.2s;
+}
+
+.cal-gallery-lightbox-prev:hover,
+.cal-gallery-lightbox-next:hover {
+	background: rgba(255,255,255,0.25);
+}
+
+.cal-gallery-lightbox-prev { left: 16px; }
+.cal-gallery-lightbox-next { right: 16px; }
+
+.cal-gallery-lightbox-prev::before { content: "\276E"; }
+.cal-gallery-lightbox-next::before { content: "\276F"; }
+
+.site-footer:empty {
+	display: none;
+}
+
+/* ── Mobile/tablet top bar (phone + email + flags on tablet, phone + flags on mobile) ── */
+.crisp-nav-mobile-flags-bar {
+	display: none;
+}
+
+@media (min-width: 1025px) {
+	.crisp-nav-topbar {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+	.crisp-nav-container {
+		gap: 18px;
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+
+	.crisp-nav-logo {
+		height: 54px;
+	}
+
+	.crisp-nav-logo img {
+		max-height: 54px;
+	}
+
+	.crisp-nav-item {
+		margin-left: 6px;
+		margin-right: 6px;
+	}
+
+	.crisp-nav-link {
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 1024px) {
+	html,
+	body {
+		max-width: 100%;
+		overflow-x: clip;
+	}
+
+	/* Hide desktop topbar on mobile/tablet */
+	.crisp-nav-topbar {
+		display: none;
+	}
+
+	/* Two fixed utility rows: flags first, contact details second. */
+	.crisp-nav-mobile-flags-bar {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 74px;
+		background: #1a1a1a;
+		padding: 4px 12px 5px;
+		box-sizing: border-box;
+		z-index: 1003;
+	}
+
+	.crisp-nav-mobile-flags-bar * {
+		box-sizing: border-box;
+	}
+
+	.crisp-nav-mobile-flags-left {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 12px;
+		width: 100%;
+		min-width: 0;
+		height: 31px;
+		color: #fff;
+		font-size: clamp(9px, 2.5vw, 12px);
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
+	.crisp-nav-mobile-flags-left svg {
+		width: 12px;
+		height: 12px;
+		fill: #ffb703;
+		vertical-align: middle;
+		margin-right: 4px;
+	}
+
+	.crisp-nav-mobile-flags-left span {
+		display: flex;
+		align-items: center;
+		min-width: 0;
+	}
+
+	.crisp-nav-mobile-flags-email {
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.crisp-nav-mobile-flags-right {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+		width: 100%;
+		height: 34px;
+	}
+
+	.crisp-nav-mobile-flags-right a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		overflow: hidden;
+		transition: transform 0.2s;
+		flex-shrink: 0;
+		box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+	}
+
+	.crisp-nav-mobile-flags-right a:hover,
+	.crisp-nav-mobile-flags-right a:focus {
+		transform: scale(1.15);
+		outline: 2px solid #ffb703;
+		outline-offset: 1px;
+	}
+
+	.crisp-nav-mobile-flags-right img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* Push the logo and menu row below both utility rows. */
+	.crisp-nav-header {
+		top: 74px !important;
+	}
+
+	.crisp-nav-container {
+		padding: 12px 20px;
+	}
+
+	.crisp-nav-logo {
+		height: 55px;
+	}
+
+	.crisp-nav-logo img {
+		max-height: 55px;
+	}
+
+	.crisp-nav-mobile-toggle,
+	.crisp-nav-mobile-close,
+	.crisp-nav-mobile-overlay {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.crisp-nav-mobile-logo,
+	.crisp-nav-mobile-topbar {
+		display: none;
+	}
+
+	.crisp-nav-nav {
+		position: fixed;
+		top: 74px;
+		right: 0;
+		width: 340px;
+		max-width: 85%;
+		height: calc(100vh - 74px);
+		background: #1a1a1a;
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 80px 0 30px;
+		transform: translateX(105%);
+		visibility: hidden;
+		transition: transform 0.35s ease, visibility 0.35s;
+		z-index: 1000;
+		overflow-y: auto;
+		box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
+	}
+
+	.crisp-nav-nav.active {
+		transform: translateX(0);
+		visibility: visible;
+	}
+
+	.crisp-nav-list {
+		flex-direction: column;
+		width: 100%;
+		padding: 0 25px;
+	}
+
+	.crisp-nav-item {
+		margin: 0;
+		width: 100%;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.crisp-nav-link {
+		padding: 18px 0;
+		width: 100%;
+		justify-content: space-between;
+		color: #fff;
+		font-size: 17px;
+		font-weight: 500;
+	}
+
+	.crisp-nav-link::after {
+		display: none;
+	}
+
+	.crisp-nav-link:hover,
+	.crisp-nav-link.active,
+	.crisp-nav-link:focus-visible {
+		color: #ffb703;
+		padding-left: 10px;
+		outline: none;
+	}
+
+	.crisp-nav-dropdown-icon {
+		padding: 10px;
+		margin: -10px;
+	}
+
+	.crisp-nav-dropdown-icon svg {
+		fill: #ffb703;
+	}
+
+	.crisp-nav-item.active .crisp-nav-dropdown-icon {
+		transform: rotate(180deg);
+	}
+
+	.crisp-nav-dropdown {
+		position: static;
+		opacity: 1;
+		visibility: visible;
+		transform: none;
+		box-shadow: none;
+		background: rgba(255, 255, 255, 0.05);
+		display: none;
+		width: 100%;
+		padding: 10px 0;
+		margin-top: 5px;
+		border-radius: 8px;
+		border-left: 3px solid #ffb703;
+		animation: crispFadeIn 0.3s;
+	}
+
+	.crisp-nav-item.active .crisp-nav-dropdown {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.crisp-nav-dropdown-item {
+		padding: 14px 20px 14px 25px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		color: #fff;
+		font-size: 15px;
+	}
+
+	.crisp-nav-dropdown-item:hover,
+	.crisp-nav-dropdown-item:focus-visible {
+		background: rgba(255, 183, 3, 0.1);
+		color: #ffb703;
+		padding-left: 30px;
+		outline: none;
+	}
+
+	.cal-footer-container {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.cal-footer-main {
+		background: #000;
+	}
+}
+
+@media (max-width: 768px) {
+	.crisp-nav-container {
+		padding: 12px 15px;
+	}
+
+	.crisp-nav-logo {
+		height: 50px;
+	}
+
+	.crisp-nav-logo img {
+		max-height: 50px;
+	}
+
+	.crisp-nav-nav {
+		width: 300px;
+		max-width: 85%;
+	}
+}
+
+@media (max-width: 600px) {
+	.cal-footer-container {
+		grid-template-columns: 1fr;
+		text-align: left;
+	}
+
+	.cal-gallery-slider {
+		margin: 0 auto;
+	}
+}
+
+@media (max-width: 480px) {
+	.crisp-nav-container {
+		padding: 10px 12px;
+	}
+
+	.crisp-nav-logo {
+		height: 45px;
+	}
+
+	.crisp-nav-logo img {
+		max-height: 45px;
+	}
+
+	.crisp-nav-nav {
+		width: 280px;
+		max-width: 90%;
+		padding: 70px 0 25px;
+	}
+
+	.crisp-nav-list {
+		padding: 0 20px;
+	}
+
+	.crisp-nav-link {
+		font-size: 16px;
+		padding: 16px 0;
+	}
+}
+
+/* Shared page title banner and breadcrumb typography. */
+.cal-about-title-banner,
+.cal-about-hero,
+.cal-course-hero,
+.cal-careers-hero,
+.cal-online-hero,
+.cal-is-hero,
+.cal-rp-hero,
+.cal-our-school-hero,
+.cal-faq-hero,
+.cal-blog-hero,
+.cal-policy-hero,
+.cal-contact-hero,
+.cal-reviews-hero,
+.cal-cooking-hero {
+	background: #1a1c20 !important;
+	padding: 24px 20px 64px !important;
+	text-align: left !important;
+}
+
+.cal-page-hero {
+	background: #1a1c20 !important;
+	padding: 24px 20px 64px !important;
+	text-align: left !important;
+}
+
+.cal-page-shell {
+	display: block !important;
+	max-width: 1200px !important;
+	margin: 0 auto !important;
+	padding: 0 !important;
+}
+
+.cal-page-hero h1 {
+	position: relative !important;
+	margin: 0 !important;
+	padding: 0 0 0 25px !important;
+	color: #fff !important;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif !important;
+	font-size: 36px !important;
+	line-height: 46.8px !important;
+	font-weight: 600 !important;
+	font-style: normal !important;
+	text-transform: none !important;
+	letter-spacing: 0 !important;
+	text-align: left !important;
+}
+
+.cal-page-hero h1::before {
+	content: "" !important;
+	position: absolute !important;
+	left: 0 !important;
+	top: 4px !important;
+	bottom: 4px !important;
+	width: 2px !important;
+	background: #ffb606 !important;
+}
+
+.cal-page-breadcrumbs {
+	display: block !important;
+	max-width: none !important;
+	margin: 0 0 44px !important;
+	padding: 20px 0 18px !important;
+	border-bottom: 1px solid #e5e7eb !important;
+	color: #606060 !important;
+	font-family: Roboto, Arial, Helvetica, sans-serif !important;
+	font-size: 13px !important;
+	line-height: 24px !important;
+	font-weight: 400 !important;
+	text-align: start !important;
+}
+
+.cal-page-breadcrumbs a,
+.cal-page-breadcrumbs span {
+	color: #606060 !important;
+	font-family: Roboto, Arial, Helvetica, sans-serif !important;
+	font-size: 13px !important;
+	line-height: 24px !important;
+	font-weight: 400 !important;
+	text-decoration: none !important;
+}
+
+.cal-page-breadcrumbs a:hover {
+	color: #ffb606 !important;
+}
+
+.cal-page-breadcrumbs .cal-breadcrumb-sep {
+	margin: 0 12px !important;
+}
+
+.cal-about-title-banner .cal-about-shell,
+.cal-about-hero-inner,
+.cal-course-hero-inner,
+.cal-careers-hero-inner,
+.cal-online-hero-inner,
+.cal-is-hero-inner,
+.cal-rp-hero-inner,
+.cal-our-school-hero-inner,
+.cal-faq-shell,
+.cal-blog-hero-inner,
+.cal-policy-hero-inner,
+.cal-contact-hero-inner,
+.cal-reviews-hero-inner,
+.cal-cooking-hero-inner {
+	display: block !important;
+	max-width: 1200px !important;
+	margin: 0 auto !important;
+	padding: 0 !important;
+}
+
+.cal-online-accent {
+	display: none !important;
+}
+
+.cal-about-title-banner h1,
+.cal-about-hero h1,
+.cal-course-hero h1,
+.cal-careers-hero h1,
+.cal-online-hero h1,
+.cal-is-hero h1,
+.cal-rp-hero h1,
+.cal-our-school-hero h1,
+.cal-faq-hero h1,
+.cal-blog-hero h1,
+.cal-policy-hero h1,
+.cal-contact-hero h1,
+.cal-reviews-hero h1,
+.cal-cooking-hero h1 {
+	position: relative !important;
+	margin: 0 !important;
+	padding: 0 0 0 25px !important;
+	color: #fff !important;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif !important;
+	font-size: 36px !important;
+	line-height: 46.8px !important;
+	font-weight: 600 !important;
+	font-style: normal !important;
+	text-transform: none !important;
+	letter-spacing: normal !important;
+	text-align: left !important;
+}
+
+.cal-about-title-banner h1::before,
+.cal-about-hero h1::before,
+.cal-course-hero h1::before,
+.cal-careers-hero h1::before,
+.cal-online-hero h1::before,
+.cal-is-hero h1::before,
+.cal-rp-hero h1::before,
+.cal-our-school-hero h1::before,
+.cal-faq-hero h1::before,
+.cal-blog-hero h1::before,
+.cal-policy-hero h1::before,
+.cal-contact-hero h1::before,
+.cal-reviews-hero h1::before,
+.cal-cooking-hero h1::before {
+	content: "" !important;
+	position: absolute !important;
+	left: 0 !important;
+	top: 4px !important;
+	bottom: 4px !important;
+	width: 2px !important;
+	height: auto !important;
+	background: #ffb703 !important;
+	border-radius: 0 !important;
+}
+
+.cal-cooking-hero p,
+.cal-online-hero-sub {
+	display: none !important;
+}
+
+.cal-about-breadcrumb-bar,
+.cal-course-content,
+.cal-careers-content,
+.cal-online-sub-bar,
+.cal-is-content,
+.cal-rp-content,
+.cal-our-school-content,
+.cal-faq-content,
+.cal-blog-sub-bar,
+.cal-policy-sub-bar,
+.cal-contact-sub-bar,
+.cal-reviews-content,
+.cal-cooking-content {
+	background: #fff !important;
+	margin-top: 0 !important;
+	padding-top: 0 !important;
+}
+
+.cal-course-main,
+.cal-careers-shell,
+.cal-online-shell,
+.cal-is-shell,
+.cal-rp-shell,
+.cal-our-school-shell,
+.cal-faq-shell,
+.cal-blog-shell,
+.cal-policy-shell,
+.cal-contact-shell,
+.cal-reviews-shell,
+.cal-cooking-content-inner {
+	max-width: 1200px !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	padding-left: 20px !important;
+	padding-right: 20px !important;
+}
+
+.cal-about-breadcrumbs,
+.cal-course-breadcrumbs,
+.cal-careers-breadcrumbs,
+.cal-online-breadcrumbs,
+.cal-is-breadcrumbs,
+.cal-rp-breadcrumbs,
+.cal-our-school-breadcrumbs,
+.cal-faq-breadcrumbs,
+.cal-blog-breadcrumbs,
+.cal-policy-breadcrumbs,
+.cal-contact-breadcrumbs,
+.cal-reviews-breadcrumbs,
+.cal-cooking-breadcrumbs,
+.cal-single-breadcrumb {
+	display: block !important;
+	max-width: none !important;
+	margin: 0 0 44px !important;
+	padding: 20px 0 18px !important;
+	border-bottom: 1px solid #e5e7eb !important;
+	color: #606060 !important;
+	font-family: Roboto, Arial, Helvetica, sans-serif !important;
+	font-size: 13px !important;
+	line-height: 24px !important;
+	font-weight: 400 !important;
+	text-align: start !important;
+}
+
+.cal-about-breadcrumbs a,
+.cal-course-breadcrumbs a,
+.cal-careers-breadcrumbs a,
+.cal-online-breadcrumbs a,
+.cal-is-breadcrumbs a,
+.cal-rp-breadcrumbs a,
+.cal-our-school-breadcrumbs a,
+.cal-faq-breadcrumbs a,
+.cal-blog-breadcrumbs a,
+.cal-policy-breadcrumbs a,
+.cal-contact-breadcrumbs a,
+.cal-reviews-breadcrumbs a,
+.cal-cooking-breadcrumbs a,
+.cal-single-breadcrumb a {
+	color: #606060 !important;
+	text-decoration: none !important;
+}
+
+.cal-about-breadcrumbs a:hover,
+.cal-course-breadcrumbs a:hover,
+.cal-careers-breadcrumbs a:hover,
+.cal-online-breadcrumbs a:hover,
+.cal-is-breadcrumbs a:hover,
+.cal-rp-breadcrumbs a:hover,
+.cal-our-school-breadcrumbs a:hover,
+.cal-faq-breadcrumbs a:hover,
+.cal-blog-breadcrumbs a:hover,
+.cal-policy-breadcrumbs a:hover,
+.cal-contact-breadcrumbs a:hover,
+.cal-reviews-breadcrumbs a:hover,
+.cal-cooking-breadcrumbs a:hover,
+.cal-single-breadcrumb a:hover {
+	color: #ffb606 !important;
+}
+
+.cal-about-breadcrumb-sep,
+.cal-breadcrumb-sep,
+.cal-careers-breadcrumbs span,
+.cal-online-breadcrumb-current,
+.cal-is-breadcrumbs span,
+.cal-rp-breadcrumbs span,
+.cal-our-school-breadcrumbs span,
+.cal-faq-breadcrumbs span,
+.cal-blog-breadcrumb-current,
+.cal-policy-breadcrumb-current,
+.cal-contact-breadcrumb-current,
+.cal-reviews-breadcrumbs span,
+.cal-cooking-breadcrumbs span,
+.cal-single-breadcrumb-sep,
+.cal-single-breadcrumb-current {
+	color: #606060 !important;
+	font-family: Roboto, Arial, Helvetica, sans-serif !important;
+	font-size: 13px !important;
+	line-height: 24px !important;
+	font-weight: 400 !important;
+}
+
+.cal-careers-breadcrumbs span,
+.cal-is-breadcrumbs span,
+.cal-rp-breadcrumbs span,
+.cal-our-school-breadcrumbs span,
+.cal-faq-breadcrumbs span,
+.cal-reviews-breadcrumbs span,
+.cal-cooking-breadcrumbs span {
+	margin: 0 12px !important;
+}
+
+.cal-careers-hero .cal-careers-shell,
+.cal-rp-hero .cal-rp-shell,
+.cal-our-school-hero .cal-our-school-shell,
+.cal-faq-hero .cal-faq-shell,
+.cal-reviews-hero .cal-reviews-shell,
+.cal-blog-hero .cal-blog-shell,
+.cal-policy-hero .cal-policy-shell,
+.cal-contact-hero .cal-contact-shell {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+@media (max-width: 768px) {
+	.cal-about-title-banner,
+	.cal-about-hero,
+	.cal-course-hero,
+	.cal-careers-hero,
+	.cal-online-hero,
+	.cal-is-hero,
+	.cal-rp-hero,
+	.cal-our-school-hero,
+	.cal-faq-hero,
+	.cal-blog-hero,
+	.cal-policy-hero,
+	.cal-contact-hero,
+	.cal-reviews-hero,
+	.cal-cooking-hero {
+		padding: 24px 16px 42px !important;
+	}
+
+	.cal-page-hero {
+		padding: 24px 16px 42px !important;
+	}
+
+	.cal-page-hero h1 {
+		font-size: 30px !important;
+		line-height: 39px !important;
+	}
+
+	.cal-about-title-banner h1,
+	.cal-about-hero h1,
+	.cal-course-hero h1,
+	.cal-careers-hero h1,
+	.cal-online-hero h1,
+	.cal-is-hero h1,
+	.cal-rp-hero h1,
+	.cal-our-school-hero h1,
+	.cal-faq-hero h1,
+	.cal-blog-hero h1,
+	.cal-policy-hero h1,
+	.cal-contact-hero h1,
+	.cal-reviews-hero h1,
+	.cal-cooking-hero h1 {
+		font-size: 30px !important;
+		line-height: 39px !important;
+	}
+
+	.cal-course-main,
+	.cal-careers-shell,
+	.cal-online-shell,
+	.cal-is-shell,
+	.cal-rp-shell,
+	.cal-our-school-shell,
+	.cal-faq-shell,
+	.cal-blog-shell,
+	.cal-policy-shell,
+	.cal-contact-shell,
+	.cal-reviews-shell,
+	.cal-cooking-content-inner {
+		padding-left: 16px !important;
+		padding-right: 16px !important;
+	}
+
+	.cal-about-breadcrumbs,
+	.cal-course-breadcrumbs,
+	.cal-careers-breadcrumbs,
+	.cal-online-breadcrumbs,
+	.cal-is-breadcrumbs,
+	.cal-rp-breadcrumbs,
+	.cal-our-school-breadcrumbs,
+	.cal-faq-breadcrumbs,
+	.cal-blog-breadcrumbs,
+	.cal-policy-breadcrumbs,
+	.cal-contact-breadcrumbs,
+	.cal-reviews-breadcrumbs,
+	.cal-cooking-breadcrumbs,
+	.cal-single-breadcrumb {
+		margin-bottom: 34px !important;
+	}
+}
+
+@keyframes crispFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+.cal-form-trap {
+	position: absolute !important;
+	left: -10000px !important;
+	width: 1px !important;
+	height: 1px !important;
+	overflow: hidden !important;
+}
+
+/* Language flags — circular (matches live site) */
+.crisp-nav-lang-switcher {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.crisp-nav-lang-switcher li {
+	margin: 0;
+	padding: 0;
+}
+
+.crisp-nav-lang-switcher a {
+	display: block;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	overflow: hidden;
+	flex-shrink: 0;
+	padding: 0;
+	background: transparent;
+	color: inherit;
+	font-size: 0;
+	text-decoration: none;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+	transition: transform 0.3s;
+}
+
+.crisp-nav-lang-switcher a:hover,
+.crisp-nav-lang-switcher a:focus {
+	transform: scale(1.15);
+	outline: 2px solid #ffb703;
+	outline-offset: 1px;
+}
+
+.crisp-nav-lang-switcher a.is-active,
+.crisp-nav-lang-switcher a.active {
+	outline: 2px solid #ffb703;
+	outline-offset: 1px;
+}
+
+.crisp-nav-lang-switcher img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	display: block;
+	border-radius: 50%;
+}
+
+/* ── Mobile-first fixes for Google mobile-friendly test ── */
+
+/* Ensure all form inputs have minimum 16px font to prevent iOS zoom */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+input[type="password"],
+input[type="url"],
+select,
+textarea {
+	font-size: 16px !important;
+}
+
+/* Ensure tap targets are ≥ 48px on all interactive elements */
+button,
+a.button,
+.crisp-nav-link,
+.cal-enquiry-submit,
+.wpcul-btn,
+.reviews-cta-btn,
+.reviews-cta-button,
+.crisp-nav-mobile-toggle,
+.crisp-nav-mobile-close {
+	min-height: 48px;
+}
+
+/* Desktop lang switcher flags — ensure 44px touch target */
+.crisp-nav-lang-switcher a {
+	width: 44px;
+	height: 44px;
+	padding: 8px;
+}
+
+.crisp-nav-lang-switcher img {
+	width: 28px;
+	height: 28px;
+}
+
+/* Mobile hero slider height adjustment */
+@media (max-width: 768px) {
+	.wpcul-slider {
+		height: 55vh !important;
+		max-height: 450px !important;
+		min-height: 320px !important;
+	}
+
+	.wpcul-content h1,
+	.wpcul-content h2 {
+		font-size: clamp(22px, 6vw, 32px) !important;
+	}
+
+	.wpcul-content p {
+		font-size: clamp(14px, 3.5vw, 16px) !important;
+		margin-bottom: 16px !important;
+	}
+
+	.wpcul-btn {
+		font-size: 14px !important;
+		padding: 12px 28px !important;
+		min-width: 180px;
+	}
+
+	.cal-enquiry-form-wrap {
+		padding: 20px 16px;
+	}
+
+	.cal-enquiry-field input,
+	.cal-enquiry-field button {
+		font-size: 16px !important;
+		min-height: 48px;
+	}
+
+	.cal-why-choose-card {
+		padding: 20px 16px;
+	}
+
+	.review-card {
+		padding: 20px;
+	}
+
+	.review-text {
+		font-size: 15px;
+		line-height: 1.5;
+	}
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+	.wpcul-slider {
+		height: 50vh !important;
+		max-height: 380px !important;
+		min-height: 280px !important;
+	}
+
+	.wpcul-content {
+		padding: 12px 16px !important;
+	}
+
+	.crisp-nav-mobile-flags-right a {
+		width: 40px !important;
+		height: 40px !important;
+	}
+
+	.crisp-nav-mobile-flags-right a img {
+		width: 24px !important;
+		height: 24px !important;
+	}
+}
+
+/* Prevent horizontal overflow on all viewports */
+body {
+	overflow-x: hidden;
+	width: 100%;
+	/* Fixed crisp-nav header: override theme/global styles that zero out padding-top */
+	padding-top: 127px !important;
+	scroll-padding-top: 127px;
+}
+
+@media (max-width: 1024px) {
+	body {
+		padding-top: 153px !important;
+		scroll-padding-top: 153px;
+	}
+}
+
+/* Page hero banners always sit below the fixed header */
+.cal-page-hero,
+.cal-about-hero,
+.cal-course-hero,
+.cal-careers-hero,
+.cal-online-hero,
+.cal-is-hero,
+.cal-rp-hero,
+.cal-our-school-hero,
+.cal-faq-hero,
+.cal-blog-hero,
+.cal-policy-hero,
+.cal-contact-hero,
+.cal-reviews-hero,
+.cal-cooking-hero,
+.cal-about-title-banner {
+	position: relative;
+	z-index: 1;
+	margin-top: 0 !important;
+}
+
+/* Ensure images don't overflow their containers */
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* ── Tighter nav spacing for non-English languages (longer text) ── */
+@media (min-width: 1025px) {
+	.lang-fr .crisp-nav-item,
+	.lang-es .crisp-nav-item,
+	.lang-it .crisp-nav-item,
+	.lang-zh .crisp-nav-item,
+	.lang-zh-tw .crisp-nav-item {
+		margin-left: 8px;
+		margin-right: 8px;
+	}
+
+	.lang-fr .crisp-nav-link,
+	.lang-es .crisp-nav-link,
+	.lang-it .crisp-nav-link,
+	.lang-zh .crisp-nav-link,
+	.lang-zh-tw .crisp-nav-link {
+		font-size: 14px;
+		padding-left: 4px;
+		padding-right: 4px;
+	}
+
+	.lang-fr .crisp-nav-container,
+	.lang-es .crisp-nav-container,
+	.lang-it .crisp-nav-container,
+	.lang-zh .crisp-nav-container,
+	.lang-zh-tw .crisp-nav-container {
+		gap: 12px;
+	}
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+	.lang-fr .crisp-nav-item,
+	.lang-es .crisp-nav-item,
+	.lang-it .crisp-nav-item,
+	.lang-zh .crisp-nav-item,
+	.lang-zh-tw .crisp-nav-item {
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+
+	.lang-fr .crisp-nav-link,
+	.lang-es .crisp-nav-link,
+	.lang-it .crisp-nav-link,
+	.lang-zh .crisp-nav-link,
+	.lang-zh-tw .crisp-nav-link {
+		font-size: 13px;
+	}
+}

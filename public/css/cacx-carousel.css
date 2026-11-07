@@ -1,0 +1,256 @@
+/* CACX carousel: unique cacx- prefix, all !important. */
+
+.cacx-section{
+    background:#0f0f1a!important;
+    padding:56px 0 52px!important;
+    position:relative!important;
+    font-family:"Outfit",sans-serif!important;
+    overflow:hidden!important;
+    width:100%!important;
+}
+.cacx-section *{box-sizing:border-box!important}
+.cacx-section::before{
+    content:""!important;position:absolute!important;
+    top:0!important;left:0!important;right:0!important;height:1px!important;
+    background:linear-gradient(90deg,transparent,#ffb606 40%,#ffb606 60%,transparent)!important;
+}
+
+/* Header */
+.cacx-header{
+    display:flex!important;justify-content:space-between!important;
+    align-items:center!important;
+    padding:0 clamp(16px,5vw,60px)!important;
+    margin-bottom:32px!important;gap:12px!important;
+}
+.cacx-header-left{flex:1 1 0!important;min-width:0!important}
+.cacx-eyebrow{
+    display:block!important;font-size:.68rem!important;
+    letter-spacing:.16em!important;text-transform:uppercase!important;
+    color:#ffb606!important;margin-bottom:8px!important;font-weight:600!important;
+}
+.cacx-title{
+    font-family:"Cormorant Garamond",serif!important;
+    font-size:clamp(1.4rem,3vw,2.8rem)!important;
+    font-weight:700!important;color:#fff!important;
+    line-height:1.15!important;margin:0!important;
+}
+.cacx-title em{color:#ffb606!important;font-style:italic!important}
+.cacx-nav{display:flex!important;gap:8px!important;flex-shrink:0!important}
+.cacx-arrow{
+    width:40px!important;height:40px!important;border-radius:50%!important;
+    border:1.5px solid rgba(255,182,6,.4)!important;
+    background:transparent!important;color:#ffb606!important;
+    font-size:.95rem!important;cursor:pointer!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    transition:background .2s,color .2s,border-color .2s!important;
+    padding:0!important;line-height:1!important;
+}
+.cacx-arrow:hover{background:#ffb606!important;color:#0f0f1a!important;border-color:#ffb606!important}
+.cacx-arrow:disabled{opacity:.2!important;cursor:default!important}
+
+/* Track wrapper */
+.cacx-track-wrap{
+    overflow:visible!important;
+    padding:0 clamp(16px,5vw,60px)!important;
+    width:100%!important;
+    padding-right:clamp(16px,5vw,60px)!important;
+}
+
+/* Track */
+.cacx-track{
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    gap:16px!important;
+    transition:transform .48s cubic-bezier(.4,0,.2,1)!important;
+    will-change:transform!important;
+    cursor:grab!important;
+    user-select:none!important;
+    align-items:stretch!important;
+}
+.cacx-track.cacx-dragging{cursor:grabbing!important;transition:none!important}
+
+/* Slides: CSS fallback widths prevent layout shift before JS runs. */
+.cacx-slide{
+    flex:0 0 calc((100% - 48px) / 4)!important;
+    flex-shrink:0!important;flex-grow:0!important;
+    display:flex!important;min-width:0!important;
+}
+@media (max-width:959px){
+    .cacx-slide{flex:0 0 calc((100% - 32px) / 3)!important;}
+}
+@media (max-width:659px){
+    .cacx-slide{flex:0 0 calc((100% - 16px) / 2)!important;}
+}
+@media (max-width:419px){
+    .cacx-slide{flex:0 0 100%!important;}
+}
+
+/* Card: equal height via flex column. */
+.cacx-card{
+    display:flex!important;flex-direction:column!important;
+    width:100%!important;
+    text-decoration:none!important;border-radius:10px!important;
+    overflow:hidden!important;background:#1a1a2e!important;
+    border:1px solid rgba(255,182,6,.12)!important;
+    transition:transform .3s,box-shadow .3s!important;
+    box-shadow:0 4px 18px rgba(0,0,0,.45)!important;
+}
+.cacx-card:hover{
+    transform:translateY(-4px)!important;
+    box-shadow:0 16px 44px rgba(0,0,0,.6),0 0 0 1px rgba(255,182,6,.25)!important;
+}
+
+/* Image */
+.cacx-img-wrap{
+    position:relative!important;height:200px!important;
+    overflow:hidden!important;flex-shrink:0!important;width:100%!important;
+}
+.cacx-img-wrap img{
+    width:100%!important;height:100%!important;
+    object-fit:cover!important;display:block!important;
+    transition:transform .5s!important;
+}
+.cacx-card:hover .cacx-img-wrap img{transform:scale(1.05)!important}
+.cacx-img-overlay{
+    position:absolute!important;inset:0!important;
+    background:linear-gradient(to top,rgba(15,15,26,.82) 0%,rgba(15,15,26,.06) 55%,transparent 100%)!important;
+}
+.cacx-badge{
+    position:absolute!important;top:12px!important;right:12px!important;
+    background:#ffb606!important;color:#0f0f1a!important;
+    padding:3px 9px!important;border-radius:3px!important;
+    font-size:.65rem!important;font-weight:700!important;
+    letter-spacing:.06em!important;text-transform:uppercase!important;
+}
+
+/* Body */
+.cacx-body{
+    padding:16px 18px 18px!important;
+    flex:1 1 auto!important;
+    display:flex!important;flex-direction:column!important;
+}
+.cacx-name{
+    font-family:"Cormorant Garamond",serif!important;
+    font-size:1.1rem!important;font-weight:600!important;
+    color:#fff!important;margin:0 0 8px!important;line-height:1.3!important;
+}
+.cacx-meta{
+    display:flex!important;align-items:center!important;
+    gap:5px!important;font-size:.76rem!important;
+    color:rgba(255,255,255,.4)!important;flex:1 1 auto!important;
+}
+.cacx-sep{color:#ffb606!important;opacity:.5!important}
+.cacx-card-footer{
+    display:flex!important;justify-content:space-between!important;align-items:center!important;
+    border-top:1px solid rgba(255,255,255,.07)!important;
+    padding-top:12px!important;margin-top:12px!important;flex-shrink:0!important;
+}
+.cacx-price{
+    font-family:"Cormorant Garamond",serif!important;
+    font-size:1.2rem!important;font-weight:700!important;color:#ffb606!important;
+}
+.cacx-cta{
+    font-size:.7rem!important;color:rgba(255,255,255,.4)!important;
+    letter-spacing:.06em!important;transition:color .2s!important;white-space:nowrap!important;
+}
+.cacx-card:hover .cacx-cta{color:#ffb606!important}
+
+/* Dots */
+.cacx-dots{
+    display:flex!important;justify-content:center!important;
+    gap:7px!important;margin-top:26px!important;
+}
+.cacx-dot-btn{
+    display:inline-block!important;
+    width:8px!important;
+    height:8px!important;
+    border-radius:4px!important;
+    background:rgba(255,182,6,.25)!important;
+    border:none!important;
+    cursor:pointer!important;
+    padding:0!important;
+    flex-shrink:0!important;
+    transition:width .3s ease,background .3s ease,opacity .3s ease!important;
+    opacity:0.5!important;
+    vertical-align:middle!important;
+}
+.cacx-dot-btn.cacx-active{
+    width:24px!important;
+    background:#ffb606!important;
+    opacity:1!important;
+    border-radius:4px!important;
+}
+
+/* More courses button */
+.cacx-btn-wrap{text-align:center!important;margin-top:34px!important;padding:0 16px!important}
+.cacx-more-btn{
+    display:inline-flex!important;align-items:center!important;gap:10px!important;
+    background:transparent!important;color:#ffb606!important;
+    border:1.5px solid #ffb606!important;
+    padding:12px 28px!important;border-radius:6px!important;
+    font-family:"Outfit",sans-serif!important;font-size:.82rem!important;
+    font-weight:600!important;letter-spacing:.08em!important;
+    text-transform:uppercase!important;text-decoration:none!important;
+    transition:background .2s,color .2s!important;
+}
+.cacx-more-btn:hover,.cacx-more-btn:focus{
+    background:#ffb606!important;color:#0f0f1a!important;text-decoration:none!important;
+}
+.cacx-arrow-icon{display:inline-block!important;transition:transform .2s!important}
+.cacx-more-btn:hover .cacx-arrow-icon{transform:translateX(4px)!important}
+
+/* Mobile adjustments */
+@media(max-width:540px){
+    .cacx-header{flex-direction:column!important;align-items:flex-start!important;gap:14px!important}
+    .cacx-img-wrap{height:175px!important}
+}
+
+
+<script>
+(function(){
+    var sec = document.getElementById('<?php echo $uid;?>');
+    if(!sec) return;
+
+    var trackWrap = sec.querySelector('.cacx-track-wrap');
+    var track     = sec.querySelector('.cacx-track');
+    var slides    = sec.querySelectorAll('.cacx-slide');
+    var btnPrev   = sec.querySelector('.cacx-prev');
+    var btnNext   = sec.querySelector('.cacx-next');
+    var dotsWrap  = sec.querySelector('.cacx-dots');
+    var autoplay  = parseInt(sec.dataset.autoplay, 10) || 0;
+    var GAP       = 16;
+    var cur       = 0;
+    var timer     = null;
+    var total     = slides.length;
+
+    function vis(){
+        var w = trackWrap.getBoundingClientRect().width;
+        if(w >= 960) return 4;
+        if(w >= 660) return 3;
+        if(w >= 420) return 2;
+        return 1;
+    }
+
+    function peek(){
+        var v = vis();
+        if(v >= 4) return 0;
+        return 48;
+    }
+
+    function sw(){
+        var inner = trackWrap.getBoundingClientRect().width;
+        var v     = vis();
+        var p     = peek();
+        return Math.floor((inner - p - GAP * (v - 1)) / v);
+    }
+
+    function applyWidths(){
+        var w = sw();
+        for(var i = 0; i < slides.length; i++){
+            slides[i].setAttribute('style',
+                'width:' + w + 'px;' +
+                'min-width:' + w + 'px;' +
+                'max-width:' + w + 'px;' +
+                'flex:0 0 ' + w + 'px;' +
+                'display:flex;'
+            );

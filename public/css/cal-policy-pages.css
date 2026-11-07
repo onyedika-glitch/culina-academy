@@ -1,0 +1,218 @@
+.cal-policy-page .site-content,
+.cal-policy-page #content,
+.cal-policy-page #primary,
+.cal-policy-page .content-area,
+.cal-policy-page .site-main,
+.cal-policy-page.separate-containers .site-main {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	max-width: 100%;
+}
+
+.cal-policy-page .site-content,
+.cal-policy-page #content {
+	display: block !important;
+}
+
+.cal-policy-page #primary,
+.cal-policy-page .content-area {
+	float: none !important;
+	flex: 0 0 100% !important;
+}
+
+.cal-policy-page .container.grid-container,
+.cal-policy-page .site.grid-container {
+	width: 100%;
+	max-width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.cal-policy-page .inside-right-sidebar,
+.cal-policy-page .inside-left-sidebar,
+.cal-policy-page .sidebar,
+.cal-policy-page #right-sidebar,
+.cal-policy-page #left-sidebar {
+	display: none !important;
+}
+
+.cal-policy-hero {
+	background: #1d1f24;
+	padding: 50px 0;
+}
+
+.cal-policy-hero-inner {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.cal-policy-accent {
+	display: block;
+	width: 5px;
+	height: 44px;
+	background: #FFB606;
+	border-radius: 3px;
+	flex-shrink: 0;
+}
+
+.cal-policy-hero h1 {
+	color: #fff;
+	font-family: "Roboto Slab", serif;
+	font-size: 38px;
+	font-weight: 600;
+	margin: 0;
+	line-height: 1.25;
+}
+
+.cal-policy-sub-bar {
+	border-top: 1px solid #e5e7eb;
+	padding: 14px 0;
+}
+
+.cal-policy-breadcrumbs {
+	color: #9ca3af;
+	font-size: 14px;
+}
+
+.cal-policy-breadcrumbs a {
+	color: #9ca3af;
+	text-decoration: none;
+}
+
+.cal-policy-breadcrumbs a:hover {
+	color: #FFB606;
+}
+
+
+.cal-policy-breadcrumb-current {
+	color: #6b7280;
+}
+
+.cal-policy-shell {
+	max-width: 860px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.cal-policy-content {
+	padding: 48px 0 60px;
+	background: #fff;
+}
+
+/* Body copy stays regular; section labels (h2 or bold-only paragraphs) stay semi-bold. */
+.cal-policy-entry p {
+	font-weight: 400;
+}
+
+.cal-policy-entry p > strong:only-child,
+.cal-policy-entry p > b:only-child {
+	font-weight: 600;
+	display: inline;
+}
+
+.cal-policy-entry {
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 24px;
+	color: #606060;
+	font-weight: 400;
+}
+
+.cal-policy-entry h2 {
+	color: #333;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 28px;
+	line-height: 36.4px;
+	font-weight: 600;
+	margin: 34px 0 14px;
+	padding: 0;
+	text-align: left;
+}
+
+.cal-policy-entry h2:first-child {
+	margin-top: 0;
+}
+
+.cal-policy-entry h3 {
+	color: #333;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 20px;
+	line-height: 26px;
+	font-weight: 700;
+	margin: 28px 0 10px;
+	padding: 0;
+	text-align: left;
+}
+
+.cal-policy-entry p {
+	color: #606060;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 24px;
+	font-weight: 400;
+	margin: 0 0 18px;
+	padding: 0;
+	text-align: left;
+}
+
+.cal-policy-entry ul,
+.cal-policy-entry ol {
+	margin: 0 0 18px 24px;
+	padding: 0;
+}
+
+.cal-policy-entry li {
+	margin-bottom: 8px;
+}
+
+.cal-policy-entry a {
+	color: #FFB606;
+	text-decoration: underline;
+}
+
+.cal-policy-entry a:hover {
+	color: #e0a000;
+}
+
+.cal-howto-enquire-btn {
+	background-color: #69727d;
+	border-radius: 3px;
+	color: #fff;
+	display: inline-block;
+	fill: #fff;
+	font-size: 15px;
+	line-height: 1;
+	padding: 12px 24px;
+	text-align: center;
+	transition: all .3s;
+	text-decoration: none;
+}
+
+.cal-howto-enquire-btn:hover {
+	background-color: #555e66;
+	color: #fff;
+}
+
+.cal-howto-enquire-wrap {
+	text-align: center;
+	margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+	.cal-policy-hero h1 {
+		font-size: 28px;
+	}
+
+	.cal-policy-content {
+		padding: 32px 0 40px;
+	}
+
+	.cal-policy-entry h2 {
+		font-size: 22px;
+	}
+}

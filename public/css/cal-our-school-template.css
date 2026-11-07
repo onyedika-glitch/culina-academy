@@ -1,0 +1,343 @@
+.cal-our-school-template-page .site-content,
+.cal-our-school-template-page #content,
+.cal-our-school-template-page #primary,
+.cal-our-school-template-page .content-area,
+.cal-our-school-template-page .site-main {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	max-width: 100%;
+}
+
+.cal-our-school-template-page .site-content,
+.cal-our-school-template-page #content {
+	display: block !important;
+}
+
+.cal-our-school-template-page #primary,
+.cal-our-school-template-page .content-area {
+	float: none !important;
+	flex: 0 0 100% !important;
+}
+
+.cal-our-school-template-page .inside-right-sidebar,
+.cal-our-school-template-page .inside-left-sidebar,
+.cal-our-school-template-page .sidebar,
+.cal-our-school-template-page #right-sidebar,
+.cal-our-school-template-page #left-sidebar {
+	display: none !important;
+}
+
+.cal-our-school-template-page .container.grid-container,
+.cal-our-school-template-page .site.grid-container {
+	width: 100%;
+	max-width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.cal-our-school-shell {
+	width: min(1180px, calc(100% - 40px));
+	margin: 0 auto;
+}
+
+.cal-our-school-hero {
+	position: relative;
+	overflow: hidden;
+	padding: 74px 0 68px;
+	background: #181b20;
+	color: #fff;
+}
+
+.cal-our-school-hero::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(135deg, rgba(255, 183, 3, 0.14), rgba(255, 255, 255, 0) 42%);
+	pointer-events: none;
+}
+
+.cal-our-school-hero-grid {
+	position: relative;
+	display: grid;
+	grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+	gap: 48px;
+	align-items: center;
+}
+
+.cal-our-school-kicker {
+	margin: 0 0 16px;
+	color: #ffb703;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+.cal-our-school-hero h1 {
+	margin: 0;
+	color: #fff;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: clamp(2.45rem, 5vw, 4.4rem);
+	line-height: 1.04;
+	font-weight: 700;
+}
+
+.cal-our-school-intro {
+	max-width: 720px;
+	margin: 24px 0 0;
+	color: rgba(255, 255, 255, 0.84);
+	font-size: 18px;
+	line-height: 1.65;
+}
+
+.cal-our-school-intro p {
+	margin: 0 0 16px;
+}
+
+.cal-our-school-intro p:last-child {
+	margin-bottom: 0;
+}
+
+.cal-our-school-hero-image {
+	border: 1px solid rgba(255, 183, 3, 0.28);
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.cal-our-school-hero-image img,
+.cal-our-school-section-image img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.cal-our-school-hero-image img {
+	aspect-ratio: 4 / 3;
+}
+
+.cal-our-school-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 30px;
+	padding: 14px 22px;
+	border: 1px solid #ffb703;
+	background: #ffb703;
+	color: #161616;
+	font-size: 13px;
+	font-weight: 800;
+	letter-spacing: 0.08em;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.cal-our-school-button:hover,
+.cal-our-school-button:focus {
+	background: #fff;
+	color: #161616;
+	transform: translateY(-1px);
+}
+
+.cal-our-school-button.is-light {
+	background: #fff;
+	color: #191c22;
+}
+
+.cal-our-school-content {
+	padding: 0 0 72px;
+	background: #fff;
+}
+
+.cal-our-school-breadcrumbs {
+	margin-bottom: 42px;
+	padding: 20px 0 12px;
+	border-bottom: 1px solid #ececec;
+	color: #8891a0;
+	font-size: 12px;
+}
+
+.cal-our-school-breadcrumbs a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.cal-our-school-breadcrumbs span {
+	margin: 0 8px;
+}
+
+.cal-our-school-sections {
+	display: grid;
+	gap: 34px;
+}
+
+.cal-our-school-section {
+	display: grid;
+	grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+	gap: 34px;
+	align-items: stretch;
+	padding: 34px;
+	border: 1px solid #ece6d6;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0 16px 38px rgba(20, 24, 31, 0.07);
+}
+
+.cal-our-school-section.is-image_left .cal-our-school-section-image {
+	order: -1;
+}
+
+.cal-our-school-section.is-wide {
+	display: block;
+	background: #f8f6f1;
+}
+
+.cal-our-school-section h2,
+.cal-our-school-markets h2,
+.cal-our-school-cta h2 {
+	margin: 0 0 16px;
+	color: #20242b;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: clamp(1.8rem, 3vw, 2.45rem);
+	line-height: 1.14;
+}
+
+.cal-our-school-rich-text p,
+.cal-our-school-markets p,
+.cal-our-school-cta p {
+	margin: 0 0 16px;
+	color: #555f6d;
+	font-size: 16px;
+	line-height: 1.75;
+}
+
+.cal-our-school-rich-text p:last-child {
+	margin-bottom: 0;
+}
+
+.cal-our-school-bullets {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 10px;
+	margin: 18px 0 20px;
+	padding: 0;
+	list-style: none;
+}
+
+.cal-our-school-bullets li {
+	position: relative;
+	padding-left: 20px;
+	color: #303640;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 1.45;
+}
+
+.cal-our-school-bullets li::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.6em;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #ffb703;
+}
+
+.cal-our-school-section-image {
+	min-height: 290px;
+	border-radius: 8px;
+	overflow: hidden;
+	background: #f4f1e9;
+}
+
+.cal-our-school-markets {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(280px, 0.65fr);
+	gap: 34px;
+	align-items: center;
+	margin-top: 40px;
+	padding: 34px;
+	border-radius: 8px;
+	background: #191c22;
+	color: #fff;
+}
+
+.cal-our-school-markets h2,
+.cal-our-school-markets p {
+	color: #fff;
+}
+
+.cal-our-school-markets p {
+	color: rgba(255, 255, 255, 0.78);
+}
+
+.cal-our-school-markets ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.cal-our-school-markets li {
+	padding: 9px 14px;
+	border: 1px solid rgba(255, 183, 3, 0.42);
+	border-radius: 999px;
+	color: #f6e7b7;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.cal-our-school-cta {
+	margin-top: 34px;
+	padding: 42px;
+	border-radius: 8px;
+	background: linear-gradient(135deg, #ffb703, #c58d00);
+	text-align: center;
+}
+
+.cal-our-school-cta h2,
+.cal-our-school-cta p {
+	color: #181b20;
+}
+
+.cal-our-school-cta p {
+	max-width: 760px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media (max-width: 900px) {
+	.cal-our-school-hero-grid,
+	.cal-our-school-section,
+	.cal-our-school-markets {
+		grid-template-columns: 1fr;
+	}
+
+	.cal-our-school-section.is-image_left .cal-our-school-section-image {
+		order: 0;
+	}
+}
+
+@media (max-width: 640px) {
+	.cal-our-school-shell {
+		width: min(100% - 28px, 1180px);
+	}
+
+	.cal-our-school-hero {
+		padding: 48px 0 46px;
+	}
+
+	.cal-our-school-section,
+	.cal-our-school-markets,
+	.cal-our-school-cta {
+		padding: 24px;
+	}
+
+
+}

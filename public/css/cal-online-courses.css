@@ -1,0 +1,286 @@
+.cal-online-page .site-content,
+.cal-online-page #content,
+.cal-online-page #primary,
+.cal-online-page .content-area,
+.cal-online-page .site-main,
+.cal-online-page.separate-containers .site-main {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	max-width: 100%;
+}
+
+.cal-online-page .site-content,
+.cal-online-page #content {
+	display: block !important;
+}
+
+.cal-online-page #primary,
+.cal-online-page .content-area {
+	float: none !important;
+	flex: 0 0 100% !important;
+}
+
+.cal-online-page .container.grid-container,
+.cal-online-page .site.grid-container,
+.cal-online-page > .site.grid-container {
+	width: 100% !important;
+	max-width: 100% !important;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.cal-online-page .inside-article {
+	padding: 0 !important;
+}
+
+.cal-online-page .inside-right-sidebar,
+.cal-online-page .inside-left-sidebar,
+.cal-online-page .sidebar,
+.cal-online-page #right-sidebar,
+.cal-online-page #left-sidebar {
+	display: none !important;
+}
+
+.cal-online-hero {
+	background: #1d1f24;
+	padding: 50px 0;
+}
+
+.cal-online-hero-inner {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.cal-online-accent {
+	display: block;
+	width: 5px;
+	height: 44px;
+	background: #FFB606;
+	border-radius: 3px;
+	flex-shrink: 0;
+}
+
+.cal-online-hero h1 {
+	color: #fff;
+	font-family: "Roboto Slab", serif;
+	font-size: 38px;
+	font-weight: 600;
+	margin: 0;
+	line-height: 1.25;
+}
+
+.cal-online-hero-sub {
+	color: #bbb;
+	font-size: 15px;
+	margin: 8px 0 0;
+	line-height: 1.6;
+	max-width: 600px;
+}
+
+.cal-online-sub-bar {
+	border-top: 1px solid #e5e7eb;
+	padding: 14px 0;
+}
+
+.cal-online-breadcrumbs {
+	color: #9ca3af;
+	font-size: 14px;
+}
+
+.cal-online-breadcrumbs a {
+	color: #9ca3af;
+	text-decoration: none;
+}
+
+.cal-online-breadcrumbs a:hover {
+	color: #FFB606;
+}
+
+.cal-online-breadcrumb-current {
+	color: #6b7280;
+}
+
+.cal-online-shell {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.cal-online-content {
+	padding: 48px 0 60px;
+	background: #fff;
+}
+
+.cal-online-grid {
+	display: grid;
+	gap: 40px;
+}
+
+.cal-online-card {
+	border: 1px solid #e5e7eb;
+	border-radius: 8px;
+	overflow: hidden;
+	background: #fff;
+}
+
+.cal-online-card-body {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0;
+}
+
+.cal-online-card-image {
+	overflow: hidden;
+}
+
+.cal-online-card-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.cal-online-card-text {
+	padding: 36px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.cal-online-card-text h2 {
+	font-family: "Roboto Slab", serif;
+	font-size: 24px;
+	font-weight: 600;
+	color: #333;
+	margin: 0 0 16px;
+	text-align: left;
+}
+
+.cal-online-card-desc {
+	font-size: 15px;
+	line-height: 1.8;
+	color: #606060;
+}
+
+.cal-online-card-desc p {
+	margin: 0 0 14px;
+}
+
+.cal-online-card-desc p:last-child {
+	margin-bottom: 0;
+}
+
+.cal-online-card-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	margin: 20px 0;
+	padding: 16px 0;
+	border-top: 1px solid #e5e7eb;
+	border-bottom: 1px solid #e5e7eb;
+}
+
+.cal-online-meta-item {
+	font-size: 15px;
+	color: #333;
+	font-weight: 600;
+}
+
+.cal-online-price {
+	color: #FFB606;
+	font-size: 18px;
+}
+
+.cal-online-card-features {
+	font-size: 14px;
+	color: #888;
+	margin: 0 0 20px;
+	font-style: italic;
+}
+
+.cal-online-btn {
+	display: inline-block;
+	padding: 12px 32px;
+	background: #FFB606;
+	color: #000;
+	font-size: 14px;
+	font-weight: 600;
+	text-decoration: none;
+	border-radius: 4px;
+	transition: background 0.2s;
+	align-self: flex-start;
+}
+
+.cal-online-btn:hover {
+	background: #e5a300;
+	color: #000;
+}
+
+.cal-online-detail-image {
+	margin-bottom: 28px;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.cal-online-detail-image img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.cal-online-detail-meta {
+	margin: 0 0 28px;
+}
+
+.cal-online-detail-body {
+	font-size: 15px;
+	line-height: 1.8;
+	color: #606060;
+}
+
+.cal-online-detail-body p {
+	margin: 0 0 14px;
+}
+
+.cal-online-detail-body .btn,
+.cal-online-detail-body a.btn {
+	display: none;
+}
+
+.cal-online-detail-summary {
+	margin-top: 24px;
+	padding: 20px 0;
+	border-top: 1px solid #e5e7eb;
+	text-align: center;
+}
+
+.cal-online-detail-features {
+	margin-top: 20px;
+}
+
+.cal-online-detail-back {
+	margin-top: 36px;
+}
+
+@media (max-width: 768px) {
+	.cal-online-hero h1 {
+		font-size: 28px;
+	}
+
+	.cal-online-card-body {
+		grid-template-columns: 1fr;
+	}
+
+	.cal-online-card-text {
+		padding: 24px;
+	}
+
+	.cal-online-content {
+		padding: 32px 0 40px;
+	}
+}

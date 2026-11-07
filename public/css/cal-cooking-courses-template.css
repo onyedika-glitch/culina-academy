@@ -1,0 +1,248 @@
+.cal-cooking-courses-template-page .site-content,
+.cal-cooking-courses-template-page #content,
+.cal-cooking-courses-template-page #primary,
+.cal-cooking-courses-template-page .content-area,
+.cal-cooking-courses-template-page .site-main {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	max-width: 100%;
+}
+
+.cal-cooking-courses-template-page .site-content,
+.cal-cooking-courses-template-page #content {
+	display: block !important;
+}
+
+.cal-cooking-courses-template-page #primary,
+.cal-cooking-courses-template-page .content-area {
+	float: none !important;
+	flex: 0 0 100% !important;
+}
+
+.cal-cooking-courses-template-page .inside-right-sidebar,
+.cal-cooking-courses-template-page .inside-left-sidebar,
+.cal-cooking-courses-template-page .sidebar,
+.cal-cooking-courses-template-page #right-sidebar,
+.cal-cooking-courses-template-page #left-sidebar {
+	display: none !important;
+}
+
+.cal-cooking-courses-template-page .container.grid-container,
+.cal-cooking-courses-template-page .site.grid-container {
+	width: 100%;
+	max-width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.cal-cooking-hero {
+	padding: 24px 20px 64px;
+	background: #1a1c20;
+}
+
+.cal-cooking-hero-inner {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0;
+	border-radius: 0;
+	background: transparent;
+	color: #fff;
+	text-align: left;
+}
+
+.cal-cooking-content-inner {
+	width: min(1200px, calc(100% - 40px));
+	margin: 0 auto;
+}
+
+.cal-cooking-hero h1 {
+	position: relative;
+	margin: 0;
+	padding: 0 0 0 25px;
+	color: #fff;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 36px;
+	line-height: 46.8px;
+	font-weight: 600;
+	text-align: left;
+}
+
+.cal-cooking-hero h1::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 4px;
+	bottom: 4px;
+	width: 2px;
+	background: #ffb703;
+}
+
+.cal-cooking-hero p {
+	max-width: 600px;
+	margin: 0 auto;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	font-size: 1.1rem;
+	line-height: 1.45;
+	color: rgba(255, 255, 255, 0.85);
+}
+
+.cal-cooking-content {
+	padding: 0 0 72px;
+	background: #fff;
+}
+
+.cal-cooking-breadcrumbs {
+	margin: 0 0 44px;
+	padding: 20px 0 18px;
+	border-bottom: 1px solid #e5e7eb;
+	color: #606060;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 24px;
+	font-weight: 400;
+}
+
+.cal-cooking-breadcrumbs a {
+	color: #606060;
+	text-decoration: none;
+}
+
+.cal-cooking-breadcrumbs a:hover {
+	color: #ffb606;
+}
+
+.cal-cooking-breadcrumbs span {
+	margin: 0 12px;
+}
+
+.cal-cooking-page-copy {
+	margin-bottom: 34px;
+}
+
+.cal-cooking-courses-listing .ca-wrap,
+.cal-cooking-content-inner .ca-wrap {
+	max-width: none;
+	padding: 0;
+	background: transparent;
+}
+
+.cal-cooking-courses-listing .ca-grid,
+.cal-cooking-content-inner .ca-grid {
+	gap: 28px;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cal-cooking-courses-listing .ca-card,
+.cal-cooking-content-inner .ca-card {
+	border: 1px solid #edf0f3;
+	border-radius: 8px;
+	box-shadow: 0 10px 28px rgba(17, 24, 39, 0.08);
+	overflow: hidden;
+}
+
+.cal-cooking-courses-listing .ca-card:hover,
+.cal-cooking-content-inner .ca-card:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 14px 34px rgba(17, 24, 39, 0.12);
+}
+
+.cal-cooking-courses-listing .ca-ci,
+.cal-cooking-content-inner .ca-ci {
+	height: 210px;
+}
+
+.cal-cooking-courses-listing .ca-cb,
+.cal-cooking-content-inner .ca-cb {
+	padding: 22px;
+}
+
+.cal-cooking-courses-listing .ca-ct,
+.cal-cooking-content-inner .ca-ct {
+	color: #111827;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 17px;
+	line-height: 1.32;
+	font-weight: 700;
+	margin: 0 0 10px;
+}
+
+.cal-cooking-courses-listing .ca-cm,
+.cal-cooking-content-inner .ca-cm {
+	color: #606060;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 20px;
+	margin-bottom: 16px;
+}
+
+.cal-cooking-courses-listing .ca-cf,
+.cal-cooking-content-inner .ca-cf {
+	padding-top: 16px;
+}
+
+.cal-cooking-courses-listing .ca-price,
+.cal-cooking-content-inner .ca-price {
+	color: #111827;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: 800;
+}
+
+.cal-cooking-courses-listing .ca-badge,
+.cal-cooking-content-inner .ca-badge {
+	background: #111827;
+	color: #ffb606;
+	border-radius: 3px;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: 700;
+}
+
+.cal-cooking-content-inner > *:first-child {
+	margin-top: 0;
+}
+
+.cal-cooking-content-inner > *:last-child {
+	margin-bottom: 0;
+}
+
+.cal-cooking-courses-template-page .ca-btn {
+	background: #FFB606 !important;
+	color: #000 !important;
+	border: none !important;
+}
+
+.cal-cooking-courses-template-page .ca-btn:hover {
+	background: #e5a300 !important;
+	color: #000 !important;
+}
+
+@media (max-width: 768px) {
+	.cal-cooking-hero {
+		padding: 24px 16px 42px;
+	}
+
+	.cal-cooking-hero-inner,
+	.cal-cooking-content-inner {
+		width: min(100%, calc(100% - 32px));
+	}
+
+	.cal-cooking-hero-inner {
+		padding: 0;
+	}
+
+	.cal-cooking-hero h1 {
+		font-size: 30px;
+		line-height: 39px;
+	}
+
+	.cal-cooking-courses-listing .ca-grid,
+	.cal-cooking-content-inner .ca-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.cal-cooking-hero p {
+		font-size: 1rem;
+	}
+}

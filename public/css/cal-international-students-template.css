@@ -1,0 +1,264 @@
+.cal-international-students-template-page .site-content,
+.cal-international-students-template-page #content,
+.cal-international-students-template-page #primary,
+.cal-international-students-template-page .content-area,
+.cal-international-students-template-page .site-main {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	max-width: 100%;
+}
+
+.cal-international-students-template-page .site-content,
+.cal-international-students-template-page #content {
+	display: block !important;
+}
+
+.cal-international-students-template-page #primary,
+.cal-international-students-template-page .content-area {
+	float: none !important;
+	flex: 0 0 100% !important;
+}
+
+.cal-international-students-template-page .inside-right-sidebar,
+.cal-international-students-template-page .inside-left-sidebar,
+.cal-international-students-template-page .sidebar,
+.cal-international-students-template-page #right-sidebar,
+.cal-international-students-template-page #left-sidebar {
+	display: none !important;
+}
+
+.cal-international-students-template-page .container.grid-container,
+.cal-international-students-template-page .site.grid-container {
+	width: 100%;
+	max-width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.cal-is-hero {
+	background: #1d1f24;
+	padding: 54px 20px 56px;
+}
+
+.cal-is-hero-inner,
+.cal-is-shell {
+	max-width: 1280px;
+	margin: 0 auto;
+}
+
+.cal-is-breadcrumbs,
+.cal-is-logo,
+.cal-is-intro,
+.cal-is-section,
+.cal-is-cta {
+	max-width: 100%;
+	margin-right: 0;
+}
+
+.cal-is-hero h1 {
+	position: relative;
+	margin: 0;
+	padding-left: 18px;
+	color: #fff;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: clamp(2.2rem, 5vw, 3rem);
+	line-height: 1.08;
+	font-weight: 700;
+}
+
+.cal-is-hero h1::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 4px;
+	bottom: 4px;
+	width: 3px;
+	background: #f0b400;
+}
+
+.cal-is-content {
+	padding: 14px 20px 44px;
+	background: #fff;
+	color: #2c3440;
+}
+
+.cal-is-breadcrumbs {
+	margin-bottom: 42px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid #ececec;
+	color: #8891a0;
+	font-size: 12px;
+}
+
+.cal-is-breadcrumbs a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.cal-is-breadcrumbs span {
+	margin: 0 8px;
+}
+
+.cal-is-logo {
+	margin-bottom: 28px;
+}
+
+.cal-is-logo img {
+	display: block;
+	max-width: 260px;
+	width: 100%;
+	height: auto;
+}
+
+.cal-is-intro,
+.cal-is-section {
+	margin-bottom: 24px;
+}
+
+.cal-is-intro h2,
+.cal-is-section h2 {
+	margin: 0 0 10px;
+	color: #273244;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: clamp(2rem, 3vw, 2.35rem);
+	line-height: 1.12;
+	font-weight: 700;
+}
+
+.cal-is-section h2 {
+	font-size: clamp(1.95rem, 2.4vw, 2.2rem);
+	margin-top: 18px;
+}
+
+.cal-is-intro p,
+.cal-is-section p,
+.cal-is-section li {
+	margin: 0 0 14px;
+	font-size: 15px;
+	line-height: 1.95;
+	color: #4a5565;
+}
+
+.cal-is-highlight {
+	color: #f0b400;
+	font-weight: 600;
+}
+
+.cal-is-section ul {
+	margin: 8px 0 14px 20px;
+	padding: 0;
+}
+
+.cal-is-section li {
+	margin-bottom: 4px;
+}
+
+.cal-is-cta {
+	margin: 38px 0 0;
+	text-align: center;
+}
+
+.cal-is-button,
+.cal-is-button:visited {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 120px;
+	padding: 12px 22px;
+	background: #6d7684;
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	font-size: 13px;
+	font-weight: 700;
+	border-radius: 2px;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.cal-is-button:hover,
+.cal-is-button:focus {
+	background: #4b5563;
+	color: #fff;
+}
+
+@media (max-width: 768px) {
+	.cal-is-hero {
+		padding: 40px 18px 42px;
+	}
+
+	.cal-is-content {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+
+	.cal-is-logo img {
+		max-width: 220px;
+	}
+
+	.cal-is-intro h2,
+	.cal-is-section h2 {
+		font-size: 1.85rem;
+	}
+}
+
+/* Final typography normalization for this page. */
+.cal-international-students-page,
+.cal-international-students-page p,
+.cal-international-students-page li,
+.cal-international-students-page a {
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+.cal-international-students-page .cal-is-intro h2,
+.cal-international-students-page .cal-is-section h2 {
+	margin: 0 0 18px;
+	color: #333;
+	font-family: "Roboto Slab", Georgia, "Times New Roman", serif;
+	font-size: 28px;
+	line-height: 36.4px;
+	font-weight: 600;
+	letter-spacing: 0;
+	text-align: left;
+}
+
+.cal-international-students-page .cal-is-section h2 {
+	margin-top: 26px;
+	font-size: 24px;
+	line-height: 31.2px;
+}
+
+.cal-international-students-page .cal-is-intro p,
+.cal-international-students-page .cal-is-section p,
+.cal-international-students-page .cal-is-section li {
+	color: #606060;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 24px;
+	font-weight: 400;
+	letter-spacing: 0;
+	text-align: left;
+}
+
+.cal-international-students-page .cal-is-highlight {
+	color: #ffb606;
+	font-weight: 600;
+}
+
+.cal-international-students-page .cal-is-button,
+.cal-international-students-page .cal-is-button:visited {
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 22.5px;
+	font-weight: 500;
+	letter-spacing: 0;
+}
+
+@media (max-width: 768px) {
+	.cal-international-students-page .cal-is-intro h2,
+	.cal-international-students-page .cal-is-section h2 {
+		font-size: 24px;
+		line-height: 31.2px;
+	}
+}
