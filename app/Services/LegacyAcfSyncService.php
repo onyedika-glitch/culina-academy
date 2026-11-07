@@ -441,20 +441,20 @@ class LegacyAcfSyncService
             [
                 'image' => '',
                 'title' => 'Introduction to the Professional Chef Online Course',
-                'description' => '<p>The Culina Academy offers professional culinary education through practical training and selected online learning options.</p>',
-                'price' => '£1,495',
+                'description' => '<p>Learn core professional kitchen skills through video lessons, written guides and tutor feedback, at your own pace.</p>',
+                'price' => '', // set the price in the admin panel
                 'duration' => '6 months to complete',
-                'features' => 'Fully supported. Culinary reference document provided.',
+                'features' => 'Tutor support and downloadable course notes included.',
                 'link_url' => OnlineCourseService::detailPath(OnlineCourseService::INTRODUCTION_SLUG, $lang),
                 'link_text' => 'See course details',
             ],
             [
                 'image' => '',
-                'title' => 'Michelin Star Advanced Techniques Online Course',
-                'description' => '<p>The Culina Academy offers professional culinary education through practical training and selected online learning options.</p>',
-                'price' => '£1,495',
-                'duration' => 'Fully supported',
-                'features' => '10% discount if both courses purchased together.',
+                'title' => 'Advanced Techniques Online Course',
+                'description' => '<p>Build on the fundamentals with advanced plating, sauce work and modern techniques, with tutor support throughout.</p>',
+                'price' => '', // set the price in the admin panel
+                'duration' => 'Self-paced',
+                'features' => 'Tutor support and downloadable course notes included.',
                 'link_url' => OnlineCourseService::detailPath(OnlineCourseService::MICHELIN_SLUG, $lang),
                 'link_text' => 'See course details',
             ],

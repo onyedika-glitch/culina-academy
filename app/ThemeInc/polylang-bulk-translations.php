@@ -186,12 +186,12 @@ function cal_set_all_polylang_translations() {
 		),
 
 		// RESERVE TEXT
-		'To reserve your place in our Hospitality Management and Advanced Food Science course today please click here to pay your 10% deposit' => array(
-			'es_ES' => 'Para reservar su lugar en nuestro curso de Gestión de Hospitalidad y Ciencia Alimentaria Avanzada hoy, haga clic aquí para pagar su depósito del 10%',
-			'fr_FR' => 'Pour réserver votre place dans notre cours de Gestion de l\'Hôtellerie et Technologie Alimentaire Avancée, cliquez ici pour payer votre dépôt de 10%',
-			'it_IT' => 'Per riservare oggi il tuo posto nel corso di Gestione dell\'Ospitalità e Scienze Alimentari Avanzate, clicca qui per versare il tuo acconto del 10%',
-			'zh_CN' => '要在我们的酒店管理和高级食品科学课程中预留您的位置，请点击此处支付 10% 的定金',
-			'zh_TW' => '要在我們的酒店管理和高級食品科學課程中預留您的位置，請點擊此處支付 10% 的定金',
+		'To reserve your place in our Restaurant Management and Food Science course today please click here to pay your 10% deposit' => array(
+			'es_ES' => 'Para reservar su lugar en nuestro curso de Gestión de Restaurantes y Ciencia Alimentaria hoy, haga clic aquí para pagar su depósito del 10%',
+			'fr_FR' => 'Pour réserver votre place dans notre cours de Gestion de Restaurant et Sciences Alimentaires, cliquez ici pour payer votre dépôt de 10%',
+			'it_IT' => 'Per riservare oggi il tuo posto nel corso di Gestione della Ristorazione e Scienze Alimentari, clicca qui per versare il tuo acconto del 10%',
+			'zh_CN' => '要在我们的餐厅管理与食品科学课程中预留您的位置，请点击此处支付 10% 的定金',
+			'zh_TW' => '要在我們的餐廳管理與食品科學課程中預留您的位置，請點擊此處支付 10% 的定金',
 		),
 
 		// BREADCRUMBS

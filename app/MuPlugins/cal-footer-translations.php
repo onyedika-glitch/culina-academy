@@ -37,12 +37,12 @@ function cal_footer_trans_map() {
 		'View Our Courses'            => array( 'fr' => 'Voir nos cours',                   'it' => 'Vedi i nostri corsi',             'es' => 'Ver nuestros cursos',             'zh' => '查看我们的课程', 'zh-tw' => '查看我們的課程' ),
 
 		// ── Footer about text ────────────────────────────────────────────
-		'Culina Academy was founded in 2007 and since then has led the way for professional training for head chefs, pastry chefs and restaurant managers. Book an appointment with one of our expert advisors for more information.' => array(
-			'fr'    => "The Culina Academy a été fondée en 2007 et depuis lors, elle est à la pointe de la formation professionnelle pour les chefs cuisiniers, les pâtissiers et les directeurs de restaurant. Prenez rendez-vous avec l'un de nos conseillers experts pour plus d'informations.",
-			'it'    => "The Culina Academy è stata fondata nel 2007 e da allora è all'avanguardia nella formazione professionale per chef, pasticceri e direttori di ristorante. Prenota un appuntamento con uno dei nostri consulenti esperti per ulteriori informazioni.",
-			'es'    => "The Culina Academy fue fundada en 2007 y desde entonces ha liderado la formación profesional para chefs, pasteleros y directores de restaurantes. Reserve una cita con uno de nuestros asesores expertos para obtener más información.",
-			'zh'    => "The Culina Academy成立于2007年，自成立以来一直引领着对主厨、糕点师和餐厅经理的专业培训。请预约我们的专家顾问以获取更多信息。",
-			'zh-tw' => "The Culina Academy成立於2007年，自成立以來一直引領著對主廚、糕點師和餐廳經理的專業培訓。請預約我們的專家顧問以獲取更多資訊。",
+		'Culina Academy offers hands-on professional training for chefs, pastry chefs and restaurant managers. Book an appointment with one of our advisors for more information.' => array(
+			'fr'    => "Culina Academy propose une formation professionnelle pratique pour les chefs, les pâtissiers et les directeurs de restaurant. Prenez rendez-vous avec l’un de nos conseillers pour plus d’informations.",
+			'it'    => "Culina Academy offre una formazione professionale pratica per chef, pasticceri e direttori di ristorante. Prenota un appuntamento con uno dei nostri consulenti per maggiori informazioni.",
+			'es'    => "Culina Academy ofrece formación profesional práctica para chefs, pasteleros y directores de restaurante. Reserve una cita con uno de nuestros asesores para obtener más información.",
+			'zh'    => "Culina Academy 为厨师、糕点师和餐厅经理提供实践型专业培训。请预约我们的顾问以获取更多信息。",
+			'zh-tw' => "Culina Academy 為廚師、糕點師和餐廳經理提供實踐型專業培訓。請預約我們的顧問以獲取更多資訊。",
 		),
 		// ── Footer address ───────────────────────────────────────────────
 		'The Culina Academy LTD' . "\n" . 'Registered Office: 123 Example Street, Your City' => array(
@@ -52,28 +52,28 @@ function cal_footer_trans_map() {
 			'zh'    => "The Culina Academy LTD\n注册办事处：Your City 00000 阿尔伯马尔街45号 3楼",
 			'zh-tw' => "The Culina Academy LTD\n註冊辦事處：Your City 00000 阿爾伯馬爾街45號 3樓",
 		),
-		'Culina Academy was founded in 2007 and has since led professional training for chefs, pastry chefs and restaurant managers. Book an appointment with one of our expert advisors for more information.' => array(
-			'fr'    => "The Culina Academy a été fondée en 2007 et depuis lors, elle est à la pointe de la formation professionnelle pour les chefs cuisiniers, les pâtissiers et les directeurs de restaurant. Prenez rendez-vous avec l'un de nos conseillers experts pour plus d'informations.",
-			'it'    => "The Culina Academy è stata fondata nel 2007 e da allora è all'avanguardia nella formazione professionale per chef, pasticceri e direttori di ristorante. Prenota un appuntamento con uno dei nostri consulenti esperti per ulteriori informazioni.",
-			'es'    => "The Culina Academy fue fundada en 2007 y desde entonces ha liderado la formación profesional para chefs, pasteleros y directores de restaurantes. Reserve una cita con uno de nuestros asesores expertos para obtener más información.",
-			'zh'    => "The Culina Academy成立于2007年，自成立以来一直引领着对主厨、糕点师和餐厅经理的专业培训。请预约我们的专家顾问以获取更多信息。",
-			'zh-tw' => "The Culina Academy成立於2007年，自成立以來一直引領著對主廚、糕點師和餐廳經理的專業培訓。請預約我們的專家顧問以獲取更多資訊。",
+		'Culina Academy offers hands-on professional training for chefs, pastry chefs and restaurant managers. Book an appointment with one of our advisors for more information.' => array(
+			'fr'    => "Culina Academy propose une formation professionnelle pratique pour les chefs, les pâtissiers et les directeurs de restaurant. Prenez rendez-vous avec l’un de nos conseillers pour plus d’informations.",
+			'it'    => "Culina Academy offre una formazione professionale pratica per chef, pasticceri e direttori di ristorante. Prenota un appuntamento con uno dei nostri consulenti per maggiori informazioni.",
+			'es'    => "Culina Academy ofrece formación profesional práctica para chefs, pasteleros y directores de restaurante. Reserve una cita con uno de nuestros asesores para obtener más información.",
+			'zh'    => "Culina Academy 为厨师、糕点师和餐厅经理提供实践型专业培训。请预约我们的顾问以获取更多信息。",
+			'zh-tw' => "Culina Academy 為廚師、糕點師和餐廳經理提供實踐型專業培訓。請預約我們的顧問以獲取更多資訊。",
 		),
 
 		// ── Footer bottom line ───────────────────────────────────────────
 		'The Culina Academy is a professional culinary school, offering professional chef courses in Your City with real hands-on training in high-level kitchens.' => array(
-			'fr'    => "The Culina Academy est largement considérée comme la meilleure école de cuisine au monde, proposant des cours de chef professionnel à Your City avec une véritable formation pratique dans des cuisines de haut niveau.",
-			'it'    => "The Culina Academy è ampiamente considerata la migliore scuola di cucina al mondo, offrendo corsi di chef professionista a Your City con formazione pratica in cucine di alto livello.",
-			'es'    => "The Culina Academy es ampliamente considerada la mejor escuela de cocina del mundo, ofreciendo cursos de chef profesional en Your City con formación práctica en cocinas de alto nivel.",
-			'zh'    => "The Culina Academy被广泛认为是世界上最好的烹饪学校，在Your City提供专业厨师课程，并在高端厨房进行真实的实践培训。",
-			'zh-tw' => "The Culina Academy被廣泛認為是世界上最好的烹飪學校，在Your City提供專業廚師課程，並在高端廚房進行真實的實踐培訓。",
+			'fr'    => "Culina Academy est une école culinaire professionnelle qui propose une formation pratique de chef à Your City.",
+			'it'    => "Culina Academy è una scuola di cucina professionale che offre una formazione pratica per chef a Your City.",
+			'es'    => "Culina Academy es una escuela culinaria profesional que ofrece formación práctica para chefs en Your City.",
+			'zh'    => "Culina Academy 是一所专业烹饪学校，在 Your City 提供实践型厨师培训。",
+			'zh-tw' => "Culina Academy 是一所專業烹飪學校，在 Your City 提供實踐型廚師培訓。",
 		),
-		'The Culina Academy is widely regarded as the best cookery school in the world.' => array(
-			'fr'    => "The Culina Academy est largement considérée comme la meilleure école de cuisine au monde.",
-			'it'    => "The Culina Academy è ampiamente considerata la migliore scuola di cucina al mondo.",
-			'es'    => "The Culina Academy es ampliamente considerada la mejor escuela de cocina del mundo.",
-			'zh'    => "The Culina Academy被广泛认为是世界上最好的烹饪学校。",
-			'zh-tw' => "The Culina Academy被廣泛認為是世界上最好的烹飪學校。",
+		'Culina Academy is a professional culinary school offering hands-on chef training in Your City.' => array(
+			'fr'    => "Culina Academy est une école culinaire professionnelle qui propose une formation pratique de chef à Your City.",
+			'it'    => "Culina Academy è una scuola di cucina professionale che offre una formazione pratica per chef a Your City.",
+			'es'    => "Culina Academy es una escuela culinaria profesional que ofrece formación práctica para chefs en Your City.",
+			'zh'    => "Culina Academy 是一所专业烹饪学校，在 Your City 提供实践型厨师培训。",
+			'zh-tw' => "Culina Academy 是一所專業烹飪學校，在 Your City 提供實踐型廚師培訓。",
 		),
 
 		// ── Policy link titles ───────────────────────────────────────────
@@ -107,8 +107,8 @@ function cal_footer_trans_map() {
 		'Online Courses'                                  => array( 'fr' => 'Cours en ligne',                                              'it' => 'Corsi Online',                                    'es' => 'Cursos en Línea',                                   'zh' => '在线课程',       'zh-tw' => '線上課程' ),
 		'How to Apply'                                    => array( 'fr' => 'Comment postuler',                                            'it' => 'Ammissioni',                                        'es' => 'Cómo solicitar',                                    'zh' => '如何申请',       'zh-tw' => '如何申請' ),
 		'Introduction to the Professional Chef Online Course' => array( 'fr' => "Introduction au cours de chef professionnel en ligne",    'it' => "Corso Online Introduttivo Professionale per Chef", 'es' => "Introducción al curso de chef profesional en línea", 'zh' => '专业厨师在线课程介绍', 'zh-tw' => '專業廚師線上課程介紹' ),
-		'Online Michelin Star Advanced Techniques course' => array( 'fr' => "Cours en ligne Techniques avancées étoile Michelin",          'it' => "Corso Online di Tecniche Avanzate Michelin",     'es' => "Curso en línea Técnicas avanzadas estrella Michelin", 'zh' => '米其林星级高级技巧在线课程', 'zh-tw' => '米其林星級高級技巧線上課程' ),
-		'Michelin Star Advanced Techniques Online Course' => array( 'fr' => "Cours en ligne Techniques avancées étoile Michelin",          'it' => "Corso Online di Tecniche Avanzate Michelin",     'es' => "Curso en línea Técnicas avanzadas estrella Michelin", 'zh' => '米其林星级高级技巧在线课程', 'zh-tw' => '米其林星級高級技巧線上課程' ),
+		'Advanced Techniques Online Course' => array( 'fr' => "Cours en ligne de techniques avancées",          'it' => "Corso Online di Tecniche Avanzate",     'es' => "Curso en línea de técnicas avanzadas", 'zh' => '高级技巧在线课程', 'zh-tw' => '高級技巧線上課程' ),
+		'Advanced Techniques Online Course' => array( 'fr' => "Cours en ligne de techniques avancées",          'it' => "Corso Online di Tecniche Avanzate",     'es' => "Curso en línea de técnicas avanzadas", 'zh' => '高级技巧在线课程', 'zh-tw' => '高級技巧線上課程' ),
 		'Learn the art of <em>professional cooking.</em>' => array( 'fr' => "Apprenez l'art de la <em>cuisine professionnelle.</em>",        'it' => "Impara l'arte della <em>cucina professionale.</em>", 'es' => "Aprende el arte de la <em>cocina profesional.</em>", 'zh' => '学习<em>专业烹饪</em>的艺术。', 'zh-tw' => '學習<em>專業烹飪</em>的藝術。' ),
 		'View Course'                                     => array( 'fr' => 'Voir le cours',                                                 'it' => 'Scopri il corso',                                   'es' => 'Ver el curso',                                       'zh' => '查看课程',       'zh-tw' => '查看課程' ),
 		'Browse More Courses'                             => array( 'fr' => 'Voir plus de cours',                                            'it' => 'Esplora tutti i corsi',                             'es' => 'Ver más cursos',                                     'zh' => '浏览更多课程',   'zh-tw' => '瀏覽更多課程' ),

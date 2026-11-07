@@ -197,7 +197,7 @@ function cal_register_course_enrollment_strings() {
 	$strings = array(
 		'Application Form' => 'Course Enrollment',
 		'Enroll for Culina Academy Cooking Courses or simply ask for more information about Certificates and Diploma.' => 'Course Enrollment',
-		'Complete the Application Form below. Our Educational Department will schedule an informal telephone interview prior to being accepted onto the course. The purpose of the telephone interview is to establish your suitability for the course and to answer any questions you may have regarding the course content, prior to completing the enrollment process.' => 'Course Enrollment',
+		'Complete the application form below. Our admissions team will get in touch to talk through the course, check it is the right fit for you and answer any questions before you complete your enrolment.' => 'Course Enrollment',
 		'Name *' => 'Course Enrollment',
 		'Surname *' => 'Course Enrollment',
 		'Email *' => 'Course Enrollment',
@@ -227,7 +227,7 @@ function cal_register_course_enrollment_strings() {
 	);
 	$multiline = array(
 		'Enroll for Culina Academy Cooking Courses or simply ask for more information about Certificates and Diploma.',
-		'Complete the Application Form below. Our Educational Department will schedule an informal telephone interview prior to being accepted onto the course. The purpose of the telephone interview is to establish your suitability for the course and to answer any questions you may have regarding the course content, prior to completing the enrollment process.',
+		'Complete the application form below. Our admissions team will get in touch to talk through the course, check it is the right fit for you and answer any questions before you complete your enrolment.',
 		'I agree consent to Culina Academy collecting my details through this form. Please read our Cookies Policy and our Privacy Policy.',
 	);
 	foreach ( $strings as $string => $group ) {

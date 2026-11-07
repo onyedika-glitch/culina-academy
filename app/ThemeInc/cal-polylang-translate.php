@@ -50,9 +50,9 @@ $translations = array(
 		'es' => 'Culina Academy Your City',
 	),
 	'cal_footer_about' => array(
-		'fr' => "Culina Academy Your City a été fondée en 2007 et depuis, elle mène la formation professionnelle pour chefs, pâtissiers et directeurs de restaurant.",
-		'it' => 'Culina Academy è stata fondata nel 2007 e da allora guida la formazione professionale per chef, pasticceri e direttori di ristorante.',
-		'es' => 'Culina Academy fue fundada en 2007 y desde entonces lidera la formación profesional para chefs, pasteleros y directores de restaurantes.',
+		'fr' => "Culina Academy propose une formation professionnelle pratique pour les chefs, les pâtissiers et les directeurs de restaurant. Prenez rendez-vous avec l’un de nos conseillers pour plus d’informations.",
+		'it' => 'Culina Academy offre una formazione professionale pratica per chef, pasticceri e direttori di ristorante. Prenota un appuntamento con uno dei nostri consulenti per maggiori informazioni.',
+		'es' => 'Culina Academy ofrece formación profesional práctica para chefs, pasteleros y directores de restaurante. Reserve una cita con uno de nuestros asesores para obtener más información.',
 	),
 	'cal_footer_contact_heading' => array(
 		'fr' => 'Contactez-nous',
@@ -65,9 +65,9 @@ $translations = array(
 		'es' => 'Nuestras Políticas',
 	),
 	'cal_footer_bottom_line' => array(
-		'fr' => "La Culina Academy est largement considérée comme la meilleure école de cuisine au monde.",
-		'it' => "La Culina Academy è ampiamente considerata la migliore scuola di cucina al mondo.",
-		'es' => "La Culina Academy es ampliamente considerada la mejor escuela de cocina del mundo.",
+		'fr' => "Culina Academy est une école culinaire professionnelle qui propose une formation pratique de chef à Your City.",
+		'it' => "Culina Academy è una scuola di cucina professionale che offre una formazione pratica per chef a Your City.",
+		'es' => "Culina Academy es una escuela culinaria profesional que ofrece formación práctica para chefs en Your City.",
 	),
 );
 
