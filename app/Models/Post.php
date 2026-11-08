@@ -14,6 +14,14 @@ class Post extends Model
     public $incrementing = true;
     protected $keyType = 'int';
 
+    /**
+     * wp_posts has no created_at/updated_at; WordPress records these times in
+     * post_date and post_modified, so map Eloquent's timestamps onto them.
+     */
+    public const CREATED_AT = 'post_date';
+
+    public const UPDATED_AT = 'post_modified';
+
     protected $fillable = [
         'ID', 'author_id', 'post_date', 'post_date_gmt', 'post_content', 'post_title',
         'post_excerpt', 'post_status', 'comment_status', 'ping_status', 'post_password',
