@@ -204,10 +204,23 @@ class LegacyAcfSyncService
             || preg_match('#/(?:en|fr|es|it|zh|zh-tw)/[a-z0-9\-/]+\.html#i', $value)) {
             $normalized = JoomlaContentSyncService::normalizeContentUrls($value);
 
-            return AcfFieldService::migrateUrl($normalized);
+            return static::isSingleUrl($normalized) ? AcfFieldService::migrateUrl($normalized) : $normalized;
         }
 
         return $value;
+    }
+
+    /**
+     * Whether a meta value is one URL (e.g. a link field) rather than rich text.
+     *
+     * AcfFieldService::migrateUrl() treats its input as a single path, so passing
+     * HTML through it would prepend a locale prefix to the whole markup.
+     */
+    protected static function isSingleUrl(string $value): bool
+    {
+        $value = trim($value);
+
+        return $value !== '' && !preg_match('/[\s<>"\']/', $value);
     }
 
     protected static function migrateValueRecursive(mixed $value): mixed
@@ -224,27 +237,24 @@ class LegacyAcfSyncService
                 return $value;
             }
 
-            if (isset($value[0]) && $value[0] === '/') {
+            if (isset($value[0]) && $value[0] === '/' && static::isSingleUrl($value)) {
                 return AcfFieldService::migrateUrl($value);
             }
 
-            return AcfFieldService::migrateUrl(JoomlaContentSyncService::normalizeContentUrls($value));
+            $normalized = JoomlaContentSyncService::normalizeContentUrls($value);
+
+            return static::isSingleUrl($normalized) ? AcfFieldService::migrateUrl($normalized) : $normalized;
         }
 
         if (!is_array($value)) {
             return $value;
         }
 
-        $changed = false;
         foreach ($value as $key => $item) {
-            $migrated = static::migrateValueRecursive($item);
-            if ($migrated !== $item) {
-                $value[$key] = $migrated;
-                $changed = true;
-            }
+            $value[$key] = static::migrateValueRecursive($item);
         }
 
-        return $changed ? $value : $value;
+        return $value;
     }
 
     protected static function syncCareersPage(Post $page, string $lang, ?string $legacyPath): bool
