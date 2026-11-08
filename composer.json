@@ -62,10 +62,6 @@
             "Database\\Seeders\\": "database/seeders/",
             "BuiltForSmallBusiness\\Laravel404Monitor\\Console\\": "vendor/builtforsmallbusiness/laravel-404-monitor/src/console/"
         },
-        "exclude-from-classmap": [
-            "app/ThemeInc/",
-            "app/MuPlugins/"
-        ],
         "files": [
             "app/helpers.php"
         ]
