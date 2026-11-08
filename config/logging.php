@@ -1,5 +1,6 @@
 <?php
 
+use Monolog\Formatter\JsonFormatter;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
@@ -102,6 +103,22 @@ return [
                 'stream' => 'php://stderr',
             ],
             'formatter' => env('LOG_STDERR_FORMATTER'),
+            'processors' => [PsrLogMessageProcessor::class],
+        ],
+
+        // Structured logs for production: one JSON object per line on stderr,
+        // which container platforms (Render, Docker) collect and index.
+        'json' => [
+            'driver' => 'monolog',
+            'level' => env('LOG_LEVEL', 'info'),
+            'handler' => StreamHandler::class,
+            'handler_with' => [
+                'stream' => env('LOG_JSON_STREAM', 'php://stderr'),
+            ],
+            'formatter' => JsonFormatter::class,
+            'formatter_with' => [
+                'includeStacktraces' => true,
+            ],
             'processors' => [PsrLogMessageProcessor::class],
         ],
 

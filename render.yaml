@@ -37,7 +37,7 @@ services:
       - key: SESSION_LIFETIME
         value: "120"
       - key: LOG_CHANNEL
-        value: stack
+        value: json
       - key: LOG_LEVEL
         value: error
       - key: QUEUE_CONNECTION
