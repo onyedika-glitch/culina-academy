@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Exceptions\AcfSyncException;
 use App\Services\JoomlaContentSyncService;
 use App\Services\LegacyAcfSyncService;
 use App\Services\LegacySiteSyncService;
@@ -122,7 +123,14 @@ class SyncLegacySite extends Command
     {
         $this->info('Syncing ACF template fields from legacy public site (all languages) ...');
 
-        $result = LegacyAcfSyncService::syncAllTemplateAcf();
+        try {
+            $result = LegacyAcfSyncService::syncAllTemplateAcf();
+        } catch (AcfSyncException $e) {
+            $this->error("  ✗ Sync stopped: {$e->getMessage()}");
+            $this->line('  See the application log for the full stack trace.');
+
+            return self::FAILURE;
+        }
         foreach ($result['results'] as $row) {
             $label = ($row['lang'] ?? 'en') . '/' . $row['page'];
 

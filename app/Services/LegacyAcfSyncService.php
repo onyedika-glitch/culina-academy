@@ -2,9 +2,13 @@
 
 namespace App\Services;
 
+use App\Exceptions\AcfSyncException;
 use App\Models\Post;
 use App\Models\PostMeta;
+use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class LegacyAcfSyncService
 {
@@ -100,29 +104,15 @@ class LegacyAcfSyncService
                     continue;
                 }
 
-                try {
-                    $changed = match ($key) {
-                        'restaurant-partners' => static::syncRestaurantPartners($page, $lang, $legacyPath),
-                        'about-us' => static::syncAboutPage($page, $lang, $legacyPath),
-                        'hospitality-development' => static::syncOurSchoolPage($page, $lang, $legacyPath),
-                        'faqs' => static::syncFaqPage($page, $lang, $legacyPath),
-                        'careers' => static::syncCareersPage($page, $lang, $legacyPath),
-                        'how-to-apply' => static::syncHowToApplyPage($page, $lang, $legacyPath),
-                        'online-courses' => static::syncOnlineCoursesPage($page, $lang),
-                        'cooking-courses' => static::syncCookingCoursesPage($page, $lang, $legacyPath),
-                        default => static::syncGenericTemplatePage($page, $legacyPath ?? '', $lang),
-                    };
+                $row = static::syncTemplatePage($key, $page, $lang, $legacyPath);
+                $results[] = $row;
 
-                    $results[] = ['page' => $key, 'lang' => $lang, 'updated' => $changed, 'error' => null];
-                    $changed ? $updated++ : $skipped++;
-                } catch (\Throwable $e) {
-                    $results[] = [
-                        'page' => $key,
-                        'lang' => $lang,
-                        'updated' => false,
-                        'error' => $e->getMessage(),
-                    ];
+                if ($row['error'] !== null) {
                     $failed++;
+                } elseif ($row['updated']) {
+                    $updated++;
+                } else {
+                    $skipped++;
                 }
             }
         }
@@ -136,6 +126,57 @@ class LegacyAcfSyncService
             'url_fixes' => $urlFixes,
             'results' => $results,
         ];
+    }
+
+    /**
+     * Sync one template page and describe the outcome.
+     *
+     * Recoverable failures are logged as warnings and returned as an error row;
+     * unexpected exceptions are logged with full context and rethrown as a
+     * non-recoverable AcfSyncException.
+     *
+     * @return array{page:string,lang:string,updated:bool,error:?string}
+     *
+     * @throws AcfSyncException when the failure is not recoverable
+     */
+    public static function syncTemplatePage(string $key, Post $page, string $lang, ?string $legacyPath): array
+    {
+        try {
+            $changed = static::runTemplateSync($key, $page, $lang, $legacyPath);
+
+            return ['page' => $key, 'lang' => $lang, 'updated' => $changed, 'error' => null];
+        } catch (HttpClientException $e) {
+            $failure = AcfSyncException::legacyFetchFailed($key, $lang, $e);
+        } catch (AcfSyncException $e) {
+            if (!$e->recoverable) {
+                throw $e;
+            }
+            $failure = $e;
+        } catch (Throwable $e) {
+            $failure = AcfSyncException::unexpected($key, $lang, $e);
+            Log::error($failure->getMessage(), $failure->context() + ['exception' => $e]);
+
+            throw $failure;
+        }
+
+        Log::warning($failure->getMessage(), $failure->context());
+
+        return ['page' => $key, 'lang' => $lang, 'updated' => false, 'error' => $failure->getMessage()];
+    }
+
+    protected static function runTemplateSync(string $key, Post $page, string $lang, ?string $legacyPath): bool
+    {
+        return match ($key) {
+            'restaurant-partners' => static::syncRestaurantPartners($page, $lang, $legacyPath),
+            'about-us' => static::syncAboutPage($page, $lang, $legacyPath),
+            'hospitality-development' => static::syncOurSchoolPage($page, $lang, $legacyPath),
+            'faqs' => static::syncFaqPage($page, $lang, $legacyPath),
+            'careers' => static::syncCareersPage($page, $lang, $legacyPath),
+            'how-to-apply' => static::syncHowToApplyPage($page, $lang, $legacyPath),
+            'online-courses' => static::syncOnlineCoursesPage($page, $lang),
+            'cooking-courses' => static::syncCookingCoursesPage($page, $lang, $legacyPath),
+            default => static::syncGenericTemplatePage($page, $legacyPath ?? '', $lang),
+        };
     }
 
     public static function migrateAcfUrls(): int
