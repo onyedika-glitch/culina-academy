@@ -41,7 +41,7 @@
     "require": {
         "php": "^8.3",
         "builtforsmallbusiness/laravel-404-monitor": "^1.0.4",
-        "cloudinary/cloudinary_php": "^2.0",
+        "cloudinary/cloudinary_php": "^3.3",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",
         "stripe/stripe-php": "^16.0"
