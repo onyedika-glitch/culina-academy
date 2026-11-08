@@ -54,5 +54,4 @@ class SiteCacheService
         static::clearFrontPage();
         static::clearResponseCache();
     }
-
 }

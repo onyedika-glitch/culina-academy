@@ -27,7 +27,7 @@ class SeoService
 
     public static function forPost(?int $postId): array
     {
-        if (!$postId) {
+        if (! $postId) {
             return static::defaults();
         }
 
@@ -42,7 +42,7 @@ class SeoService
     protected static function buildPostSeo(int $postId): array
     {
         $post = Post::find($postId);
-        if (!$post) {
+        if (! $post) {
             return static::defaults();
         }
 
@@ -112,7 +112,7 @@ class SeoService
     public static function saveForPost(int $postId, array $data): void
     {
         foreach (static::$rankMathKeys as $field => $metaKey) {
-            if (!array_key_exists($field, $data)) {
+            if (! array_key_exists($field, $data)) {
                 continue;
             }
             $value = $data[$field];

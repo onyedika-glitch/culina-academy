@@ -18,14 +18,15 @@ class FixCourseDescriptions extends Command
         $result = CourseDisplayService::fixCourseDescriptions();
 
         foreach ($result['results'] as $row) {
-            $label = ($row['lang'] ?? 'en') . '/' . ($row['slug'] ?? $row['course_id']);
+            $label = ($row['lang'] ?? 'en').'/'.($row['slug'] ?? $row['course_id']);
 
-            if (!empty($row['error'])) {
+            if (! empty($row['error'])) {
                 $this->error("  ✗ {$label}: {$row['error']}");
+
                 continue;
             }
 
-            $this->line('  ✓ ' . $label . ' (' . ($row['source'] ?? 'fixed') . ')');
+            $this->line('  ✓ '.$label.' ('.($row['source'] ?? 'fixed').')');
         }
 
         $this->info("Descriptions updated: {$result['updated']}, skipped: {$result['skipped']}, failed: {$result['failed']}");

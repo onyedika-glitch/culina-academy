@@ -17,7 +17,7 @@ class ContactFormSubmitted extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Contact Form Message from ' . ($this->payload['name'] ?? 'Website'),
+            subject: 'Contact Form Message from '.($this->payload['name'] ?? 'Website'),
             replyTo: [$this->payload['email'] ?? config('mail.from.address')],
         );
     }

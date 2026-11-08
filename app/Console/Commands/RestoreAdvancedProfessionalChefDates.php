@@ -19,7 +19,7 @@ class RestoreAdvancedProfessionalChefDates extends Command
         SiteCacheService::clearResponseCache();
 
         $this->info("Updated {$result['updated']} course posts ({$result['skipped']} already correct).");
-        $this->line('Course IDs: ' . implode(', ', $result['course_ids']));
+        $this->line('Course IDs: '.implode(', ', $result['course_ids']));
 
         return self::SUCCESS;
     }

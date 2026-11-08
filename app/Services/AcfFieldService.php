@@ -9,11 +9,17 @@ use App\Models\PostMeta;
 class AcfFieldService
 {
     protected static array $postMetaCache = [];
+
     protected static array $optionCache = [];
+
     protected static array $webpExistsCache = [];
+
     protected static array $attachmentMetadataCache = [];
+
     protected static array $attachmentFileCache = [];
+
     protected static array $urlToAttachmentIdCache = [];
+
     /** @var array<string, true>|null */
     protected static ?array $optionRepeaterBases = null;
 
@@ -24,7 +30,7 @@ class AcfFieldService
             return;
         }
 
-        if (!$post->relationLoaded('meta')) {
+        if (! $post->relationLoaded('meta')) {
             $post->load('meta');
         }
 
@@ -53,6 +59,7 @@ class AcfFieldService
             if ($parentId > 0 && $parentId !== $postId) {
                 return static::getField($parentId, $name, $default);
             }
+
             return $default;
         }
 
@@ -64,6 +71,7 @@ class AcfFieldService
                     return static::getRepeater($parentId, $name);
                 }
             }
+
             return $repeater;
         }
 
@@ -77,24 +85,25 @@ class AcfFieldService
 
         // For non-English locales, try a locale-specific option first.
         if ($lang !== 'en') {
-            $localizedKey = $baseKey . '_' . $lang;
+            $localizedKey = $baseKey.'_'.$lang;
             $localizedValue = CalCache::remember(
-                'cal.option.' . $localizedKey,
+                'cal.option.'.$localizedKey,
                 now()->addHour(),
                 static fn () => Option::where('option_name', $localizedKey)->value('option_value'),
             );
             if ($localizedValue !== null && $localizedValue !== '') {
                 if (static::isOptionRepeaterCount($name, $localizedValue)) {
-                    return static::getOptionRepeater($name . '_' . $lang);
+                    return static::getOptionRepeater($name.'_'.$lang);
                 }
+
                 return static::parseValue($localizedValue);
             }
         }
 
         // Fall back to the base (English) option.
-        if (!isset(static::$optionCache[$baseKey])) {
+        if (! isset(static::$optionCache[$baseKey])) {
             static::$optionCache[$baseKey] = CalCache::remember(
-                'cal.option.' . $baseKey,
+                'cal.option.'.$baseKey,
                 now()->addHour(),
                 static function () use ($baseKey) {
                     return Option::where('option_name', $baseKey)->value('option_value');
@@ -116,12 +125,12 @@ class AcfFieldService
 
     public static function getRepeater(int $postId, string $fieldName): array
     {
-        $prefix = $fieldName . '_';
+        $prefix = $fieldName.'_';
         $meta = static::getAllMeta($postId);
         $items = [];
 
         foreach ($meta as $key => $value) {
-            if (!preg_match('/^' . preg_quote($fieldName, '/') . '_(\d+)_(.+)$/', $key, $matches)) {
+            if (! preg_match('/^'.preg_quote($fieldName, '/').'_(\d+)_(.+)$/', $key, $matches)) {
                 continue;
             }
             $idx = (int) $matches[1];
@@ -142,7 +151,7 @@ class AcfFieldService
                 $parentItems = static::getRepeater($parentId, $fieldName);
                 foreach ($items as $idx => &$item) {
                     if (isset($parentItems[$idx]) && is_array($parentItems[$idx])) {
-                        $item = array_merge($parentItems[$idx], array_filter($item, fn($v) => $v !== null && $v !== ''));
+                        $item = array_merge($parentItems[$idx], array_filter($item, fn ($v) => $v !== null && $v !== ''));
                     }
                 }
                 unset($item);
@@ -161,7 +170,7 @@ class AcfFieldService
         $base = str_starts_with($fieldName, 'options_') ? $fieldName : "options_{$fieldName}";
 
         return CalCache::remember(
-            'cal.option.repeater.' . $base,
+            'cal.option.repeater.'.$base,
             now()->addHour(),
             static function () use ($fieldName, $base) {
                 return static::loadOptionRepeater($fieldName, $base);
@@ -171,12 +180,12 @@ class AcfFieldService
 
     protected static function loadOptionRepeater(string $fieldName, string $base): array
     {
-        $prefix = $base . '_';
-        $options = Option::where('option_name', 'like', $prefix . '%')->get();
+        $prefix = $base.'_';
+        $options = Option::where('option_name', 'like', $prefix.'%')->get();
         $items = [];
 
         foreach ($options as $option) {
-            if (!preg_match('/^' . preg_quote($base, '/') . '_(\d+)_(.+)$/', $option->option_name, $matches)) {
+            if (! preg_match('/^'.preg_quote($base, '/').'_(\d+)_(.+)$/', $option->option_name, $matches)) {
                 continue;
             }
             $idx = (int) $matches[1];
@@ -202,7 +211,7 @@ class AcfFieldService
         $keysToRemove = [];
 
         foreach ($item as $key => $value) {
-            if (!is_string($key) || !preg_match('/^([a-z][a-z0-9_]*)_(\d+)_([a-z][a-z0-9_]*)$/i', $key, $matches)) {
+            if (! is_string($key) || ! preg_match('/^([a-z][a-z0-9_]*)_(\d+)_([a-z][a-z0-9_]*)$/i', $key, $matches)) {
                 continue;
             }
 
@@ -235,7 +244,7 @@ class AcfFieldService
 
     public static function imageUrl(mixed $image): string
     {
-        if (is_array($image) && !empty($image['url']) && is_string($image['url'])) {
+        if (is_array($image) && ! empty($image['url']) && is_string($image['url'])) {
             return static::webpWhenAvailable(static::migrateUrl($image['url']));
         }
 
@@ -253,7 +262,7 @@ class AcfFieldService
      */
     public static function attachmentSrc(mixed $image, string $size = 'large'): ?array
     {
-        if (is_array($image) && !empty($image['url']) && is_string($image['url'])) {
+        if (is_array($image) && ! empty($image['url']) && is_string($image['url'])) {
             $attachmentId = static::attachmentIdFromImage($image);
             if ($attachmentId <= 0) {
                 $url = static::webpWhenAvailable(static::migrateUrl($image['url']));
@@ -287,7 +296,7 @@ class AcfFieldService
         $baseDir = dirname((string) ($metadata['file'] ?? ''));
         $resolved = null;
 
-        if ($size !== 'full' && !empty($metadata['sizes'][$size]) && is_array($metadata['sizes'][$size])) {
+        if ($size !== 'full' && ! empty($metadata['sizes'][$size]) && is_array($metadata['sizes'][$size])) {
             $resolved = $metadata['sizes'][$size];
         }
 
@@ -306,9 +315,9 @@ class AcfFieldService
 
         $path = str_contains($file, '/')
             ? $file
-            : ($baseDir !== '.' && $baseDir !== '' ? $baseDir . '/' . $file : $file);
+            : ($baseDir !== '.' && $baseDir !== '' ? $baseDir.'/'.$file : $file);
 
-        $url = static::webpWhenAvailable('/uploads/' . ltrim($path, '/'));
+        $url = static::webpWhenAvailable('/uploads/'.ltrim($path, '/'));
 
         return [
             'url' => $url,
@@ -345,7 +354,7 @@ class AcfFieldService
         $candidates = [];
 
         foreach (['medium', 'medium_large', 'large', '1536x1536'] as $sizeName) {
-            if (empty($metadata['sizes'][$sizeName]) || !is_array($metadata['sizes'][$sizeName])) {
+            if (empty($metadata['sizes'][$sizeName]) || ! is_array($metadata['sizes'][$sizeName])) {
                 continue;
             }
 
@@ -359,10 +368,10 @@ class AcfFieldService
 
             $path = str_contains($file, '/')
                 ? $file
-                : ($baseDir !== '.' && $baseDir !== '' ? $baseDir . '/' . $file : $file);
+                : ($baseDir !== '.' && $baseDir !== '' ? $baseDir.'/'.$file : $file);
 
             if ($width <= $maxWidth) {
-                $candidates[$width] = static::webpWhenAvailable('/uploads/' . ltrim($path, '/'));
+                $candidates[$width] = static::webpWhenAvailable('/uploads/'.ltrim($path, '/'));
             }
         }
 
@@ -373,7 +382,7 @@ class AcfFieldService
         ksort($candidates);
         $parts = [];
         foreach ($candidates as $width => $url) {
-            $parts[] = $url . ' ' . $width . 'w';
+            $parts[] = $url.' '.$width.'w';
         }
 
         return implode(', ', $parts);
@@ -386,19 +395,19 @@ class AcfFieldService
             return '';
         }
 
-        return ' width="' . $src['width'] . '" height="' . $src['height'] . '"';
+        return ' width="'.$src['width'].'" height="'.$src['height'].'"';
     }
 
     public static function attachmentIdFromImage(mixed $image): int
     {
         if (is_array($image)) {
-            if (!empty($image['ID'])) {
+            if (! empty($image['ID'])) {
                 return (int) $image['ID'];
             }
-            if (!empty($image['id'])) {
+            if (! empty($image['id'])) {
                 return (int) $image['id'];
             }
-            if (!empty($image['url']) && is_string($image['url'])) {
+            if (! empty($image['url']) && is_string($image['url'])) {
                 return static::attachmentIdFromUrl($image['url']);
             }
         }
@@ -407,7 +416,7 @@ class AcfFieldService
             return (int) $image;
         }
 
-        if (is_string($image) && $image !== '' && !str_starts_with($image, 'http') && !str_starts_with($image, '/')) {
+        if (is_string($image) && $image !== '' && ! str_starts_with($image, 'http') && ! str_starts_with($image, '/')) {
             return (int) $image;
         }
 
@@ -421,7 +430,7 @@ class AcfFieldService
     protected static function attachmentIdFromUrl(string $url): int
     {
         $path = parse_url(static::migrateUrl($url), PHP_URL_PATH);
-        if (!is_string($path) || !str_starts_with($path, '/uploads/')) {
+        if (! is_string($path) || ! str_starts_with($path, '/uploads/')) {
             return 0;
         }
 
@@ -464,7 +473,7 @@ class AcfFieldService
             ->where('meta_key', '_wp_attachment_metadata')
             ->value('meta_value');
 
-        if (!is_string($raw) || $raw === '') {
+        if (! is_string($raw) || $raw === '') {
             static::$attachmentMetadataCache[$attachmentId] = null;
 
             return null;
@@ -482,7 +491,7 @@ class AcfFieldService
             return '';
         }
 
-        if (!array_key_exists($attachmentId, static::$attachmentFileCache)) {
+        if (! array_key_exists($attachmentId, static::$attachmentFileCache)) {
             static::$attachmentFileCache[$attachmentId] = PostMeta::where('post_id', $attachmentId)
                 ->where('meta_key', '_wp_attached_file')
                 ->value('meta_value');
@@ -490,11 +499,11 @@ class AcfFieldService
 
         $file = static::$attachmentFileCache[$attachmentId];
 
-        if (!$file) {
+        if (! $file) {
             return '';
         }
 
-        $url = '/uploads/' . ltrim($file, '/');
+        $url = '/uploads/'.ltrim($file, '/');
 
         // Serve WebP when available and browser supports it
         return static::webpWhenAvailable($url);
@@ -506,16 +515,16 @@ class AcfFieldService
     public static function webpWhenAvailable(string $url): string
     {
         // Only convert local paths
-        if (!str_starts_with($url, '/uploads/')) {
+        if (! str_starts_with($url, '/uploads/')) {
             return $url;
         }
 
-        $webpPath = public_path(ltrim($url, '/') . '.webp');
-        if (!array_key_exists($webpPath, static::$webpExistsCache)) {
+        $webpPath = public_path(ltrim($url, '/').'.webp');
+        if (! array_key_exists($webpPath, static::$webpExistsCache)) {
             static::$webpExistsCache[$webpPath] = is_file($webpPath);
         }
         if (static::$webpExistsCache[$webpPath]) {
-            return $url . '.webp';
+            return $url.'.webp';
         }
 
         return $url;
@@ -529,8 +538,8 @@ class AcfFieldService
         }
 
         // Normalise scheme-less host URLs (e.g. culinaacademyonline.com/path)
-        if (!str_contains($url, '://') && preg_match('#^([a-z0-9.-]+\\.[a-z]{2,})(/.*)?$#i', $url, $hostMatch)) {
-            $url = 'https://' . $url;
+        if (! str_contains($url, '://') && preg_match('#^([a-z0-9.-]+\\.[a-z]{2,})(/.*)?$#i', $url, $hostMatch)) {
+            $url = 'https://'.$url;
         }
 
         $parsed = parse_url($url);
@@ -546,26 +555,26 @@ class AcfFieldService
             return OnlineCourseService::listingPath();
         }
 
-        if ($host && !str_contains($host, 'example.com')) {
+        if ($host && ! str_contains($host, 'example.com')) {
             return $url;
         }
 
-        $query = isset($parsed['query']) ? '?' . $parsed['query'] : '';
-        $fragment = isset($parsed['fragment']) ? '#' . $parsed['fragment'] : '';
+        $query = isset($parsed['query']) ? '?'.$parsed['query'] : '';
+        $fragment = isset($parsed['fragment']) ? '#'.$parsed['fragment'] : '';
 
         // Relative WordPress upload paths (no host)
-        if (!$host && str_starts_with($url, '/wp-content/uploads/')) {
-            return preg_replace('#^/wp-content/uploads/#', '/uploads/', $url) . $fragment;
+        if (! $host && str_starts_with($url, '/wp-content/uploads/')) {
+            return preg_replace('#^/wp-content/uploads/#', '/uploads/', $url).$fragment;
         }
 
         $path = $parsed['path'] ?? '/';
-        $path = '/' . trim($path, '/');
+        $path = '/'.trim($path, '/');
         $path = preg_replace('#^/wp-content/uploads/#', '/uploads/', $path);
         $path = preg_replace('#^/images/#', '/uploads/joomla/images/', $path);
 
         // Static assets must never receive a language prefix (/en/uploads would 404).
         if (preg_match('#^/(uploads|css|js|assets|fonts|favicon\.ico|robots\.txt|sitemap\.xml)(/|$)#i', $path)) {
-            return rtrim($path, '/') . $query . $fragment;
+            return rtrim($path, '/').$query.$fragment;
         }
 
         // Strip .html extension from old Joomla URLs
@@ -576,20 +585,20 @@ class AcfFieldService
         $localePrefix = '';
         if (preg_match('#^/(en|fr|es|it|zh|zh-tw)(/|$)#', $path, $m)) {
             $localePrefix = $m[1];
-            $path = substr($path, strlen('/' . $localePrefix)) ?: '/';
+            $path = substr($path, strlen('/'.$localePrefix)) ?: '/';
         }
 
         // Normalize path to start with /
-        $path = '/' . ltrim($path, '/');
+        $path = '/'.ltrim($path, '/');
 
         // After stripping locale, static paths can surface again.
         if (preg_match('#^/(uploads|css|js|assets|fonts)(/|$)#i', $path)) {
-            return rtrim($path, '/') . $query . $fragment;
+            return rtrim($path, '/').$query.$fragment;
         }
 
         // Convert old Joomla /course/ paths to /courses/
         if (preg_match('#^/course/([^/]+)/?$#', $path, $m)) {
-            $path = '/courses/' . cal_normalize_course_slug($m[1]);
+            $path = '/courses/'.cal_normalize_course_slug($m[1]);
         }
 
         // Convert old Joomla online-courses/... to local detail pages
@@ -614,7 +623,7 @@ class AcfFieldService
             $slug = cal_normalize_course_slug($m[1]);
             // Strip locale prefix inside slug if it somehow ended up there
             $slug = ltrim(preg_replace('#^(en|fr|es|it|zh|zh-tw)/#', '', $slug), '/');
-            $path = '/courses/' . $slug;
+            $path = '/courses/'.$slug;
         } elseif (preg_match('#^/cooking-courses/?$#', $path)) {
             // Convert root cooking-courses listing (no specific course slug) to /courses
             $path = '/courses';
@@ -631,20 +640,20 @@ class AcfFieldService
             $localePrefix = $currentLang;
         }
         if ($path === '/') {
-            $path = '/' . $localePrefix;
-        } elseif (!str_starts_with($path, '/' . $localePrefix . '/') && $path !== '/' . $localePrefix) {
-            $path = '/' . $localePrefix . $path;
+            $path = '/'.$localePrefix;
+        } elseif (! str_starts_with($path, '/'.$localePrefix.'/') && $path !== '/'.$localePrefix) {
+            $path = '/'.$localePrefix.$path;
         }
 
-        $path = rtrim($path, '/') ?: '/' . $localePrefix;
+        $path = rtrim($path, '/') ?: '/'.$localePrefix;
 
-        return $path . $query . $fragment;
+        return $path.$query.$fragment;
     }
 
     protected static function getRawMeta(int $postId, string $name): ?string
     {
         $cacheKey = "{$postId}.{$name}";
-        if (!isset(static::$postMetaCache[$cacheKey])) {
+        if (! isset(static::$postMetaCache[$cacheKey])) {
             static::$postMetaCache[$cacheKey] = PostMeta::where('post_id', $postId)
                 ->where('meta_key', $name)
                 ->value('meta_value');
@@ -655,7 +664,7 @@ class AcfFieldService
 
     protected static function getAllMeta(int $postId): array
     {
-        if (!isset(static::$postMetaCache["all.{$postId}"])) {
+        if (! isset(static::$postMetaCache["all.{$postId}"])) {
             static::$postMetaCache["all.{$postId}"] = PostMeta::where('post_id', $postId)
                 ->where('meta_key', 'not like', '\_%')
                 ->pluck('meta_value', 'meta_key')
@@ -667,11 +676,11 @@ class AcfFieldService
 
     protected static function isRepeaterCount(int $postId, string $name, string $raw): bool
     {
-        if (!ctype_digit($raw)) {
+        if (! ctype_digit($raw)) {
             return false;
         }
 
-        $prefix = $name . '_0_';
+        $prefix = $name.'_0_';
 
         if (isset(static::$postMetaCache["all.{$postId}"])) {
             foreach (array_keys(static::$postMetaCache["all.{$postId}"]) as $key) {
@@ -684,13 +693,13 @@ class AcfFieldService
         }
 
         return (bool) PostMeta::where('post_id', $postId)
-            ->where('meta_key', 'like', $prefix . '%')
+            ->where('meta_key', 'like', $prefix.'%')
             ->exists();
     }
 
     protected static function isOptionRepeaterCount(string $name, string $raw): bool
     {
-        if (!ctype_digit($raw)) {
+        if (! ctype_digit($raw)) {
             return false;
         }
 
@@ -735,6 +744,7 @@ class AcfFieldService
                     unset(static::$postMetaCache[$key]);
                 }
             }
+
             return;
         }
 
@@ -749,7 +759,7 @@ class AcfFieldService
 
     protected static function parseValue(mixed $value): mixed
     {
-        if (!is_string($value)) {
+        if (! is_string($value)) {
             return $value;
         }
 
@@ -764,8 +774,12 @@ class AcfFieldService
             $value = $unserialized;
         }
 
-        if ($value === 'true') return true;
-        if ($value === 'false') return false;
+        if ($value === 'true') {
+            return true;
+        }
+        if ($value === 'false') {
+            return false;
+        }
 
         return $value;
     }

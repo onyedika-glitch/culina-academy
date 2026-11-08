@@ -9,8 +9,8 @@ class CulinaAcademy
     public static function renderBreadcrumbs(string $cssClass = '', array $items = [], string $current = ''): void
     {
         $current = $current ?: static::getTheTitle();
-        $locale = \App\Services\PolylangService::currentLanguage();
-        $baseUrl = url('/' . $locale);
+        $locale = PolylangService::currentLanguage();
+        $baseUrl = url('/'.$locale);
 
         // Build JSON-LD BreadcrumbList
         $breadcrumbItems = [
@@ -25,7 +25,7 @@ class CulinaAcademy
                 '@type' => 'ListItem',
                 'position' => $position++,
                 'name' => $item['title'],
-                'item' => url('/' . $locale . '/' . ltrim(AcfFieldService::migrateUrl($item['url']), '/')),
+                'item' => url('/'.$locale.'/'.ltrim(AcfFieldService::migrateUrl($item['url']), '/')),
             ];
         }
         $breadcrumbItems[] = [
@@ -34,49 +34,49 @@ class CulinaAcademy
             'name' => $current,
         ];
 
-        echo '<nav class="' . esc_attr($cssClass) . ' cal-page-breadcrumbs" aria-label="Breadcrumb">';
-        echo '<a href="' . PolylangService::prefixForLanguage() . '">' . esc_html(cal_i18n_text('Home')) . '</a>';
+        echo '<nav class="'.esc_attr($cssClass).' cal-page-breadcrumbs" aria-label="Breadcrumb">';
+        echo '<a href="'.PolylangService::prefixForLanguage().'">'.esc_html(cal_i18n_text('Home')).'</a>';
         foreach ($items as $item) {
             if (empty($item['url']) || empty($item['title'])) {
                 continue;
             }
             $url = AcfFieldService::migrateUrl($item['url']);
             echo '<span class="cal-breadcrumb-sep">&raquo;</span>';
-            echo '<a href="' . esc_url($url) . '">' . esc_html($item['title']) . '</a>';
+            echo '<a href="'.esc_url($url).'">'.esc_html($item['title']).'</a>';
         }
         echo '<span class="cal-breadcrumb-sep">&raquo;</span>';
-        echo '<span class="cal-breadcrumb-current">' . esc_html($current) . '</span>';
+        echo '<span class="cal-breadcrumb-current">'.esc_html($current).'</span>';
         echo '</nav>';
 
         // Emit JSON-LD BreadcrumbList
-        echo '<script type="application/ld+json">' . json_encode([
+        echo '<script type="application/ld+json">'.json_encode([
             '@context' => 'https://schema.org',
             '@type' => 'BreadcrumbList',
             'itemListElement' => $breadcrumbItems,
-        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>';
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).'</script>';
     }
 
     public static function renderPageBanner(string $cssClass, string $title): void
     {
-        echo '<section class="' . esc_attr($cssClass) . '-hero cal-page-hero">';
-        echo '<div class="' . esc_attr($cssClass) . '-hero-inner cal-page-shell">';
-        echo '<h1>' . esc_html($title) . '</h1>';
+        echo '<section class="'.esc_attr($cssClass).'-hero cal-page-hero">';
+        echo '<div class="'.esc_attr($cssClass).'-hero-inner cal-page-shell">';
+        echo '<h1>'.esc_html($title).'</h1>';
         echo '</div></section>';
     }
 
     public static function renderLink(mixed $link, string $class = ''): void
     {
-        if (empty($link) || !is_array($link) || empty($link['url'])) {
+        if (empty($link) || ! is_array($link) || empty($link['url'])) {
             return;
         }
 
         $url = AcfFieldService::migrateUrl($link['url']);
-        $title = !empty($link['title']) ? $link['title'] : $url;
-        $target = !empty($link['target']) ? $link['target'] : '';
-        $classAttr = $class ? ' class="' . esc_attr($class) . '"' : '';
-        $targetAttr = $target ? ' target="' . esc_attr($target) . '" rel="noopener"' : '';
+        $title = ! empty($link['title']) ? $link['title'] : $url;
+        $target = ! empty($link['target']) ? $link['target'] : '';
+        $classAttr = $class ? ' class="'.esc_attr($class).'"' : '';
+        $targetAttr = $target ? ' target="'.esc_attr($target).'" rel="noopener"' : '';
 
-        echo '<a href="' . esc_url($url) . '"' . $classAttr . $targetAttr . '>' . esc_html($title) . '</a>';
+        echo '<a href="'.esc_url($url).'"'.$classAttr.$targetAttr.'>'.esc_html($title).'</a>';
     }
 
     public static function formatPrice(mixed $courseIdOrRaw): string
@@ -94,7 +94,7 @@ class CulinaAcademy
             return (string) $raw;
         }
 
-        return '£' . number_format($number);
+        return '£'.number_format($number);
     }
 
     public static function formatCourseDuration(mixed $hours, mixed $duration, ?string $lang = null): string
@@ -105,11 +105,12 @@ class CulinaAcademy
         $units = ['en' => 'hours', 'fr' => 'heures', 'es' => 'horas', 'it' => 'ore', 'zh' => '小时', 'zh-tw' => '小時'];
         $unit = $units[$lang] ?? $units['en'];
         if ($h !== '' && $d !== '') {
-            return $h . ' ' . $unit . ' / ' . $d;
+            return $h.' '.$unit.' / '.$d;
         }
         if ($h !== '') {
-            return $h . ' ' . $unit;
+            return $h.' '.$unit;
         }
+
         return $d;
     }
 
@@ -121,21 +122,22 @@ class CulinaAcademy
     public static function getTheTitle(): string
     {
         $id = static::getTheID();
-        if (!$id) {
+        if (! $id) {
             return '';
         }
         $post = Post::find($id);
+
         return $post ? $post->post_title : '';
     }
 
     public static function theContent(): string
     {
         $id = static::getTheID();
-        if (!$id) {
+        if (! $id) {
             return '';
         }
         $post = Post::find($id);
-        if (!$post) {
+        if (! $post) {
             return '';
         }
 
@@ -149,12 +151,14 @@ class CulinaAcademy
             static function ($matches) {
                 $url = html_entity_decode($matches[3], ENT_QUOTES, 'UTF-8');
                 $migrated = AcfFieldService::migrateUrl($url);
-                return $matches[1] . '=' . $matches[2] . esc_url($migrated) . $matches[2];
+
+                return $matches[1].'='.$matches[2].esc_url($migrated).$matches[2];
             },
             $content
         ) ?? $content;
 
         $content = str_replace('/wp-content/uploads/', '/uploads/', $content);
+
         return $content;
     }
 
@@ -169,18 +173,18 @@ class CulinaAcademy
         }
 
         // Extract YouTube ID from embed URL
-        if (!preg_match('#youtube\\.com/embed/([a-zA-Z0-9_-]{11})#', $embed, $m)) {
+        if (! preg_match('#youtube\\.com/embed/([a-zA-Z0-9_-]{11})#', $embed, $m)) {
             return '';
         }
 
         $videoId = $m[1];
-        $watchUrl = 'https://www.youtube.com/@example' . $videoId;
-        $thumbUrl = 'https://i.ytimg.com/vi/' . $videoId . '/hqdefault.jpg';
+        $watchUrl = 'https://www.youtube.com/@example'.$videoId;
+        $thumbUrl = 'https://i.ytimg.com/vi/'.$videoId.'/hqdefault.jpg';
 
         $json = [
             '@context' => 'https://schema.org',
             '@type' => 'VideoObject',
-            'name' => $pageTitle . ' — Video',
+            'name' => $pageTitle.' — Video',
             'description' => strip_tags((string) $pageTitle),
             'thumbnailUrl' => $thumbUrl,
             'embedUrl' => $embed,
@@ -188,6 +192,6 @@ class CulinaAcademy
             'uploadDate' => date('Y-m-d'),
         ];
 
-        return '<script type="application/ld+json">' . json_encode($json, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>';
+        return '<script type="application/ld+json">'.json_encode($json, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).'</script>';
     }
 }

@@ -90,13 +90,13 @@ class JoomlaContentSyncService
         $langPattern = implode('|', LegacyLocaleMap::legacyLanguagePrefixes());
 
         $content = preg_replace(
-            '#https?://(?:www\.)?culinaacademy\.com/(?:' . $langPattern . ')/#i',
+            '#https?://(?:www\.)?culinaacademy\.com/(?:'.$langPattern.')/#i',
             '/',
             $content,
         ) ?? $content;
         $content = preg_replace('#https?://(?:www\.)?culinaacademy\.com/#i', '/', $content) ?? $content;
         $content = preg_replace(
-            '#/(?:' . $langPattern . ')/([a-z0-9\-/%]+)\.html#i',
+            '#/(?:'.$langPattern.')/([a-z0-9\-/%]+)\.html#i',
             '/$1',
             $content,
         ) ?? $content;
@@ -137,8 +137,8 @@ class JoomlaContentSyncService
     {
         $lang = PolylangService::normalizeCode($lang ?? 'en');
         $legacyPath = trim($legacyPath, '/');
-        $base = rtrim(LegacySiteSyncService::LEGACY_BASE_URL, '/') . '/' . $lang;
-        $url = $legacyPath !== '' ? $base . '/' . $legacyPath . '.html' : $base . '/';
+        $base = rtrim(LegacySiteSyncService::LEGACY_BASE_URL, '/').'/'.$lang;
+        $url = $legacyPath !== '' ? $base.'/'.$legacyPath.'.html' : $base.'/';
 
         $response = Http::timeout(30)->get($url);
 
@@ -229,7 +229,7 @@ class JoomlaContentSyncService
         }
 
         if ($current !== ''
-            && !CourseDisplayService::isMetadataOnlyDescription($current)
+            && ! CourseDisplayService::isMetadataOnlyDescription($current)
             && CourseDisplayService::plainTextLength($current) >= CourseDisplayService::plainTextLength($content)) {
             return false;
         }
@@ -266,7 +266,7 @@ class JoomlaContentSyncService
         foreach (LegacyLocaleMap::languages() as $lang) {
             foreach (static::LEGACY_PAGE_PATHS as $englishLegacyPath => $slug) {
                 $page = PolylangService::findPageBySlug($slug, $lang);
-                if (!$page) {
+                if (! $page) {
                     $results[] = [
                         'type' => 'page',
                         'slug' => $slug,
@@ -275,6 +275,7 @@ class JoomlaContentSyncService
                         'error' => 'Page not found in DB',
                     ];
                     $failed++;
+
                     continue;
                 }
 
@@ -291,6 +292,7 @@ class JoomlaContentSyncService
                         'skipped' => true,
                     ];
                     $skipped++;
+
                     continue;
                 }
 
@@ -304,6 +306,7 @@ class JoomlaContentSyncService
                         'error' => 'Failed to fetch legacy page',
                     ];
                     $failed++;
+
                     continue;
                 }
 
@@ -317,6 +320,7 @@ class JoomlaContentSyncService
                         'error' => 'No content extracted',
                     ];
                     $failed++;
+
                     continue;
                 }
 
@@ -339,7 +343,7 @@ class JoomlaContentSyncService
     public static function syncFromExtract(?string $sourceDir = null): array
     {
         $sourceDir = $sourceDir ?: static::extractDir();
-        $articlesDir = $sourceDir . '/articles';
+        $articlesDir = $sourceDir.'/articles';
 
         $updated = 0;
         $skipped = 0;
@@ -347,7 +351,7 @@ class JoomlaContentSyncService
         $imported = 0;
         $results = [];
 
-        if (!is_dir($articlesDir)) {
+        if (! is_dir($articlesDir)) {
             return [
                 'updated' => 0,
                 'skipped' => 0,
@@ -361,10 +365,11 @@ class JoomlaContentSyncService
         $maxId = (int) (Post::query()->max('ID') ?? 0);
         $nextId = $maxId + 1;
 
-        foreach (glob($articlesDir . '/*.json') as $file) {
+        foreach (glob($articlesDir.'/*.json') as $file) {
             $data = json_decode((string) file_get_contents($file), true);
-            if (!is_array($data)) {
+            if (! is_array($data)) {
                 $failed++;
+
                 continue;
             }
 
@@ -374,6 +379,7 @@ class JoomlaContentSyncService
 
             if (static::isSkippableArticle($title, $alias) || $content === '') {
                 $skipped++;
+
                 continue;
             }
 
@@ -385,6 +391,7 @@ class JoomlaContentSyncService
                 } else {
                     $skipped++;
                 }
+
                 continue;
             }
 
@@ -396,6 +403,7 @@ class JoomlaContentSyncService
                 } else {
                     $skipped++;
                 }
+
                 continue;
             }
 
@@ -407,6 +415,7 @@ class JoomlaContentSyncService
                 } else {
                     $skipped++;
                 }
+
                 continue;
             }
 
@@ -426,7 +435,7 @@ class JoomlaContentSyncService
                 'post_modified' => now(),
                 'post_modified_gmt' => now()->utc(),
                 'post_type' => 'post',
-                'guid' => url('/blog/' . $alias),
+                'guid' => url('/blog/'.$alias),
             ]);
 
             $existingSlugs[] = $alias;

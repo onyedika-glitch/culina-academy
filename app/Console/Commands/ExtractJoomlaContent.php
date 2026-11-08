@@ -12,7 +12,9 @@ class ExtractJoomlaContent extends Command
     protected $description = 'Extract all content from the Joomla site via admin API';
 
     private string $baseUrl = 'https://www.example.com/administrator';
+
     private string $cookieFile = '/tmp/joomla_cookies.txt';
+
     private string $token = '';
 
     public function handle(): int
@@ -23,8 +25,9 @@ class ExtractJoomlaContent extends Command
         @mkdir("$outputDir/menus", 0755, true);
 
         // Login
-        if (!$this->login()) {
+        if (! $this->login()) {
             $this->error('Failed to login to Joomla admin');
+
             return self::FAILURE;
         }
 
@@ -35,7 +38,7 @@ class ExtractJoomlaContent extends Command
         // Extract articles
         $this->info('Extracting articles list...');
         $articles = $this->extractArticleList();
-        $this->info('Found ' . count($articles) . ' articles');
+        $this->info('Found '.count($articles).' articles');
 
         // Extract each article's full content
         foreach ($articles as $id => $title) {
@@ -52,6 +55,7 @@ class ExtractJoomlaContent extends Command
         $this->extractMenus($outputDir);
 
         $this->info("Extraction complete. Data saved to: {$outputDir}");
+
         return self::SUCCESS;
     }
 
@@ -101,7 +105,7 @@ class ExtractJoomlaContent extends Command
         $html = $this->fetch("index.php?option=com_content&task=article.edit&id={$id}");
 
         if (empty($html) || str_contains($html, 'login')) {
-            $this->warn("    Session expired, re-logging in...");
+            $this->warn('    Session expired, re-logging in...');
             $this->login();
             $html = $this->fetch("index.php?option=com_content&task=article.edit&id={$id}");
         }
@@ -180,7 +184,7 @@ class ExtractJoomlaContent extends Command
 
         $categories = [];
         foreach ($ids[1] as $i => $id) {
-            $title = $titles[1][$i] ?? "Unknown";
+            $title = $titles[1][$i] ?? 'Unknown';
             $categories[$id] = html_entity_decode(trim($title));
         }
 
@@ -199,7 +203,7 @@ class ExtractJoomlaContent extends Command
 
         $menuItems = [];
         foreach ($ids[1] as $i => $id) {
-            $title = $titles[1][$i] ?? "Unknown";
+            $title = $titles[1][$i] ?? 'Unknown';
             $menuItems[$id] = html_entity_decode(trim($title));
         }
 
@@ -208,7 +212,7 @@ class ExtractJoomlaContent extends Command
 
     private function fetch(string $path, array $postData = []): string
     {
-        $url = $this->baseUrl . '/' . ltrim($path, '/');
+        $url = $this->baseUrl.'/'.ltrim($path, '/');
         $ch = curl_init($url);
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
@@ -221,7 +225,7 @@ class ExtractJoomlaContent extends Command
             CURLOPT_TIMEOUT => 30,
         ]);
 
-        if (!empty($postData)) {
+        if (! empty($postData)) {
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
         }

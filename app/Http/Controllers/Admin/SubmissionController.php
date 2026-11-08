@@ -6,12 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Mail\WaitlistInvitation;
 use App\Models\Application;
 use App\Models\Booking;
-use App\Models\BookingDocument;
 use App\Models\ContactSubmission;
 use App\Models\Enrollment;
 use App\Models\Post;
-use App\Models\Waitlist;
 use App\Models\WaitingList;
+use App\Models\Waitlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -128,7 +127,7 @@ class SubmissionController extends Controller
         ]);
 
         // Build the invite URL
-        $inviteUrl = url('/waitlist/invite/' . $token);
+        $inviteUrl = url('/waitlist/invite/'.$token);
 
         // Get course title
         $course = Post::find($entry->course_id);
@@ -145,8 +144,9 @@ class SubmissionController extends Controller
 
             return back()->with('success', "Invitation sent to {$entry->email}. They have {$expiryHours} hours to claim their spot.");
         } catch (\Throwable $e) {
-            Log::error('Failed to send waitlist invitation: ' . $e->getMessage());
-            return back()->with('error', 'Invitation token generated but email failed to send. Token: ' . $token);
+            Log::error('Failed to send waitlist invitation: '.$e->getMessage());
+
+            return back()->with('error', 'Invitation token generated but email failed to send. Token: '.$token);
         }
     }
 

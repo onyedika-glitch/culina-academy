@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Booking;
 use App\Models\IntakeDate;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -72,7 +71,7 @@ class IntakeController extends Controller
         ]);
 
         // Allow clearing the override
-        if (!$request->filled('availability_override')) {
+        if (! $request->filled('availability_override')) {
             $data['availability_override'] = null;
         }
 
@@ -112,6 +111,6 @@ class IntakeController extends Controller
             'availability_override' => $data['availability_override'] ?? null,
         ]);
 
-        return back()->with('success', 'Availability override updated for ' . $intake->intake_date->format('d M Y') . '.');
+        return back()->with('success', 'Availability override updated for '.$intake->intake_date->format('d M Y').'.');
     }
 }

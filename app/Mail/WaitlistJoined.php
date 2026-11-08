@@ -17,10 +17,10 @@ class WaitlistJoined extends Mailable
 
     public function envelope(): Envelope
     {
-        $name = trim($this->entry->first_name . ' ' . $this->entry->last_name);
+        $name = trim($this->entry->first_name.' '.$this->entry->last_name);
 
         return new Envelope(
-            subject: 'Waitlist Signup: ' . $name,
+            subject: 'Waitlist Signup: '.$name,
             replyTo: [$this->entry->email],
         );
     }

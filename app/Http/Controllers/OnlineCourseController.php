@@ -14,7 +14,7 @@ class OnlineCourseController extends Controller
         $listingSlug = rawurldecode((string) $request->route('listingSlug'));
         $courseSlug = (string) $request->route('courseSlug');
 
-        if (!OnlineCourseService::isListingSlug($listingSlug) || !OnlineCourseService::isCourseSlug($courseSlug)) {
+        if (! OnlineCourseService::isListingSlug($listingSlug) || ! OnlineCourseService::isCourseSlug($courseSlug)) {
             abort(404);
         }
 
@@ -29,7 +29,7 @@ class OnlineCourseController extends Controller
         }
 
         $course = OnlineCourseService::resolve($courseSlug);
-        if (!$course) {
+        if (! $course) {
             abort(404);
         }
 

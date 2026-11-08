@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\PostMeta;
-use Illuminate\Support\Facades\DB;
 
 class PostMetaWriter
 {
@@ -32,7 +31,7 @@ class PostMetaWriter
     public static function deleteByPrefix(int $postId, string $prefix): void
     {
         PostMeta::where('post_id', $postId)
-            ->where('meta_key', 'like', $prefix . '%')
+            ->where('meta_key', 'like', $prefix.'%')
             ->delete();
 
         AcfFieldService::clearCache($postId);
@@ -43,12 +42,12 @@ class PostMetaWriter
     /** @param array<int, array<string, mixed>> $rows */
     public static function setRepeater(int $postId, string $fieldName, array $rows): void
     {
-        static::deleteByPrefix($postId, $fieldName . '_');
+        static::deleteByPrefix($postId, $fieldName.'_');
 
         static::set($postId, $fieldName, (string) count($rows));
 
         foreach ($rows as $index => $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
             foreach ($row as $subKey => $subValue) {
@@ -64,15 +63,15 @@ class PostMetaWriter
     /**
      * Write a repeater that may contain nested repeaters (e.g. FAQ categories → questions).
      *
-     * @param array<int, array<string, mixed>> $rows
+     * @param  array<int, array<string, mixed>>  $rows
      */
     public static function setNestedRepeater(int $postId, string $fieldName, array $rows): void
     {
-        static::deleteByPrefix($postId, $fieldName . '_');
+        static::deleteByPrefix($postId, $fieldName.'_');
         static::set($postId, $fieldName, (string) count($rows));
 
         foreach ($rows as $index => $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
 
@@ -83,6 +82,7 @@ class PostMetaWriter
 
                 if (is_array($subValue) && static::isRepeaterPayload($subValue)) {
                     static::setNestedRepeater($postId, "{$fieldName}_{$index}_{$subKey}", $subValue);
+
                     continue;
                 }
 
@@ -95,12 +95,13 @@ class PostMetaWriter
     public static function setFields(int $postId, array $fields): void
     {
         foreach ($fields as $key => $value) {
-            if (!is_string($key) || $key === '' || str_starts_with($key, '_')) {
+            if (! is_string($key) || $key === '' || str_starts_with($key, '_')) {
                 continue;
             }
 
             if (is_array($value) && static::isRepeaterPayload($value)) {
                 static::setRepeater($postId, $key, $value);
+
                 continue;
             }
 

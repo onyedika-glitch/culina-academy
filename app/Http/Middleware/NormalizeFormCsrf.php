@@ -11,7 +11,7 @@ class NormalizeFormCsrf
     public function handle(Request $request, Closure $next): Response
     {
         if (in_array($request->method(), ['POST', 'PUT', 'PATCH', 'DELETE'], true)) {
-            if (!$request->input('_token') && $request->filled('nonce')) {
+            if (! $request->input('_token') && $request->filled('nonce')) {
                 $request->merge(['_token' => $request->input('nonce')]);
             }
         }

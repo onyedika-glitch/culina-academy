@@ -24,7 +24,7 @@ class ArchitectureTest extends TestCase
         foreach (['app', 'routes', 'config', 'bootstrap'] as $dir) {
             $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(self::root().'/'.$dir));
             foreach ($iterator as $file) {
-                if ($file->isFile() && $file->getExtension() === 'php' && !str_contains($file->getPathname(), '/bootstrap/cache/')) {
+                if ($file->isFile() && $file->getExtension() === 'php' && ! str_contains($file->getPathname(), '/bootstrap/cache/')) {
                     $relative = substr($file->getPathname(), strlen(self::root()) + 1);
                     $files[$relative] = [$relative];
                 }

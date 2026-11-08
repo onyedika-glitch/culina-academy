@@ -77,7 +77,7 @@ class PolylangService
         $code = static::normalizeCode($code ?? static::currentLanguage());
 
         // All languages (including English) use a URL prefix: /en, /it, /fr, …
-        return '/' . $code;
+        return '/'.$code;
     }
 
     public static function localeTag(?string $code = null): string
@@ -101,7 +101,7 @@ class PolylangService
 
         static::$languagesCache = static::defaultLanguages();
 
-        if (!Schema::hasTable('wp_terms') || !Schema::hasTable('wp_term_taxonomy')) {
+        if (! Schema::hasTable('wp_terms') || ! Schema::hasTable('wp_term_taxonomy')) {
             return static::$languagesCache;
         }
 
@@ -175,7 +175,7 @@ class PolylangService
 
         $missingLanguages = array_values(array_filter(
             $postIds,
-            static fn (int $id): bool => !isset(static::$postLanguageCache[$id]),
+            static fn (int $id): bool => ! isset(static::$postLanguageCache[$id]),
         ));
 
         if ($missingLanguages !== []) {
@@ -198,7 +198,7 @@ class PolylangService
 
         $missingGroups = array_values(array_filter(
             $postIds,
-            static fn (int $id): bool => !isset(static::$translationGroupCache[$id]),
+            static fn (int $id): bool => ! isset(static::$translationGroupCache[$id]),
         ));
 
         if ($missingGroups !== []) {
@@ -219,7 +219,7 @@ class PolylangService
 
                 if (is_array($group)) {
                     foreach ($group as $lang => $id) {
-                        if (!is_string($lang) || !is_numeric($id)) {
+                        if (! is_string($lang) || ! is_numeric($id)) {
                             continue;
                         }
                         $normalized[static::normalizeCode($lang)] = (int) $id;
@@ -264,7 +264,7 @@ class PolylangService
 
         if (is_array($group)) {
             foreach ($group as $lang => $id) {
-                if (!is_string($lang) || !is_numeric($id)) {
+                if (! is_string($lang) || ! is_numeric($id)) {
                     continue;
                 }
                 $normalized[static::normalizeCode($lang)] = (int) $id;
@@ -279,7 +279,7 @@ class PolylangService
         $lang = static::normalizeCode($lang);
         $group = static::getTranslationGroup($postId);
 
-        if (!empty($group[$lang])) {
+        if (! empty($group[$lang])) {
             return (int) $group[$lang];
         }
 
@@ -292,7 +292,7 @@ class PolylangService
             'cal.frontpage.id',
             now()->addDay(),
             static function (): int {
-                if (!Schema::hasTable('wp_options')) {
+                if (! Schema::hasTable('wp_options')) {
                     return 21;
                 }
 
@@ -324,7 +324,7 @@ class PolylangService
             },
         );
 
-        if (!$targetId) {
+        if (! $targetId) {
             return null;
         }
 
@@ -407,7 +407,7 @@ class PolylangService
         $lang = static::normalizeCode($lang ?? static::currentLanguage());
         $post = Post::find($postId);
 
-        if (!$post) {
+        if (! $post) {
             return static::prefixForLanguage($lang);
         }
 
@@ -424,25 +424,25 @@ class PolylangService
                 return $prefix;
             }
 
-            return $prefix . '/' . $slug;
+            return $prefix.'/'.$slug;
         }
 
         if ($post->post_type === 'ca_course') {
-            return $prefix . '/courses/' . $slug;
+            return $prefix.'/courses/'.$slug;
         }
 
         if ($post->post_type === 'post') {
-            return $prefix . '/blog/' . $slug;
+            return $prefix.'/blog/'.$slug;
         }
 
-        return $prefix . '/' . $slug;
+        return $prefix.'/'.$slug;
     }
 
     /** @return array<int, array{slug:string,name:string,url:string,active:bool}> */
     public static function getLanguageSwitcherLinks(?int $postId = null): array
     {
         $postId = $postId ?: (int) request()->attributes->get('_post_id', 0);
-        $cacheKey = $postId . ':' . static::currentLanguage();
+        $cacheKey = $postId.':'.static::currentLanguage();
 
         if (isset(static::$languageSwitcherCache[$cacheKey])) {
             return static::$languageSwitcherCache[$cacheKey];
@@ -454,7 +454,7 @@ class PolylangService
             $code = $language['slug'];
             $targetId = $postId ? static::getTranslationId($postId, $code) : 0;
 
-            if ($postId && !$targetId && static::getPostLanguage($postId) === $code) {
+            if ($postId && ! $targetId && static::getPostLanguage($postId) === $code) {
                 $targetId = $postId;
             }
 
@@ -480,7 +480,7 @@ class PolylangService
     public static function localizedPath(string $path, ?string $lang = null): string
     {
         $lang = static::normalizeCode($lang ?? static::currentLanguage());
-        $path = '/' . trim($path, '/');
+        $path = '/'.trim($path, '/');
         $prefix = static::prefixForLanguage($lang);
 
         if ($path === '/') {
@@ -489,12 +489,12 @@ class PolylangService
 
         // Already language-prefixed.
         if (preg_match('#^/(en|fr|es|it|zh|zh-tw)(/|$)#', $path)) {
-            return $path === $prefix || str_starts_with($path, $prefix . '/')
+            return $path === $prefix || str_starts_with($path, $prefix.'/')
                 ? rtrim($path, '/') ?: $prefix
                 : $path;
         }
 
-        return $prefix . $path;
+        return $prefix.$path;
     }
 
     protected static function parseSerialized(string $value): array

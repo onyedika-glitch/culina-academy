@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Cloudinary\Cloudinary;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -11,7 +12,6 @@ class CloudinaryService
     /**
      * Upload a file to Cloudinary with a GDPR-compliant hashed filename.
      *
-     * @param  UploadedFile  $file
      * @param  string  $folder  The Cloudinary folder path
      * @return array{public_id: string, secure_url: string, hashed_name: string, original_name: string, mime_type: string, size: int}|null
      */
@@ -20,9 +20,9 @@ class CloudinaryService
         try {
             $originalName = $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
-            $hashedName = Str::random(40) . '_' . hash('sha256', $originalName . microtime()) . '.' . $extension;
+            $hashedName = Str::random(40).'_'.hash('sha256', $originalName.microtime()).'.'.$extension;
 
-            $cloudinary = new \Cloudinary\Cloudinary([
+            $cloudinary = new Cloudinary([
                 'cloud' => [
                     'cloud_name' => config('services.cloudinary.cloud_name'),
                     'api_key' => config('services.cloudinary.api_key'),
@@ -51,9 +51,10 @@ class CloudinaryService
                 'size' => $file->getSize(),
             ];
         } catch (\Throwable $e) {
-            Log::error('Cloudinary upload failed: ' . $e->getMessage(), [
+            Log::error('Cloudinary upload failed: '.$e->getMessage(), [
                 'file' => $file->getClientOriginalName(),
             ]);
+
             return null;
         }
     }
@@ -64,7 +65,7 @@ class CloudinaryService
     public static function delete(string $publicId): bool
     {
         try {
-            $cloudinary = new \Cloudinary\Cloudinary([
+            $cloudinary = new Cloudinary([
                 'cloud' => [
                     'cloud_name' => config('services.cloudinary.cloud_name'),
                     'api_key' => config('services.cloudinary.api_key'),
@@ -79,9 +80,10 @@ class CloudinaryService
 
             return true;
         } catch (\Throwable $e) {
-            Log::error('Cloudinary delete failed: ' . $e->getMessage(), [
+            Log::error('Cloudinary delete failed: '.$e->getMessage(), [
                 'public_id' => $publicId,
             ]);
+
             return false;
         }
     }
@@ -89,7 +91,6 @@ class CloudinaryService
     /**
      * Upload a file to Cloudinary as publicly accessible (for site images/videos).
      *
-     * @param  UploadedFile  $file
      * @param  string  $folder  The Cloudinary folder path
      * @return array{public_id: string, secure_url: string, original_name: string, mime_type: string, size: int}|null
      */
@@ -99,7 +100,7 @@ class CloudinaryService
             $originalName = $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
 
-            $cloudinary = new \Cloudinary\Cloudinary([
+            $cloudinary = new Cloudinary([
                 'cloud' => [
                     'cloud_name' => config('services.cloudinary.cloud_name'),
                     'api_key' => config('services.cloudinary.api_key'),
@@ -129,9 +130,10 @@ class CloudinaryService
                 'size' => $file->getSize(),
             ];
         } catch (\Throwable $e) {
-            Log::error('Cloudinary public upload failed: ' . $e->getMessage(), [
+            Log::error('Cloudinary public upload failed: '.$e->getMessage(), [
                 'file' => $file->getClientOriginalName(),
             ]);
+
             return null;
         }
     }
@@ -155,11 +157,11 @@ class CloudinaryService
         $ext = strtolower($file->getClientOriginalExtension());
         $mime = $file->getMimeType();
 
-        if (!in_array($ext, $allowedExtensions, true)) {
+        if (! in_array($ext, $allowedExtensions, true)) {
             return "File \"{$file->getClientOriginalName()}\" has an unsupported format. Only PDF, JPG, and PNG files are allowed.";
         }
 
-        if (!in_array($mime, $allowedMimes, true)) {
+        if (! in_array($mime, $allowedMimes, true)) {
             return "File \"{$file->getClientOriginalName()}\" has an invalid MIME type ({$mime}). Only PDF, JPG, and PNG are accepted.";
         }
 

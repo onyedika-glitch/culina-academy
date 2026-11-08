@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Menu extends Model
 {
     protected $table = 'menus';
+
     protected $fillable = ['name', 'slug', 'language_code', 'term_id'];
 
     public function items(): HasMany

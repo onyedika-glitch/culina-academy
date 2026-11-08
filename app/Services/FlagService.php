@@ -37,6 +37,6 @@ class FlagService
             return "/assets/images/flags/{$iso}.svg";
         }
 
-        return 'https://flagcdn.com/w40/' . $iso . '.png';
+        return 'https://flagcdn.com/w40/'.$iso.'.png';
     }
 }

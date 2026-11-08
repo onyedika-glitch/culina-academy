@@ -4,13 +4,13 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\IntakeController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\SubmissionController;
-use App\Http\Controllers\Admin\IntakeController;
 use App\Http\Middleware\EnsureAdministrator;
 use Illuminate\Support\Facades\Route;
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Responses;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
@@ -18,7 +19,7 @@ class FormRequestResponse
             || $request->is('*/booking/ajax');
     }
 
-    public static function validation(ValidationException $exception): \Illuminate\Http\JsonResponse
+    public static function validation(ValidationException $exception): JsonResponse
     {
         $message = collect($exception->errors())->flatten()->first() ?? $exception->getMessage();
 
@@ -29,7 +30,7 @@ class FormRequestResponse
         ], $exception->status);
     }
 
-    public static function csrfExpired(): \Illuminate\Http\JsonResponse
+    public static function csrfExpired(): JsonResponse
     {
         return response()->json([
             'success' => false,
@@ -37,9 +38,9 @@ class FormRequestResponse
         ], 419);
     }
 
-    public static function handleException(\Throwable $exception, Request $request): ?\Illuminate\Http\JsonResponse
+    public static function handleException(\Throwable $exception, Request $request): ?JsonResponse
     {
-        if (!static::wantsJson($request)) {
+        if (! static::wantsJson($request)) {
             return null;
         }
 

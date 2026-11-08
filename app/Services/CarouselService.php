@@ -38,7 +38,7 @@ class CarouselService
         $browseMore = UiTranslationService::translate('Browse More Courses', $lang);
         // Use the cooking-courses page in this language only (no English ID fallback).
         $cookingCoursesPageId = PolylangService::getTranslationId(44, $lang);
-        if (!$cookingCoursesPageId && PolylangService::getPostLanguage(44) === $lang) {
+        if (! $cookingCoursesPageId && PolylangService::getPostLanguage(44) === $lang) {
             $cookingCoursesPageId = 44;
         }
         $moreCoursesUrl = $cookingCoursesPageId
@@ -46,7 +46,7 @@ class CarouselService
             : PolylangService::localizedPath('/cooking-courses', $lang);
 
         $attachmentUrls = static::attachmentUrlsForCourses($courses);
-        $uid = 'cacx_' . uniqid();
+        $uid = 'cacx_'.uniqid();
         ob_start();
         ?>
         <section class="cacx-section" id="<?= $uid ?>" data-autoplay="4500">
@@ -62,14 +62,14 @@ class CarouselService
             </div>
             <div class="cacx-track-wrap">
                 <div class="cacx-track">
-                <?php foreach ($courses as $course):
+                <?php foreach ($courses as $course) {
                     $id = $course->ID;
                     $imageMeta = AcfFieldService::parseValuePublic($course->getMeta('ca_image') ?: $course->getMeta('_thumbnail_id'));
                     $imageData = static::resolveCourseImageData($imageMeta, $attachmentUrls);
                     $image = $imageData['url'] ?? '';
                     // Fallback placeholder when course has no featured image
-                    if (!$image) {
-                        $image = 'data:image/svg+xml,' . rawurlencode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect fill="#e8e8e8" width="800" height="600"/><text x="400" y="310" text-anchor="middle" fill="#999" font-family="sans-serif" font-size="22">' . htmlspecialchars($course->post_title, ENT_QUOTES, 'UTF-8') . '</text></svg>');
+                    if (! $image) {
+                        $image = 'data:image/svg+xml,'.rawurlencode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect fill="#e8e8e8" width="800" height="600"/><text x="400" y="310" text-anchor="middle" fill="#999" font-family="sans-serif" font-size="22">'.htmlspecialchars($course->post_title, ENT_QUOTES, 'UTF-8').'</text></svg>');
                     }
                     $badge = CourseDisplayService::badge($course->getMeta('ca_badge', ''), $lang);
                     $hours = $course->getMeta('ca_hours', '');
@@ -78,40 +78,40 @@ class CarouselService
                     // Always link to this language's course URL (ignore cross-language ca_course_url).
                     $url = PolylangService::buildPostUrl((int) $id, $lang);
                     $price = CulinaAcademy::formatPrice(AcfFieldService::parseValuePublic($course->getMeta('ca_price', '')));
-                ?>
+                    ?>
                 <div class="cacx-slide">
                     <a href="<?= esc_url($url) ?>" class="cacx-card">
                         <div class="cacx-img-wrap">
-                            <?php if ($image): ?>
+                            <?php if ($image) { ?>
                             <img data-src="<?= esc_url($image) ?>"
                                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E"
                                  alt="<?= esc_attr($course->post_title) ?>"
-                                 <?php if (!empty($imageData['width']) && !empty($imageData['height'])): ?>
+                                 <?php if (! empty($imageData['width']) && ! empty($imageData['height'])) { ?>
                                  width="<?= (int) $imageData['width'] ?>" height="<?= (int) $imageData['height'] ?>"
-                                 <?php endif; ?>
+                                 <?php } ?>
                                  class="cacx-lazy-img"
                                  loading="lazy"
                                  decoding="async"
                                  fetchpriority="low">
-                            <?php endif; ?>
+                            <?php } ?>
                             <div class="cacx-img-overlay"></div>
-                            <?php if ($badge): ?>
+                            <?php if ($badge) { ?>
                             <span class="cacx-badge"><?= esc_html($badge) ?></span>
-                            <?php endif; ?>
+                            <?php } ?>
                         </div>
                         <div class="cacx-body">
                             <h3 class="cacx-name"><?= esc_html($course->post_title) ?></h3>
                             <div class="cacx-meta">
-                                <?php if ($durationLine): ?><span><?= esc_html($durationLine) ?></span><?php endif; ?>
+                                <?php if ($durationLine) { ?><span><?= esc_html($durationLine) ?></span><?php } ?>
                             </div>
                             <div class="cacx-footer">
-                                <?php if ($price): ?><span class="cacx-price"><?= $price ?></span><?php endif; ?>
+                                <?php if ($price) { ?><span class="cacx-price"><?= $price ?></span><?php } ?>
                                 <span class="cacx-cta"><?= esc_html($viewCourse) ?> &#8594;</span>
                             </div>
                         </div>
                     </a>
                 </div>
-                <?php endforeach; ?>
+                <?php } ?>
                 </div>
             </div>
             <div class="cacx-dots" aria-label="Course carousel navigation"></div>
@@ -131,7 +131,7 @@ class CarouselService
         foreach ($courses as $course) {
             foreach (['ca_image', '_thumbnail_id'] as $key) {
                 $value = AcfFieldService::parseValuePublic($course->getMeta($key));
-                if (is_array($value) && !empty($value['ID'])) {
+                if (is_array($value) && ! empty($value['ID'])) {
                     $ids[] = (int) $value['ID'];
                 } elseif (is_numeric($value)) {
                     $ids[] = (int) $value;
@@ -151,7 +151,7 @@ class CarouselService
 
         $urls = [];
         foreach ($files as $postId => $file) {
-            $urls[(int) $postId] = AcfFieldService::webpWhenAvailable('/uploads/' . ltrim((string) $file, '/'));
+            $urls[(int) $postId] = AcfFieldService::webpWhenAvailable('/uploads/'.ltrim((string) $file, '/'));
         }
 
         return $urls;
@@ -166,7 +166,7 @@ class CarouselService
         }
 
         if (is_array($imageMeta)) {
-            if (!empty($imageMeta['url'])) {
+            if (! empty($imageMeta['url'])) {
                 return [
                     'url' => AcfFieldService::webpWhenAvailable(AcfFieldService::migrateUrl((string) $imageMeta['url'])),
                     'width' => 0,

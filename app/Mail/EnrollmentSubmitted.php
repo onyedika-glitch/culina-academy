@@ -17,10 +17,10 @@ class EnrollmentSubmitted extends Mailable
 
     public function envelope(): Envelope
     {
-        $name = trim($this->enrollment->first_name . ' ' . $this->enrollment->last_name);
+        $name = trim($this->enrollment->first_name.' '.$this->enrollment->last_name);
 
         return new Envelope(
-            subject: 'Course Enrollment: ' . $name,
+            subject: 'Course Enrollment: '.$name,
             replyTo: [$this->enrollment->email],
         );
     }

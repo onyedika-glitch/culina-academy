@@ -79,7 +79,7 @@ class LegacyAcfSyncService
         foreach (LegacyLocaleMap::languages() as $lang) {
             foreach (static::TEMPLATE_PAGES as $key => $config) {
                 $page = PolylangService::findPageBySlug($config['slug'], $lang);
-                if (!$page) {
+                if (! $page) {
                     $results[] = [
                         'page' => $key,
                         'lang' => $lang,
@@ -88,11 +88,12 @@ class LegacyAcfSyncService
                         'skipped' => true,
                     ];
                     $skipped++;
+
                     continue;
                 }
 
                 $legacyPath = LegacyLocaleMap::legacyPathForSlug($config['slug'], $lang);
-                if ($legacyPath === null && !in_array($key, ['home', 'reviews', 'online-courses'], true)) {
+                if ($legacyPath === null && ! in_array($key, ['home', 'reviews', 'online-courses'], true)) {
                     $results[] = [
                         'page' => $key,
                         'lang' => $lang,
@@ -101,6 +102,7 @@ class LegacyAcfSyncService
                         'skipped' => true,
                     ];
                     $skipped++;
+
                     continue;
                 }
 
@@ -148,7 +150,7 @@ class LegacyAcfSyncService
         } catch (HttpClientException $e) {
             $failure = AcfSyncException::legacyFetchFailed($key, $lang, $e);
         } catch (AcfSyncException $e) {
-            if (!$e->recoverable) {
+            if (! $e->recoverable) {
                 throw $e;
             }
             $failure = $e;
@@ -261,7 +263,7 @@ class LegacyAcfSyncService
     {
         $value = trim($value);
 
-        return $value !== '' && !preg_match('/[\s<>"\']/', $value);
+        return $value !== '' && ! preg_match('/[\s<>"\']/', $value);
     }
 
     protected static function migrateValueRecursive(mixed $value): mixed
@@ -271,10 +273,10 @@ class LegacyAcfSyncService
                 return $value;
             }
 
-            if (!str_contains($value, 'example.com')
-                && !str_contains($value, 'new.culinaacademy')
-                && !str_contains($value, '/images/')
-                && !preg_match('#/(?:en|fr|es|it|zh|zh-tw)/[a-z0-9\-/]+\.html#i', $value)) {
+            if (! str_contains($value, 'example.com')
+                && ! str_contains($value, 'new.culinaacademy')
+                && ! str_contains($value, '/images/')
+                && ! preg_match('#/(?:en|fr|es|it|zh|zh-tw)/[a-z0-9\-/]+\.html#i', $value)) {
                 return $value;
             }
 
@@ -287,7 +289,7 @@ class LegacyAcfSyncService
             return static::isSingleUrl($normalized) ? AcfFieldService::migrateUrl($normalized) : $normalized;
         }
 
-        if (!is_array($value)) {
+        if (! is_array($value)) {
             return $value;
         }
 
@@ -318,7 +320,7 @@ class LegacyAcfSyncService
         $paragraphs = static::extractParagraphs($body);
         $introParagraphs = array_values(array_filter(
             $paragraphs,
-            fn ($text) => strlen($text) > 80 && !preg_match('/^(Andy|Registered Office|Phone:)/i', $text),
+            fn ($text) => strlen($text) > 80 && ! preg_match('/^(Andy|Registered Office|Phone:)/i', $text),
         ));
 
         if ($introParagraphs !== []) {
@@ -355,7 +357,7 @@ class LegacyAcfSyncService
     /** @return array<int, array<string, string>> */
     protected static function parseCareersCards(string $html): array
     {
-        if (!preg_match_all(
+        if (! preg_match_all(
             '/<p[^>]*>\s*<img[^>]+alt="([^"]*)"[^>]*>.*?<\/p>\s*<p[^>]*>([^<]+)<\/p>\s*<p[^>]*>([^<]+)<\/p>/is',
             $html,
             $matches,
@@ -788,15 +790,15 @@ class LegacyAcfSyncService
     /** @return array<int, array<string, mixed>> */
     protected static function parseRestaurantArticles(string $html): array
     {
-        if (!preg_match_all('/<article[^>]*>(.*?)<\/article>/is', $html, $matches)) {
+        if (! preg_match_all('/<article[^>]*>(.*?)<\/article>/is', $html, $matches)) {
             return [];
         }
 
         $restaurants = [];
 
         foreach ($matches[1] as $articleHtml) {
-            if (!preg_match('/<h2[^>]*class="[^"]*entry-title[^"]*"[^>]*>.*?<a[^>]*>(.*?)<\/a>/is', $articleHtml, $titleMatch)
-                && !preg_match('/<h2[^>]*class="[^"]*entry-title[^"]*"[^>]*>\s*([^<]+)/is', $articleHtml, $titleMatch)) {
+            if (! preg_match('/<h2[^>]*class="[^"]*entry-title[^"]*"[^>]*>.*?<a[^>]*>(.*?)<\/a>/is', $articleHtml, $titleMatch)
+                && ! preg_match('/<h2[^>]*class="[^"]*entry-title[^"]*"[^>]*>\s*([^<]+)/is', $articleHtml, $titleMatch)) {
                 continue;
             }
 
@@ -908,14 +910,14 @@ class LegacyAcfSyncService
     /** @return array<int, string> */
     protected static function extractParagraphs(string $html): array
     {
-        if (!preg_match_all('/<p[^>]*>(.*?)<\/p>/is', $html, $matches)) {
+        if (! preg_match_all('/<p[^>]*>(.*?)<\/p>/is', $html, $matches)) {
             return [];
         }
 
         $paragraphs = [];
         foreach ($matches[1] as $raw) {
             $text = trim(html_entity_decode(strip_tags($raw), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
-            if ($text !== '' && !preg_match('/^(Print|Email)$/i', $text)) {
+            if ($text !== '' && ! preg_match('/^(Print|Email)$/i', $text)) {
                 $paragraphs[] = $text;
             }
         }

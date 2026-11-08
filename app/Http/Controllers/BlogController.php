@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Services\PolylangService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
@@ -17,6 +18,7 @@ class BlogController extends Controller
             'it' => 'blogs-it',
             'es' => 'blogs-es',
         ];
+
         return $categoryMap[$lang] ?? 'blog';
     }
 
@@ -34,7 +36,7 @@ class BlogController extends Controller
             ->where('post_type', 'post')
             ->published()
             ->whereExists(function ($query) use ($categorySlug) {
-                $query->select(\Illuminate\Support\Facades\DB::raw(1))
+                $query->select(DB::raw(1))
                     ->from('wp_term_relationships')
                     ->join('wp_term_taxonomy', 'wp_term_relationships.term_taxonomy_id', '=', 'wp_term_taxonomy.term_taxonomy_id')
                     ->join('wp_terms', 'wp_term_taxonomy.term_id', '=', 'wp_terms.term_id')
@@ -59,7 +61,7 @@ class BlogController extends Controller
             ->where('post_type', 'post')
             ->published()
             ->whereExists(function ($query) use ($categorySlug) {
-                $query->select(\Illuminate\Support\Facades\DB::raw(1))
+                $query->select(DB::raw(1))
                     ->from('wp_term_relationships')
                     ->join('wp_term_taxonomy', 'wp_term_relationships.term_taxonomy_id', '=', 'wp_term_taxonomy.term_taxonomy_id')
                     ->join('wp_terms', 'wp_term_taxonomy.term_id', '=', 'wp_terms.term_id')
@@ -98,7 +100,7 @@ class BlogController extends Controller
             ->where('post_type', 'post')
             ->published()
             ->whereExists(function ($query) use ($categorySlug) {
-                $query->select(\Illuminate\Support\Facades\DB::raw(1))
+                $query->select(DB::raw(1))
                     ->from('wp_term_relationships')
                     ->join('wp_term_taxonomy', 'wp_term_relationships.term_taxonomy_id', '=', 'wp_term_taxonomy.term_taxonomy_id')
                     ->join('wp_terms', 'wp_term_taxonomy.term_id', '=', 'wp_terms.term_id')
@@ -109,7 +111,7 @@ class BlogController extends Controller
             ->first();
 
         // Fallback: find by slug without category filter (for uncategorised legacy posts)
-        if (!$post) {
+        if (! $post) {
             $post = Post::with('meta')
                 ->where('post_name', $slug)
                 ->where('post_type', 'post')
@@ -117,7 +119,7 @@ class BlogController extends Controller
                 ->first();
         }
 
-        if (!$post) {
+        if (! $post) {
             abort(404);
         }
 
@@ -125,7 +127,7 @@ class BlogController extends Controller
 
         $fields = [];
         foreach ($post->meta as $meta) {
-            if (!str_starts_with($meta->meta_key, '_')) {
+            if (! str_starts_with($meta->meta_key, '_')) {
                 $fields[$meta->meta_key] = $meta->meta_value;
             }
         }
@@ -134,7 +136,7 @@ class BlogController extends Controller
             ->published()
             ->where('ID', '!=', $post->ID)
             ->whereExists(function ($query) use ($categorySlug) {
-                $query->select(\Illuminate\Support\Facades\DB::raw(1))
+                $query->select(DB::raw(1))
                     ->from('wp_term_relationships')
                     ->join('wp_term_taxonomy', 'wp_term_relationships.term_taxonomy_id', '=', 'wp_term_taxonomy.term_taxonomy_id')
                     ->join('wp_terms', 'wp_term_taxonomy.term_id', '=', 'wp_terms.term_id')

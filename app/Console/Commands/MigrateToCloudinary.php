@@ -2,9 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Services\CloudinaryService;
+use Cloudinary\Cloudinary;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 
 class MigrateToCloudinary extends Command
 {
@@ -22,8 +21,9 @@ class MigrateToCloudinary extends Command
 
         $scanPath = $subPath ? "$basePath/$subPath" : $basePath;
 
-        if (!is_dir($scanPath)) {
+        if (! is_dir($scanPath)) {
             $this->error("Directory not found: $scanPath");
+
             return self::FAILURE;
         }
 
@@ -32,6 +32,7 @@ class MigrateToCloudinary extends Command
 
         if ($count === 0) {
             $this->info('No files found to migrate.');
+
             return self::SUCCESS;
         }
 
@@ -43,38 +44,41 @@ class MigrateToCloudinary extends Command
         $failed = 0;
 
         foreach ($files as $file) {
-            $relativePath = str_replace($basePath . '/', '', $file);
+            $relativePath = str_replace($basePath.'/', '', $file);
             $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
             $allowedExts = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4', 'webm'];
 
-            if (!in_array($ext, $allowedExts, true)) {
+            if (! in_array($ext, $allowedExts, true)) {
                 $this->line("  ⏭ Skipped (unsupported): {$relativePath}");
                 $skipped++;
+
                 continue;
             }
 
             // Skip files that look like they're already Cloudinary-backed
-            $cloudinaryFlagPath = $file . '.cloudinary';
+            $cloudinaryFlagPath = $file.'.cloudinary';
             if (file_exists($cloudinaryFlagPath)) {
                 $this->line("  ⏭ Already migrated: {$relativePath}");
                 $skipped++;
+
                 continue;
             }
 
             if ($dryRun) {
                 $this->line("  🔄 Would upload: {$relativePath}");
                 $uploaded++;
+
                 continue;
             }
 
             // Create an UploadedFile-compatible upload
             $mime = mime_content_type($file) ?: 'application/octet-stream';
-            $folder = 'culina-academy/migrated/' . dirname($relativePath);
+            $folder = 'culina-academy/migrated/'.dirname($relativePath);
 
             try {
                 // Use curl-style upload since we don't have an UploadedFile instance
                 $curlFile = new \CURLFile($file, $mime, basename($file));
-                $cloudinary = new \Cloudinary\Cloudinary([
+                $cloudinary = new Cloudinary([
                     'cloud' => [
                         'cloud_name' => config('services.cloudinary.cloud_name'),
                         'api_key' => config('services.cloudinary.api_key'),

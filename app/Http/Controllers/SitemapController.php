@@ -18,7 +18,7 @@ class SitemapController extends Controller
             'User-agent: *',
             'Allow: /',
             '',
-            'Sitemap: ' . $base . '/sitemap.xml',
+            'Sitemap: '.$base.'/sitemap.xml',
             '',
         ]);
 
@@ -74,18 +74,18 @@ class SitemapController extends Controller
     {
         $lines = [
             '  <url>',
-            '    <loc>' . $this->escape($baseUrl . '/en') . '</loc>',
+            '    <loc>'.$this->escape($baseUrl.'/en').'</loc>',
             '    <priority>1.0</priority>',
             '    <changefreq>weekly</changefreq>',
-            '    <lastmod>' . date('Y-m-d') . '</lastmod>',
+            '    <lastmod>'.date('Y-m-d').'</lastmod>',
         ];
 
         foreach ($locales as $lang) {
-            $href = $baseUrl . '/' . $lang;
-            $lines[] = '    <xhtml:link rel="alternate" hreflang="' . $this->escape($lang) . '" href="' . $this->escape($href) . '"/>';
+            $href = $baseUrl.'/'.$lang;
+            $lines[] = '    <xhtml:link rel="alternate" hreflang="'.$this->escape($lang).'" href="'.$this->escape($href).'"/>';
         }
 
-        $lines[] = '    <xhtml:link rel="alternate" hreflang="x-default" href="' . $this->escape($baseUrl . '/en') . '"/>';
+        $lines[] = '    <xhtml:link rel="alternate" hreflang="x-default" href="'.$this->escape($baseUrl.'/en').'"/>';
         $lines[] = '  </url>';
 
         return $lines;
@@ -132,24 +132,24 @@ class SitemapController extends Controller
             $translationGroup = PolylangService::getTranslationGroup((int) $post->ID);
 
             $lines[] = '  <url>';
-            $lines[] = '    <loc>' . $this->escape($pageUrl) . '</loc>';
-            $lines[] = '    <priority>' . $this->escape($priority) . '</priority>';
-            $lines[] = '    <changefreq>' . $this->escape($changefreq) . '</changefreq>';
-            $lines[] = '    <lastmod>' . $this->escape(substr((string) ($post->post_modified_gmt ?? ''), 0, 10)) . '</lastmod>';
+            $lines[] = '    <loc>'.$this->escape($pageUrl).'</loc>';
+            $lines[] = '    <priority>'.$this->escape($priority).'</priority>';
+            $lines[] = '    <changefreq>'.$this->escape($changefreq).'</changefreq>';
+            $lines[] = '    <lastmod>'.$this->escape(substr((string) ($post->post_modified_gmt ?? ''), 0, 10)).'</lastmod>';
 
             foreach ($locales as $lang) {
                 $altId = $translationGroup[$lang] ?? 0;
-                if (!$altId || !$postsById->has($altId)) {
+                if (! $altId || ! $postsById->has($altId)) {
                     continue;
                 }
 
                 $altPost = $postsById->get($altId);
                 $altUrl = $this->absolutePostUrl($altPost, $lang, $baseUrl);
-                $lines[] = '    <xhtml:link rel="alternate" hreflang="' . $this->escape($lang) . '" href="' . $this->escape($altUrl) . '"/>';
+                $lines[] = '    <xhtml:link rel="alternate" hreflang="'.$this->escape($lang).'" href="'.$this->escape($altUrl).'"/>';
             }
 
-            if (!isset($translationGroup['en'])) {
-                $lines[] = '    <xhtml:link rel="alternate" hreflang="x-default" href="' . $this->escape($pageUrl) . '"/>';
+            if (! isset($translationGroup['en'])) {
+                $lines[] = '    <xhtml:link rel="alternate" hreflang="x-default" href="'.$this->escape($pageUrl).'"/>';
             }
 
             $lines[] = '  </url>';
@@ -160,7 +160,7 @@ class SitemapController extends Controller
 
     protected function absolutePostUrl(Post $post, string $lang, string $baseUrl): string
     {
-        return rtrim($baseUrl, '/') . $this->pathForPost($post, $lang);
+        return rtrim($baseUrl, '/').$this->pathForPost($post, $lang);
     }
 
     protected function pathForPost(Post $post, string $lang): string
@@ -170,14 +170,14 @@ class SitemapController extends Controller
         $slug = $post->post_name;
 
         if ($post->post_type === 'ca_course') {
-            return $prefix . '/courses/' . $slug;
+            return $prefix.'/courses/'.$slug;
         }
 
         if ($post->post_type === 'post') {
-            return $prefix . '/blog/' . $slug;
+            return $prefix.'/blog/'.$slug;
         }
 
-        return $prefix . '/' . $slug;
+        return $prefix.'/'.$slug;
     }
 
     protected function escape(string $value): string

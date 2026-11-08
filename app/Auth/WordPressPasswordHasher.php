@@ -46,13 +46,13 @@ class WordPressPasswordHasher
             return false;
         }
 
-        $hashed = md5($salt . $password, true);
+        $hashed = md5($salt.$password, true);
 
         for ($i = 0; $i < $count; $i++) {
-            $hashed = md5($hashed . $password, true);
+            $hashed = md5($hashed.$password, true);
         }
 
-        $output = substr($hash, 0, 12) . static::encode64($hashed, 16);
+        $output = substr($hash, 0, 12).static::encode64($hashed, 16);
 
         return hash_equals($hash, $output);
     }
@@ -65,13 +65,13 @@ class WordPressPasswordHasher
 
         do {
             $value = ord($input[$i++]);
-            $output .= $itoa64[$value & 0x3f];
+            $output .= $itoa64[$value & 0x3F];
 
             if ($i < $count) {
                 $value |= ord($input[$i]) << 8;
             }
 
-            $output .= $itoa64[($value >> 6) & 0x3f];
+            $output .= $itoa64[($value >> 6) & 0x3F];
 
             if ($i++ >= $count) {
                 break;
@@ -81,13 +81,13 @@ class WordPressPasswordHasher
                 $value |= ord($input[$i]) << 16;
             }
 
-            $output .= $itoa64[($value >> 12) & 0x3f];
+            $output .= $itoa64[($value >> 12) & 0x3F];
 
             if ($i++ >= $count) {
                 break;
             }
 
-            $output .= $itoa64[($value >> 18) & 0x3f];
+            $output .= $itoa64[($value >> 18) & 0x3F];
         } while ($i < $count);
 
         return $output;

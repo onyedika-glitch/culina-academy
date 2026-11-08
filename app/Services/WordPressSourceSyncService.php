@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Post;
-use App\Models\PostMeta;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -23,7 +22,7 @@ class WordPressSourceSyncService
     public static function restoreFromSql(?string $sqlPath = null): array
     {
         $sqlPath = $sqlPath ?: static::defaultSqlPath();
-        if (!is_readable($sqlPath)) {
+        if (! is_readable($sqlPath)) {
             throw new \RuntimeException("WordPress SQL dump not found: {$sqlPath}");
         }
 
@@ -47,7 +46,7 @@ class WordPressSourceSyncService
         $failed = 0;
 
         try {
-            DB::transaction(function () use ($metaRows, $postIds, $touchedPosts, &$updated): void {
+            DB::transaction(function () use ($metaRows, $postIds, &$updated): void {
                 DB::table('wp_postmeta')
                     ->whereIn('post_id', $postIds)
                     ->where(function ($q) {
@@ -108,7 +107,7 @@ class WordPressSourceSyncService
      * @return array<int, array{post_id:int,meta_key:string,meta_value:string}>
      */
     /**
-     * @param array<int, bool> $localPostIdSet
+     * @param  array<int, bool>  $localPostIdSet
      * @return array<int, array{post_id:int,meta_key:string,meta_value:string}>
      */
     protected static function parsePostMetaFromSql(string $sqlPath, array $localPostIdSet): array
@@ -120,15 +119,15 @@ class WordPressSourceSyncService
         }
 
         while (($line = fgets($handle)) !== false) {
-            if (!str_contains($line, 'INSERT INTO') || !str_contains($line, 'postmeta')) {
+            if (! str_contains($line, 'INSERT INTO') || ! str_contains($line, 'postmeta')) {
                 continue;
             }
 
-            if (!str_contains($line, 'cal_') && !str_contains($line, 'ca_') && !str_contains($line, 'rank_math_')) {
+            if (! str_contains($line, 'cal_') && ! str_contains($line, 'ca_') && ! str_contains($line, 'rank_math_')) {
                 continue;
             }
 
-            if (!preg_match_all(
+            if (! preg_match_all(
                 '/\((\d+),\s*(\d+),\s*\'((?:\\\\\'|[^\'])*)\',\s*\'((?:\\\\\'|[^\'])*)\'\)/s',
                 $line,
                 $matches,
@@ -139,12 +138,12 @@ class WordPressSourceSyncService
 
             foreach ($matches as $match) {
                 $postId = (int) $match[2];
-                if (!isset($localPostIdSet[$postId])) {
+                if (! isset($localPostIdSet[$postId])) {
                     continue;
                 }
 
                 $metaKey = static::unescapeSqlString($match[3]);
-                if (!static::isRestorableMetaKey($metaKey)) {
+                if (! static::isRestorableMetaKey($metaKey)) {
                     continue;
                 }
 
@@ -175,10 +174,10 @@ class WordPressSourceSyncService
         }
 
         while (($line = fgets($input)) !== false) {
-            if (!str_contains($line, 'postmeta')) {
+            if (! str_contains($line, 'postmeta')) {
                 continue;
             }
-            if (!str_contains($line, 'cal_') && !str_contains($line, 'ca_') && !str_contains($line, 'rank_math_')) {
+            if (! str_contains($line, 'cal_') && ! str_contains($line, 'ca_') && ! str_contains($line, 'rank_math_')) {
                 continue;
             }
             fwrite($output, $line);

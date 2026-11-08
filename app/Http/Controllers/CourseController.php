@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Mail\EnrollmentSubmitted;
 use App\Mail\WaitlistJoined;
-use App\Models\Post;
-use App\Models\IntakeDate;
 use App\Models\Enrollment;
+use App\Models\IntakeDate;
+use App\Models\Post;
 use App\Models\Waitlist;
 use App\Services\AdminMailService;
 use App\Services\PolylangService;
@@ -40,13 +40,13 @@ class CourseController extends Controller
         $slug = $request->route('slug');
         $course = PolylangService::findCourseBySlug($slug);
 
-        if (!$course) {
+        if (! $course) {
             abort(404);
         }
 
         $fields = [];
         foreach ($course->meta as $meta) {
-            if (!str_starts_with($meta->meta_key, '_')) {
+            if (! str_starts_with($meta->meta_key, '_')) {
                 $fields[$meta->meta_key] = $meta->meta_value;
             }
         }

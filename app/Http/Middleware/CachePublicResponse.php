@@ -28,7 +28,7 @@ class CachePublicResponse
     public function handle(Request $request, Closure $next): Response
     {
         try {
-            if (!$this->shouldCache($request)) {
+            if (! $this->shouldCache($request)) {
                 return $next($request);
             }
 
@@ -78,7 +78,7 @@ class CachePublicResponse
         $path = rtrim($request->getPathInfo(), '/') ?: '/';
 
         foreach (self::SKIP_PATH_SEGMENTS as $segment) {
-            if (preg_match('#(^|/)' . preg_quote($segment, '#') . '(/|$)#', $path) === 1) {
+            if (preg_match('#(^|/)'.preg_quote($segment, '#').'(/|$)#', $path) === 1) {
                 return false;
             }
         }
@@ -88,7 +88,7 @@ class CachePublicResponse
 
     protected function shouldStore(Request $request, Response $response): bool
     {
-        if (!$this->shouldCache($request)) {
+        if (! $this->shouldCache($request)) {
             return false;
         }
 

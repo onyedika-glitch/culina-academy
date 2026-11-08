@@ -3,9 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Exceptions\AcfSyncException;
+use App\Models\Post;
+use App\Services\CourseDisplayService;
 use App\Services\JoomlaContentSyncService;
 use App\Services\LegacyAcfSyncService;
 use App\Services\LegacySiteSyncService;
+use App\Services\SiteCacheService;
 use Illuminate\Console\Command;
 
 class SyncLegacySite extends Command
@@ -45,11 +48,11 @@ class SyncLegacySite extends Command
 
         $failed += $this->syncCourses() !== self::SUCCESS ? 1 : 0;
 
-        $descriptions = \App\Services\CourseDisplayService::fixCourseDescriptions();
+        $descriptions = CourseDisplayService::fixCourseDescriptions();
         $this->info("Course descriptions checked: {$descriptions['updated']} repaired, {$descriptions['failed']} failed.");
 
-        $meta = \App\Services\CourseDisplayService::fixEnglishCourseMeta();
-        \App\Services\SiteCacheService::clearResponseCache();
+        $meta = CourseDisplayService::fixEnglishCourseMeta();
+        SiteCacheService::clearResponseCache();
         $this->info("English metadata fixed on {$meta['updated']} courses.");
 
         return $failed > 0 ? self::FAILURE : self::SUCCESS;
@@ -57,19 +60,20 @@ class SyncLegacySite extends Command
 
     protected function syncCourses(): int
     {
-        $this->info('Syncing cooking courses from ' . LegacySiteSyncService::LEGACY_BASE_URL . ' ...');
+        $this->info('Syncing cooking courses from '.LegacySiteSyncService::LEGACY_BASE_URL.' ...');
 
         $result = LegacySiteSyncService::syncAllLegacyCourses();
         foreach ($result['results'] as $row) {
-            $course = \App\Models\Post::find($row['course_id']);
-            $title = $course?->post_title ?? 'Course ' . $row['course_id'];
+            $course = Post::find($row['course_id']);
+            $title = $course?->post_title ?? 'Course '.$row['course_id'];
 
-            if (!empty($row['error'])) {
+            if (! empty($row['error'])) {
                 $this->error("  ✗ {$title}: {$row['error']}");
+
                 continue;
             }
 
-            $this->line(($row['updated'] ? '  ✓ ' : '  – ') . "{$title}: {$row['ranges']} intake(s)");
+            $this->line(($row['updated'] ? '  ✓ ' : '  – ')."{$title}: {$row['ranges']} intake(s)");
         }
 
         $this->info("Courses updated: {$result['updated']}, skipped: {$result['skipped']}, failed: {$result['failed']}");
@@ -99,18 +103,19 @@ class SyncLegacySite extends Command
 
         $result = JoomlaContentSyncService::syncLegacyPublicPages();
         foreach ($result['results'] as $row) {
-            $label = ($row['lang'] ?? 'en') . '/' . $row['slug'];
+            $label = ($row['lang'] ?? 'en').'/'.$row['slug'];
 
-            if (!empty($row['skipped'])) {
+            if (! empty($row['skipped'])) {
                 continue;
             }
 
-            if (!empty($row['error'])) {
+            if (! empty($row['error'])) {
                 $this->error("  ✗ {$label}: {$row['error']}");
+
                 continue;
             }
 
-            $this->line(($row['updated'] ? '  ✓ ' : '  – ') . $label);
+            $this->line(($row['updated'] ? '  ✓ ' : '  – ').$label);
         }
 
         $this->info("Pages updated: {$result['updated']}, skipped: {$result['skipped']}, failed: {$result['failed']}");
@@ -132,18 +137,19 @@ class SyncLegacySite extends Command
             return self::FAILURE;
         }
         foreach ($result['results'] as $row) {
-            $label = ($row['lang'] ?? 'en') . '/' . $row['page'];
+            $label = ($row['lang'] ?? 'en').'/'.$row['page'];
 
-            if (!empty($row['skipped'])) {
+            if (! empty($row['skipped'])) {
                 continue;
             }
 
-            if (!empty($row['error'])) {
+            if (! empty($row['error'])) {
                 $this->error("  ✗ {$label}: {$row['error']}");
+
                 continue;
             }
 
-            $this->line(($row['updated'] ? '  ✓ ' : '  – ') . $label);
+            $this->line(($row['updated'] ? '  ✓ ' : '  – ').$label);
         }
 
         $this->info("ACF pages updated: {$result['updated']}, skipped: {$result['skipped']}, failed: {$result['failed']}, URL fixes: {$result['url_fixes']}");

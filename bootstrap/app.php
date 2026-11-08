@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\NormalizeFormCsrf;
+use App\Http\Middleware\SecurityHeaders;
 use App\Http\Responses\FormRequestResponse;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -19,7 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->trustProxies(at: '*');
         $middleware->prependToGroup('web', NormalizeFormCsrf::class);
-        $middleware->prependToGroup('web', \App\Http\Middleware\SecurityHeaders::class);
+        $middleware->prependToGroup('web', SecurityHeaders::class);
         $middleware->redirectGuestsTo(fn (Request $request) => $request->is('admin', 'admin/*')
             ? route('admin.login')
             : route('admin.login'));

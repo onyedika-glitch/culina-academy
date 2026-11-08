@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ApplicationSubmitted;
-use App\Mail\BookingConfirmed;
 use App\Mail\WaitlistConfirmation;
 use App\Mail\WaitlistJoined;
 use App\Models\Application;
 use App\Models\Booking;
 use App\Models\BookingDocument;
+use App\Models\IntakeDate;
 use App\Models\Post;
-use App\Models\Waitlist;
 use App\Models\WaitingList;
+use App\Models\Waitlist;
 use App\Services\AcfFieldService;
 use App\Services\AdminMailService;
-use App\Services\CulinaAcademy;
 use App\Services\CloudinaryService;
 use App\Services\CourseIntakeService;
+use App\Services\CulinaAcademy;
 use App\Services\PolylangService;
 use App\Services\StripeService;
 use App\Services\UiTranslationService;
@@ -74,7 +74,7 @@ class BookingController extends Controller
 
         // Check the course exists
         $course = Post::with('meta')->find($data['course_id']);
-        if (!$course || $course->post_type !== 'ca_course') {
+        if (! $course || $course->post_type !== 'ca_course') {
             return back()->withErrors(['course_id' => 'Course not found.'])->withInput();
         }
 
@@ -88,11 +88,11 @@ class BookingController extends Controller
         }
 
         // Double check capacity validation on submit (respects overrides)
-        if (!empty($data['intake_date'])) {
-            $intake = \App\Models\IntakeDate::where('course_id', $data['course_id'])
+        if (! empty($data['intake_date'])) {
+            $intake = IntakeDate::where('course_id', $data['course_id'])
                 ->whereDate('intake_date', $data['intake_date'])
                 ->first();
-            if ($intake && !$intake->isAvailable()) {
+            if ($intake && ! $intake->isAvailable()) {
                 return back()->withErrors(['booking' => 'This intake date is fully booked. Please join the waiting list instead.'])->withInput();
             }
         }
@@ -133,7 +133,7 @@ class BookingController extends Controller
                     'size_bytes' => $result['size'],
                 ]);
             } else {
-                Log::warning('Document upload failed for booking #' . $booking->id, [
+                Log::warning('Document upload failed for booking #'.$booking->id, [
                     'file' => $file->getClientOriginalName(),
                 ]);
             }
@@ -145,7 +145,7 @@ class BookingController extends Controller
         // Create Stripe Checkout Session and redirect
         $checkoutUrl = StripeService::createCheckoutSession($booking, $depositAmountCents);
 
-        if (!$checkoutUrl) {
+        if (! $checkoutUrl) {
             return back()->withErrors(['payment' => 'Unable to start payment. Please try again or contact us.'])->withInput();
         }
 
@@ -209,7 +209,7 @@ class BookingController extends Controller
         ]);
 
         $course = Post::find($data['course_id']);
-        if (!$course || $course->post_type !== 'ca_course') {
+        if (! $course || $course->post_type !== 'ca_course') {
             return back()->withErrors(['course_id' => 'Course not found.'])->withInput();
         }
 
@@ -229,7 +229,7 @@ class BookingController extends Controller
         try {
             Mail::to($entry->email)->send(new WaitlistConfirmation($entry, $course->post_title));
         } catch (\Throwable $e) {
-            Log::error('Waitlist confirmation email failed: ' . $e->getMessage());
+            Log::error('Waitlist confirmation email failed: '.$e->getMessage());
         }
 
         // Notify admin
@@ -256,7 +256,7 @@ class BookingController extends Controller
         $courseId = (int) $request->input('course_id');
         $course = Post::with('meta')->find($courseId);
 
-        if (!$course || $course->post_type !== 'ca_course') {
+        if (! $course || $course->post_type !== 'ca_course') {
             return response()->json(['success' => false, 'data' => 'Course not found.']);
         }
 
@@ -356,7 +356,7 @@ class BookingController extends Controller
         ]);
 
         $course = Post::find((int) $data['course_id']);
-        if (!$course || $course->post_type !== 'ca_course') {
+        if (! $course || $course->post_type !== 'ca_course') {
             return response()->json(['success' => false, 'data' => 'Course not found.'], 404);
         }
 

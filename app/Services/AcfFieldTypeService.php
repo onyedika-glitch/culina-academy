@@ -80,7 +80,7 @@ class AcfFieldTypeService
     public static function imagePreview(mixed $value): string
     {
         if (is_array($value)) {
-            if (!empty($value['url'])) {
+            if (! empty($value['url'])) {
                 return AcfFieldService::migrateUrl((string) $value['url']);
             }
             $id = (int) ($value['ID'] ?? $value['id'] ?? 0);

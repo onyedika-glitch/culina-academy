@@ -19,8 +19,9 @@ class ImportJoomlaData extends Command
         $sourceDir = $this->option('source') ?: storage_path('app/joomla-extract');
         $dryRun = $this->option('dry-run');
 
-        if (!is_dir("$sourceDir/articles")) {
+        if (! is_dir("$sourceDir/articles")) {
             $this->error("Source directory not found: $sourceDir/articles");
+
             return self::FAILURE;
         }
 
@@ -35,7 +36,7 @@ class ImportJoomlaData extends Command
         $maxMetaId = DB::table('wp_postmeta')->max('meta_id') ?? 0;
 
         $files = glob("$sourceDir/articles/*.json");
-        $this->info('Found ' . count($files) . ' article files');
+        $this->info('Found '.count($files).' article files');
 
         $imported = 0;
         $skipped = 0;
@@ -43,35 +44,40 @@ class ImportJoomlaData extends Command
 
         foreach ($files as $file) {
             $data = json_decode(file_get_contents($file), true);
-            if (!$data || empty($data['title'])) {
+            if (! $data || empty($data['title'])) {
                 $skipped++;
+
                 continue;
             }
 
             $title = trim(html_entity_decode($data['title'], ENT_QUOTES | ENT_HTML5, 'UTF-8'));
-            $alias = !empty($data['alias']) ? strtolower(trim($data['alias'])) : Str::slug($title);
+            $alias = ! empty($data['alias']) ? strtolower(trim($data['alias'])) : Str::slug($title);
 
             // Skip language-association-only entries (those are not real articles)
             if (preg_match('/^(Category:|Uncategorised)/', $title) && strlen($title) < 60) {
                 $skipped++;
+
                 continue;
             }
 
             // Dedup by post_name (slug)
             if (in_array($alias, $existingSlugs)) {
                 $skipped++;
+
                 continue;
             }
 
             $content = $this->cleanContent($data['fulltext'] ?? $data['introtext'] ?? '');
             if (empty($content)) {
                 $skipped++;
+
                 continue;
             }
 
             if ($dryRun) {
                 $this->line("  Would import: {$title} ({$alias})");
                 $imported++;
+
                 continue;
             }
 
@@ -91,22 +97,22 @@ class ImportJoomlaData extends Command
                     'closed',
                     $alias,
                     'post',
-                    url('/?p=' . $postId),
+                    url('/?p='.$postId),
                 ]);
 
                 // Track this slug so we don't import duplicates within the same batch
                 $existingSlugs[] = $alias;
 
                 // Import SEO metadata
-                if (!empty($data['metadesc']) || !empty($data['metakey'])) {
-                    if (!empty($data['metadesc'])) {
+                if (! empty($data['metadesc']) || ! empty($data['metakey'])) {
+                    if (! empty($data['metadesc'])) {
                         DB::statement('INSERT INTO wp_postmeta (post_id, meta_key, meta_value) VALUES (?, ?, ?)', [
-                            $postId, 'rank_math_description', $data['metadesc']
+                            $postId, 'rank_math_description', $data['metadesc'],
                         ]);
                     }
-                    if (!empty($data['metakey'])) {
+                    if (! empty($data['metakey'])) {
                         DB::statement('INSERT INTO wp_postmeta (post_id, meta_key, meta_value) VALUES (?, ?, ?)', [
-                            $postId, 'rank_math_focus_keyword', $data['metakey']
+                            $postId, 'rank_math_focus_keyword', $data['metakey'],
                         ]);
                     }
                     // Also store in seo_meta table

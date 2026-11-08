@@ -2,16 +2,21 @@
 
 namespace App\Models;
 
+use App\Services\PolylangService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Facades\DB;
 
 class Post extends Model
 {
     protected $table = 'wp_posts';
+
     protected $primaryKey = 'ID';
+
     public $incrementing = true;
+
     protected $keyType = 'int';
 
     /**
@@ -60,6 +65,7 @@ class Post extends Model
     public function getMeta(string $key, mixed $default = null): mixed
     {
         $meta = $this->meta->firstWhere('meta_key', $key);
+
         return $meta ? $meta->meta_value : $default;
     }
 
@@ -75,16 +81,16 @@ class Post extends Model
 
     public function scopeTemplate($query, string $template)
     {
-        return $query->whereHas('meta', fn($q) =>
-            $q->where('meta_key', '_wp_page_template')->where('meta_value', $template)
+        return $query->whereHas('meta', fn ($q) => $q->where('meta_key', '_wp_page_template')->where('meta_value', $template)
         );
     }
 
     public function scopeForLanguage($query, ?string $lang = null)
     {
-        $lang = $lang ?: \App\Services\PolylangService::currentLanguage();
+        $lang = $lang ?: PolylangService::currentLanguage();
+
         return $query->whereExists(function ($q) use ($lang) {
-            $q->select(\Illuminate\Support\Facades\DB::raw(1))
+            $q->select(DB::raw(1))
                 ->from('wp_term_relationships')
                 ->join('wp_term_taxonomy', 'wp_term_relationships.term_taxonomy_id', '=', 'wp_term_taxonomy.term_taxonomy_id')
                 ->join('wp_terms', 'wp_term_taxonomy.term_id', '=', 'wp_terms.term_id')

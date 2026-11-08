@@ -20,7 +20,7 @@ class MenuController extends Controller
     public function edit(int $termTaxonomyId)
     {
         $menu = collect(MenuAdminService::listMenus())->firstWhere('term_taxonomy_id', $termTaxonomyId);
-        if (!$menu) {
+        if (! $menu) {
             abort(404);
         }
 

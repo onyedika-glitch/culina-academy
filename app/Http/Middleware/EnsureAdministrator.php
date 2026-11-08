@@ -12,7 +12,7 @@ class EnsureAdministrator
     {
         $user = $request->user('admin');
 
-        if (!$user || !$user->isAdministrator()) {
+        if (! $user || ! $user->isAdministrator()) {
             if ($request->expectsJson()) {
                 return response()->json(['message' => 'Unauthorized.'], 403);
             }

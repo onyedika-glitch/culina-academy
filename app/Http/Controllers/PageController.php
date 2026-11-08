@@ -12,10 +12,10 @@ class PageController extends Controller
     {
         $locale = $request->route('locale');
         $slug = $request->route('slug');
-        
+
         $lang = PolylangService::currentLanguage();
 
-        if (!$slug) {
+        if (! $slug) {
             $page = PolylangService::getFrontPage($lang);
         } else {
             // Support legacy percent-encoded Chinese slugs and normal ASCII slugs.
@@ -23,7 +23,7 @@ class PageController extends Controller
             $page = PolylangService::findPageBySlug($slug, $lang);
         }
 
-        if (!$page) {
+        if (! $page) {
             abort(404);
         }
 
@@ -80,11 +80,11 @@ class PageController extends Controller
             $classes = array_merge($classes, $templateClasses[$bladeView]);
         } elseif ($template) {
             $slug = preg_replace('/\.php$/', '', str_replace('template-', '', $template));
-            $classes[] = 'page-template-template-' . $slug;
+            $classes[] = 'page-template-template-'.$slug;
         }
 
-        if (!PolylangService::isDefaultLanguage()) {
-            $classes[] = 'lang-' . PolylangService::currentLanguage();
+        if (! PolylangService::isDefaultLanguage()) {
+            $classes[] = 'lang-'.PolylangService::currentLanguage();
         }
 
         return implode(' ', array_unique($classes));

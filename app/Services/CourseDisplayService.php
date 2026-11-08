@@ -139,7 +139,7 @@ class CourseDisplayService
         $description = trim((string) AcfFieldService::getField($course->ID, 'ca_course_description'));
         $content = trim((string) ($course->post_content ?? ''));
 
-        if ($description !== '' && !static::isMetadataOnlyDescription($description)) {
+        if ($description !== '' && ! static::isMetadataOnlyDescription($description)) {
             return $description;
         }
 
@@ -168,8 +168,9 @@ class CourseDisplayService
             $current = trim((string) AcfFieldService::getField($course->ID, 'ca_course_description'));
             $content = trim((string) ($course->post_content ?? ''));
 
-            if ($current !== '' && !static::isMetadataOnlyDescription($current) && static::plainTextLength($current) >= 200) {
+            if ($current !== '' && ! static::isMetadataOnlyDescription($current) && static::plainTextLength($current) >= 200) {
                 $skipped++;
+
                 continue;
             }
 
@@ -202,11 +203,13 @@ class CourseDisplayService
                     'error' => 'No replacement content found',
                 ];
                 $failed++;
+
                 continue;
             }
 
             if ($current === $replacement) {
                 $skipped++;
+
                 continue;
             }
 

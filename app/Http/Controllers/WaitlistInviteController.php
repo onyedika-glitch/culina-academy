@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\BookingConfirmed;
 use App\Models\Booking;
 use App\Models\BookingDocument;
 use App\Models\Post;
 use App\Models\WaitingList;
+use App\Services\AcfFieldService;
 use App\Services\CloudinaryService;
 use App\Services\PolylangService;
 use App\Services\StripeService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class WaitlistInviteController extends Controller
 {
@@ -29,12 +27,13 @@ class WaitlistInviteController extends Controller
             ->where('status', 'invited')
             ->first();
 
-        if (!$entry) {
+        if (! $entry) {
             abort(404, 'This invitation link is invalid or has already been used.');
         }
 
-        if (!$entry->isInviteValid()) {
+        if (! $entry->isInviteValid()) {
             $entry->update(['status' => 'expired']);
+
             return view('site.waitlist-invite-expired');
         }
 
@@ -61,12 +60,13 @@ class WaitlistInviteController extends Controller
             ->where('status', 'invited')
             ->first();
 
-        if (!$entry) {
+        if (! $entry) {
             abort(404, 'This invitation link is invalid or has already been used.');
         }
 
-        if (!$entry->isInviteValid()) {
+        if (! $entry->isInviteValid()) {
             $entry->update(['status' => 'expired']);
+
             return redirect()->route('home', ['locale' => PolylangService::currentLanguage() ?: 'en'])
                 ->withErrors(['invite' => 'This invitation has expired.']);
         }
@@ -138,10 +138,10 @@ class WaitlistInviteController extends Controller
         $entry->update(['status' => 'claimed']);
 
         // Create Stripe Checkout Session
-        $depositAmountCents = (int) (\App\Services\AcfFieldService::getField($booking->course_id, 'ca_deposit_amount', 500) * 100);
+        $depositAmountCents = (int) (AcfFieldService::getField($booking->course_id, 'ca_deposit_amount', 500) * 100);
         $checkoutUrl = StripeService::createCheckoutSession($booking, $depositAmountCents);
 
-        if (!$checkoutUrl) {
+        if (! $checkoutUrl) {
             return back()->withErrors(['payment' => 'Unable to start payment. Please try again or contact us.'])->withInput();
         }
 

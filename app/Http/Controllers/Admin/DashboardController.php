@@ -8,8 +8,8 @@ use App\Models\Booking;
 use App\Models\ContactSubmission;
 use App\Models\Enrollment;
 use App\Models\Post;
-use App\Models\Waitlist;
 use App\Models\WaitingList;
+use App\Models\Waitlist;
 use App\Services\PolylangService;
 
 class DashboardController extends Controller

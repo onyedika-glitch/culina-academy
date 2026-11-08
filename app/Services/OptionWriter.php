@@ -22,11 +22,11 @@ class OptionWriter
     {
         $base = str_starts_with($fieldName, 'options_') ? $fieldName : "options_{$fieldName}";
 
-        Option::where('option_name', 'like', $base . '_%')->delete();
+        Option::where('option_name', 'like', $base.'_%')->delete();
         static::set($base, (string) count($rows));
 
         foreach ($rows as $index => $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
             foreach ($row as $subKey => $subValue) {
@@ -39,12 +39,13 @@ class OptionWriter
     public static function setFields(array $fields): void
     {
         foreach ($fields as $key => $value) {
-            if (!is_string($key) || $key === '') {
+            if (! is_string($key) || $key === '') {
                 continue;
             }
 
             if (is_array($value) && static::isRepeaterPayload($value)) {
                 static::setRepeater($key, $value);
+
                 continue;
             }
 
@@ -65,7 +66,7 @@ class OptionWriter
     {
         $base = str_starts_with($fieldName, 'options_') ? $fieldName : "options_{$fieldName}";
 
-        return Option::where('option_name', 'like', $base . '_0_%')->exists();
+        return Option::where('option_name', 'like', $base.'_0_%')->exists();
     }
 
     protected static function serializeValue(mixed $value): string

@@ -2,18 +2,20 @@
 
 require __DIR__.'/admin.php';
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PageController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\OnlineCourseController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\BookingController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\WaitlistInviteController;
 use App\Http\Middleware\CachePublicResponse;
 use App\Http\Middleware\SetLocale;
+use App\Services\OnlineCourseService;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Support\Facades\Route;
 
 // All public languages use a URL prefix: /en (default), /fr, /es, /it, /zh, /zh-tw
 $locales = 'en|fr|es|it|zh|zh-tw';
@@ -24,7 +26,7 @@ $onlineCourseSlugs = 'introduction-to-the-professional-chef-online-course|introd
 $localePath = static function (string $locale, string $path = ''): string {
     $path = trim($path, '/');
 
-    return $path === '' ? '/' . $locale : '/' . $locale . '/' . $path;
+    return $path === '' ? '/'.$locale : '/'.$locale.'/'.$path;
 };
 
 // Root always lands on English locale home.
@@ -48,18 +50,18 @@ $chinesePageRedirects = [
 
 foreach ($chinesePageRedirects as $locale => $map) {
     foreach ($map as $from => $to) {
-        Route::get('/' . $locale . '/' . $from, static fn () => redirect('/' . $locale . '/' . $to, 301));
-        Route::get('/' . $locale . '/' . rawurlencode($from), static fn () => redirect('/' . $locale . '/' . $to, 301));
+        Route::get('/'.$locale.'/'.$from, static fn () => redirect('/'.$locale.'/'.$to, 301));
+        Route::get('/'.$locale.'/'.rawurlencode($from), static fn () => redirect('/'.$locale.'/'.$to, 301));
     }
 
     // Online course detail under Chinese listing label → ASCII listing
     $listingFrom = $locale === 'zh' ? '在线课程' : '線上課程';
     $listingTo = $locale === 'zh' ? 'zaixian-kecheng' : 'zaixian-kecheng-tw';
-    Route::get('/' . $locale . '/' . $listingFrom . '/{courseSlug}', static function (string $courseSlug) use ($locale, $listingTo) {
-        return redirect('/' . $locale . '/' . $listingTo . '/' . $courseSlug, 301);
+    Route::get('/'.$locale.'/'.$listingFrom.'/{courseSlug}', static function (string $courseSlug) use ($locale, $listingTo) {
+        return redirect('/'.$locale.'/'.$listingTo.'/'.$courseSlug, 301);
     })->where('courseSlug', $onlineCourseSlugs);
-    Route::get('/' . $locale . '/' . rawurlencode($listingFrom) . '/{courseSlug}', static function (string $courseSlug) use ($locale, $listingTo) {
-        return redirect('/' . $locale . '/' . $listingTo . '/' . $courseSlug, 301);
+    Route::get('/'.$locale.'/'.rawurlencode($listingFrom).'/{courseSlug}', static function (string $courseSlug) use ($locale, $listingTo) {
+        return redirect('/'.$locale.'/'.$listingTo.'/'.$courseSlug, 301);
     })->where('courseSlug', $onlineCourseSlugs);
 }
 
@@ -98,11 +100,11 @@ Route::get('/en/professional-patisserie-and-confectionary-course-1040-hours', st
 Route::get('/en/auto-generate-from-title', static fn () => redirect('/en', 301));
 
 Route::get('/wp-content/uploads/{path}', function (string $path) {
-    return redirect('/uploads/' . $path, 301);
+    return redirect('/uploads/'.$path, 301);
 })->where('path', '.*');
 
 Route::get('/images/{path}', function (string $path) {
-    return redirect('/uploads/joomla/images/' . $path, 301);
+    return redirect('/uploads/joomla/images/'.$path, 301);
 })->where('path', '.*');
 
 // ── SEO: Old Joomla URL 301 Redirects ──
@@ -110,11 +112,11 @@ Route::get('/images/{path}', function (string $path) {
 
 // 1. Old Joomla Blog Post 301 Redirects (strip Joomla ID prefix like /blog/105-slug.html)
 Route::get('/{locale}/blog/{id}-{slug}.html', function (string $locale, string $id, string $slug) use ($localePath) {
-    return redirect($localePath($locale, 'blog/' . $slug), 301);
+    return redirect($localePath($locale, 'blog/'.$slug), 301);
 })->where('locale', $locales)->where('id', '[0-9]+')->where('slug', '[a-zA-Z0-9\\\\-]+');
 
 Route::get('/blog/{id}-{slug}.html', function (string $id, string $slug) use ($localePath) {
-    return redirect($localePath('en', 'blog/' . $slug), 301);
+    return redirect($localePath('en', 'blog/'.$slug), 301);
 })->where('id', '[0-9]+')->where('slug', '[a-zA-Z0-9\\\\-]+');
 
 // 2. Old Joomla Course URL 301 Redirects (cooking-courses/...html → courses/...)
@@ -133,7 +135,7 @@ $oldCourseRedirects = [
 ];
 
 foreach ($oldCourseRedirects as $oldPattern => $newPath) {
-    Route::get('/{locale}/cooking-courses/' . $oldPattern . '.html', function (string $locale) use ($localePath, $newPath) {
+    Route::get('/{locale}/cooking-courses/'.$oldPattern.'.html', function (string $locale) use ($localePath, $newPath) {
         return redirect($localePath($locale, $newPath), 301);
     })->where('locale', $locales);
 }
@@ -145,15 +147,15 @@ Route::get('/{locale}/cooking-courses/professional-patisserie-and-confectionary-
 
 // 3. Old Joomla Online Course URL 301 Redirects
 Route::get('/{locale}/online-courses/introduction-to-the-professional-chef-online-course.html', function (string $locale) {
-    return redirect(\App\Services\OnlineCourseService::detailPath(
-        \App\Services\OnlineCourseService::INTRODUCTION_SLUG,
+    return redirect(OnlineCourseService::detailPath(
+        OnlineCourseService::INTRODUCTION_SLUG,
         $locale
     ), 301);
 })->where('locale', $locales);
 
 Route::get('/{locale}/online-courses/michelin-star-advanced-techniques-online-course.html', function (string $locale) {
-    return redirect(\App\Services\OnlineCourseService::detailPath(
-        \App\Services\OnlineCourseService::MICHELIN_SLUG,
+    return redirect(OnlineCourseService::detailPath(
+        OnlineCourseService::MICHELIN_SLUG,
         $locale
     ), 301);
 })->where('locale', $locales);
@@ -171,8 +173,8 @@ $oldPageRedirects = [
 ];
 
 foreach ($oldPageRedirects as $oldSlug => $newPath) {
-    Route::get('/' . $oldSlug . '.html', fn () => redirect($localePath('en', $newPath), 301));
-    Route::get('/en/' . $oldSlug . '.html', fn () => redirect($localePath('en', $newPath), 301));
+    Route::get('/'.$oldSlug.'.html', fn () => redirect($localePath('en', $newPath), 301));
+    Route::get('/en/'.$oldSlug.'.html', fn () => redirect($localePath('en', $newPath), 301));
 }
 
 Route::get('/site-map.html', static fn () => redirect('/sitemap.xml', 301));
@@ -206,7 +208,7 @@ Route::get('/{locale}/contact', fn (string $locale) => redirect($localePath($loc
 
 // ── Stripe Webhook (no CSRF, no web middleware) ──
 Route::post('/api/webhooks/stripe', StripeWebhookController::class)
-    ->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class])
+    ->withoutMiddleware([VerifyCsrfToken::class])
     ->name('stripe.webhook');
 
 // ── Locale-prefixed public site routes (/en, /it, /fr, …) ──
@@ -252,23 +254,23 @@ Route::middleware([CachePublicResponse::class, SetLocale::class])
 
 // ── Legacy unprefixed English URLs → /en/... (SEO + bookmarks) ──
 Route::get('/blog', static fn () => redirect('/en/blog', 301));
-Route::get('/blog/{slug}', static fn (string $slug) => redirect('/en/blog/' . $slug, 301));
+Route::get('/blog/{slug}', static fn (string $slug) => redirect('/en/blog/'.$slug, 301));
 Route::get('/courses', static fn () => redirect('/en/courses', 301));
-Route::get('/course/{slug}', static fn (string $slug) => redirect('/en/course/' . $slug, 301));
-Route::get('/courses/{slug}', static fn (string $slug) => redirect('/en/courses/' . $slug, 301));
+Route::get('/course/{slug}', static fn (string $slug) => redirect('/en/course/'.$slug, 301));
+Route::get('/courses/{slug}', static fn (string $slug) => redirect('/en/courses/'.$slug, 301));
 Route::get('/course-enrollment', static fn () => redirect('/en/course-enrollment', 301));
 Route::get('/contact-us', static fn () => redirect('/en/contact-us', 301));
 Route::get('/booking/success', static fn () => redirect('/en/booking/success', 301));
 Route::get('/booking/cancelled', static fn () => redirect('/en/booking/cancelled', 301));
-Route::get('/waitlist/invite/{token}', static fn (string $token) => redirect('/en/waitlist/invite/' . $token, 301));
+Route::get('/waitlist/invite/{token}', static fn (string $token) => redirect('/en/waitlist/invite/'.$token, 301));
 
 Route::get('/{listingSlug}/{courseSlug}', function (string $listingSlug, string $courseSlug) {
-    return redirect('/en/' . $listingSlug . '/' . $courseSlug, 301);
+    return redirect('/en/'.$listingSlug.'/'.$courseSlug, 301);
 })->where([
     'listingSlug' => $onlineListingSlugs,
     'courseSlug' => $onlineCourseSlugs,
 ]);
 
 Route::get('/{slug}', static function (string $slug) {
-    return redirect('/en/' . $slug, 301);
+    return redirect('/en/'.$slug, 301);
 })->where('slug', '(?!admin$|uploads$|css$|js$|assets$|api$|sitemap\\.xml$|robots\\.txt$)[a-z0-9\-]+');

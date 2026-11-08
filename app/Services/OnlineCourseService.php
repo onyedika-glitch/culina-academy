@@ -83,7 +83,7 @@ class OnlineCourseService
             ->published()
             ->first();
 
-        if (!$enPage) {
+        if (! $enPage) {
             return null;
         }
 
@@ -106,10 +106,10 @@ class OnlineCourseService
 
         if ($page) {
             // Always emit ASCII listing path even if DB still has a legacy encoded slug.
-            return cal_localized_path('/' . self::canonicalListingSlug($lang), $lang);
+            return cal_localized_path('/'.self::canonicalListingSlug($lang), $lang);
         }
 
-        return cal_localized_path('/' . self::canonicalListingSlug($lang), $lang);
+        return cal_localized_path('/'.self::canonicalListingSlug($lang), $lang);
     }
 
     public static function detailPath(string $courseSlug, ?string $lang = null): string
@@ -117,7 +117,7 @@ class OnlineCourseService
         $lang = PolylangService::normalizeCode($lang ?? PolylangService::currentLanguage());
         $listingSlug = self::canonicalListingSlug($lang);
 
-        return cal_localized_path('/' . $listingSlug . '/' . trim($courseSlug, '/'), $lang);
+        return cal_localized_path('/'.$listingSlug.'/'.trim($courseSlug, '/'), $lang);
     }
 
     public static function courseSlugFromUrl(string $url): ?string
@@ -127,8 +127,8 @@ class OnlineCourseService
             return null;
         }
 
-        if (!str_contains($url, '://') && preg_match('#^([a-z0-9.-]+\\.[a-z]{2,})(/.*)?$#i', $url)) {
-            $url = 'https://' . $url;
+        if (! str_contains($url, '://') && preg_match('#^([a-z0-9.-]+\\.[a-z]{2,})(/.*)?$#i', $url)) {
+            $url = 'https://'.$url;
         }
 
         $path = strtolower(parse_url($url, PHP_URL_PATH) ?? $url);
@@ -180,14 +180,14 @@ class OnlineCourseService
      */
     public static function resolve(string $courseSlug, ?string $lang = null): ?array
     {
-        if (!self::isCourseSlug($courseSlug)) {
+        if (! self::isCourseSlug($courseSlug)) {
             return null;
         }
 
         $index = $courseSlug === self::INTRODUCTION_SLUG ? 0 : 1;
         $listingPage = self::listingPage($lang);
 
-        if (!$listingPage) {
+        if (! $listingPage) {
             return null;
         }
 
@@ -197,7 +197,7 @@ class OnlineCourseService
         $courses = cal_page_field('cal_online_courses', []);
         $course = is_array($courses) ? ($courses[$index] ?? null) : null;
 
-        if (!is_array($course) || empty($course['title'])) {
+        if (! is_array($course) || empty($course['title'])) {
             if ($previousPostId) {
                 $restore = Post::find($previousPostId);
                 if ($restore) {
@@ -249,17 +249,17 @@ class OnlineCourseService
 
         $overview = $lang === 'en'
             ? '<p>Our Introduction to Professional Chef course will provide you with guidance on the correct tools, equipment, skills and techniques necessary for a career as a Professional Chef.</p>'
-                . '<p>Following the successful completion of your online course you will become certified and be presented with your online Diploma from Culina Academy which is internationally recognised and accredited by ASIC (Accreditation Service for International Colleges).</p>'
-                . '<p>This course consists of many modules and will cover everything from knife techniques, to fish, meat &amp; poultry fabrication, stocks &amp; sauces and pasta making.</p>'
-                . '<p>All of our modules are supported with reference documentation which you will be able to access at any time during the duration of the course.</p>'
+                .'<p>Following the successful completion of your online course you will become certified and be presented with your online Diploma from Culina Academy which is internationally recognised and accredited by ASIC (Accreditation Service for International Colleges).</p>'
+                .'<p>This course consists of many modules and will cover everything from knife techniques, to fish, meat &amp; poultry fabrication, stocks &amp; sauces and pasta making.</p>'
+                .'<p>All of our modules are supported with reference documentation which you will be able to access at any time during the duration of the course.</p>'
             : '';
 
         $summary = '<div class="cal-online-detail-summary">'
-            . ($price !== '' ? '<p><strong>Fees:</strong> ' . $price . '</p>' : '')
-            . ($duration !== '' ? '<p>' . $duration . '</p>' : '')
-            . ($features !== '' ? '<p>' . $features . '</p>' : '')
-            . '</div>';
+            .($price !== '' ? '<p><strong>Fees:</strong> '.$price.'</p>' : '')
+            .($duration !== '' ? '<p>'.$duration.'</p>' : '')
+            .($features !== '' ? '<p>'.$features.'</p>' : '')
+            .'</div>';
 
-        return $overview . $description . $summary;
+        return $overview.$description.$summary;
     }
 }

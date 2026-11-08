@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
 
 class ImportWordPressData extends Command
 {
@@ -22,8 +21,9 @@ class ImportWordPressData extends Command
         $sqlPath = $this->option('sql') ?: '/home/user/Downloads/audit-site/database.sql';
         $sourceDir = $this->option('source') ?: '/home/user/Downloads/audit-site';
 
-        if (!file_exists($sqlPath)) {
+        if (! file_exists($sqlPath)) {
             $this->error("SQL file not found: $sqlPath");
+
             return self::FAILURE;
         }
 
@@ -40,7 +40,7 @@ class ImportWordPressData extends Command
 
         // Split into individual statements
         $statements = $this->splitSql($sql);
-        $this->info('  Found ' . count($statements) . ' SQL statements');
+        $this->info('  Found '.count($statements).' SQL statements');
 
         // Phase 2: Import data (tables already created by migration)
         $this->warn('Phase 2: Importing data...');
@@ -77,7 +77,7 @@ class ImportWordPressData extends Command
         $this->info('========================================');
         $this->info('IMPORT COMPLETE!');
         $this->info('========================================');
-        $this->info('Admin URL: ' . rtrim(config('app.url'), '/') . '/admin');
+        $this->info('Admin URL: '.rtrim(config('app.url'), '/').'/admin');
         $this->info('Username: q (change after login)');
         $this->warn('IMPORTANT: Reset the admin password with:');
         $this->info('  php artisan app:reset-password');
@@ -99,14 +99,16 @@ class ImportWordPressData extends Command
 
             if ($inString) {
                 if ($ch === '\\' && $next === $stringChar) {
-                    $current .= $ch . $next;
+                    $current .= $ch.$next;
                     $i++;
+
                     continue;
                 }
                 if ($ch === $stringChar) {
                     $inString = false;
                 }
                 $current .= $ch;
+
                 continue;
             }
 
@@ -114,15 +116,17 @@ class ImportWordPressData extends Command
                 $inString = true;
                 $stringChar = $ch;
                 $current .= $ch;
+
                 continue;
             }
 
             if ($ch === ';' && ($next === "\n" || $next === "\r" || $next === ' ' || $next === '')) {
                 $trimmed = trim($current);
-                if (!empty($trimmed)) {
+                if (! empty($trimmed)) {
                     $statements[] = $trimmed;
                 }
                 $current = '';
+
                 continue;
             }
 
@@ -130,7 +134,7 @@ class ImportWordPressData extends Command
         }
 
         $trimmed = trim($current);
-        if (!empty($trimmed)) {
+        if (! empty($trimmed)) {
             $statements[] = $trimmed;
         }
 
@@ -140,7 +144,7 @@ class ImportWordPressData extends Command
     private function createPgTable(string $createSql): void
     {
         // Extract table name
-        if (!preg_match('/CREATE\s+TABLE\s+`?(wp_\w+)`?\s*\((.+)/is', $createSql, $m)) {
+        if (! preg_match('/CREATE\s+TABLE\s+`?(wp_\w+)`?\s*\((.+)/is', $createSql, $m)) {
             return;
         }
         $tableName = $m[1];
@@ -198,7 +202,7 @@ class ImportWordPressData extends Command
         try {
             DB::statement($pgSql);
         } catch (\Exception $e) {
-            $this->warn("  Warning creating $tableName: " . $e->getMessage());
+            $this->warn("  Warning creating $tableName: ".$e->getMessage());
         }
     }
 
@@ -207,7 +211,7 @@ class ImportWordPressData extends Command
         // Extract column names or use table schema if not specified
         $columns = null;
         if (preg_match('/INSERT\s+INTO\s+`?(wp_\w+)`?\s*\(([^)]+)\)\s*VALUES/is', $insertSql, $m)) {
-            $columns = array_map(function($col) {
+            $columns = array_map(function ($col) {
                 return trim(str_replace('`', '', $col));
             }, explode(',', $m[2]));
         } else {
@@ -216,15 +220,17 @@ class ImportWordPressData extends Command
                 $cols = DB::select("SELECT column_name FROM information_schema.columns 
                     WHERE table_name = ? AND table_schema = 'public' 
                     ORDER BY ordinal_position", [$table]);
-                $columns = array_map(fn($c) => $c->column_name, $cols);
+                $columns = array_map(fn ($c) => $c->column_name, $cols);
             } catch (\Exception $e) {
                 return;
             }
         }
-        if (!$columns) return;
+        if (! $columns) {
+            return;
+        }
 
         // Extract all VALUES
-        if (!preg_match('/VALUES\s+(.+)/is', $insertSql, $m)) {
+        if (! preg_match('/VALUES\s+(.+)/is', $insertSql, $m)) {
             return;
         }
 
@@ -244,8 +250,10 @@ class ImportWordPressData extends Command
                 }
 
                 $data = array_combine($columns, $values);
-                $data = array_map(function($v) {
-                    if ($v === 'NULL' || $v === null) return null;
+                $data = array_map(function ($v) {
+                    if ($v === 'NULL' || $v === null) {
+                        return null;
+                    }
                     // Strip surrounding quotes
                     $v = trim($v);
                     if ((strlen($v) >= 2) && (
@@ -256,10 +264,11 @@ class ImportWordPressData extends Command
                     }
                     // Unescape
                     $v = preg_replace("/\\\(['\"])/", '$1', $v);
-                    $v = str_replace("\\n", "\n", $v);
-                    $v = str_replace("\\r", "\r", $v);
-                    $v = str_replace("\\t", "\t", $v);
-                    $v = str_replace("\\\\", "\\", $v);
+                    $v = str_replace('\\n', "\n", $v);
+                    $v = str_replace('\\r', "\r", $v);
+                    $v = str_replace('\\t', "\t", $v);
+                    $v = str_replace('\\\\', '\\', $v);
+
                     return $v;
                 }, $data);
 
@@ -275,7 +284,7 @@ class ImportWordPressData extends Command
             }
         }
 
-        if (!empty($batch)) {
+        if (! empty($batch)) {
             $this->insertBatchWithFallback($table, $batch);
         }
     }
@@ -311,14 +320,16 @@ class ImportWordPressData extends Command
 
             if ($inString) {
                 if ($ch === '\\' && ($next === "'" || $next === '"' || $next === '\\')) {
-                    $current .= $ch . $next;
+                    $current .= $ch.$next;
                     $i++;
+
                     continue;
                 }
                 if ($ch === $stringChar) {
                     $inString = false;
                 }
                 $current .= $ch;
+
                 continue;
             }
 
@@ -326,12 +337,16 @@ class ImportWordPressData extends Command
                 $inString = true;
                 $stringChar = $ch;
                 $current .= $ch;
+
                 continue;
             }
 
             if ($ch === '(') {
-                if ($depth > 0) $current .= $ch;
+                if ($depth > 0) {
+                    $current .= $ch;
+                }
                 $depth++;
+
                 continue;
             }
 
@@ -340,9 +355,11 @@ class ImportWordPressData extends Command
                 if ($depth === 0) {
                     $groups[] = $current;
                     $current = '';
+
                     continue;
                 }
                 $current .= $ch;
+
                 continue;
             }
 
@@ -368,14 +385,16 @@ class ImportWordPressData extends Command
 
             if ($inString) {
                 if ($ch === '\\' && ($next === "'" || $next === '"' || $next === '\\')) {
-                    $current .= $ch . $next;
+                    $current .= $ch.$next;
                     $i++;
+
                     continue;
                 }
                 if ($ch === $stringChar) {
                     $inString = false;
                 }
                 $current .= $ch;
+
                 continue;
             }
 
@@ -383,12 +402,14 @@ class ImportWordPressData extends Command
                 $inString = true;
                 $stringChar = $ch;
                 $current .= $ch;
+
                 continue;
             }
 
-            if ($ch === ',' && !$inString) {
+            if ($ch === ',' && ! $inString) {
                 $values[] = trim($current);
                 $current = '';
+
                 continue;
             }
 
@@ -438,7 +459,9 @@ class ImportWordPressData extends Command
         $dir = opendir($src);
         @mkdir($dst, 0755, true);
         while (($file = readdir($dir)) !== false) {
-            if ($file === '.' || $file === '..') continue;
+            if ($file === '.' || $file === '..') {
+                continue;
+            }
             $srcPath = "$src/$file";
             $dstPath = "$dst/$file";
             if (is_dir($srcPath)) {

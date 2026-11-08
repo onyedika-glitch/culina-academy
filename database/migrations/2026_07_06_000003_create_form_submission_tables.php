@@ -47,13 +47,13 @@ return new class extends Migration
         });
 
         Schema::table('ca_waitlist', function (Blueprint $table) {
-            if (!Schema::hasColumn('ca_waitlist', 'intake_date')) {
+            if (! Schema::hasColumn('ca_waitlist', 'intake_date')) {
                 $table->string('intake_date', 20)->nullable()->after('course_id');
             }
-            if (!Schema::hasColumn('ca_waitlist', 'locale')) {
+            if (! Schema::hasColumn('ca_waitlist', 'locale')) {
                 $table->string('locale', 10)->default('en')->after('notes');
             }
-            if (!Schema::hasColumn('ca_waitlist', 'page_url')) {
+            if (! Schema::hasColumn('ca_waitlist', 'page_url')) {
                 $table->string('page_url', 500)->nullable()->after('locale');
             }
         });

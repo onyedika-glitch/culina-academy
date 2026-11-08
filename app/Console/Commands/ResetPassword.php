@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 class ResetPassword extends Command
 {
     protected $signature = 'app:reset-password {--password=admin123}';
+
     protected $description = 'Reset the admin user password';
 
     public function handle(): int
@@ -20,8 +21,8 @@ class ResetPassword extends Command
 
         $this->info('Admin password reset successfully!');
         $this->warn("New password: $password");
-        $this->info("Login: " . rtrim(config('app.url'), '/') . '/admin');
-        $this->info("Username: q");
+        $this->info('Login: '.rtrim(config('app.url'), '/').'/admin');
+        $this->info('Username: q');
 
         return self::SUCCESS;
     }

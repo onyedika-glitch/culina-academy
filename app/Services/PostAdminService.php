@@ -59,6 +59,7 @@ class PostAdminService
 
             if (preg_match('/^(.+)_(\d+)_(.+)$/', $key, $m)) {
                 $repeaters[$m[1]][(int) $m[2]][$m[3]] = AcfFieldService::parseValuePublic($row->meta_value);
+
                 continue;
             }
 
@@ -79,7 +80,7 @@ class PostAdminService
             if (isset($scalars[$name])) {
                 unset($scalars[$name]);
             }
-            if (!array_is_list($rows)) {
+            if (! array_is_list($rows)) {
                 ksort($rows);
                 $repeaters[$name] = array_values($rows);
             }
@@ -92,7 +93,7 @@ class PostAdminService
     public static function getEditableOptionFields(string $prefix = 'cal_'): array
     {
         $options = DB::table('wp_options')
-            ->where('option_name', 'like', 'options_' . $prefix . '%')
+            ->where('option_name', 'like', 'options_'.$prefix.'%')
             ->orderBy('option_name')
             ->get();
 
@@ -104,6 +105,7 @@ class PostAdminService
 
             if (preg_match('/^(.+)_(\d+)_(.+)$/', $key, $m)) {
                 $repeaters[$m[1]][(int) $m[2]][$m[3]] = AcfFieldService::parseValuePublic($row->option_value);
+
                 continue;
             }
 
@@ -124,7 +126,7 @@ class PostAdminService
             if (isset($scalars[$name])) {
                 unset($scalars[$name]);
             }
-            if (!array_is_list($rows)) {
+            if (! array_is_list($rows)) {
                 ksort($rows);
                 $repeaters[$name] = array_values($rows);
             }
@@ -164,14 +166,14 @@ class PostAdminService
         ]);
 
         DB::table('wp_posts')->where('ID', $id)->update([
-            'guid' => url('/?p=' . $id),
+            'guid' => url('/?p='.$id),
         ]);
 
         $post = Post::with('meta')->find($id);
 
         static::applyMeta($post, $data);
 
-        if (!empty($data['language'])) {
+        if (! empty($data['language'])) {
             PolylangAdminService::setPostLanguage($id, $data['language']);
         }
 
@@ -196,11 +198,11 @@ class PostAdminService
 
         static::applyMeta($post, $data);
 
-        if (!empty($data['language'])) {
+        if (! empty($data['language'])) {
             PolylangAdminService::setPostLanguage($post->ID, $data['language']);
         }
 
-        if (!empty($data['translations']) && is_array($data['translations'])) {
+        if (! empty($data['translations']) && is_array($data['translations'])) {
             $group = [];
             $group[PolylangService::getPostLanguage($post->ID)] = $post->ID;
             foreach ($data['translations'] as $lang => $id) {
@@ -220,7 +222,7 @@ class PostAdminService
             PostMetaWriter::set($post->ID, '_wp_page_template', $data['page_template']);
         }
 
-        if (!empty($data['acf_scalars']) && is_array($data['acf_scalars'])) {
+        if (! empty($data['acf_scalars']) && is_array($data['acf_scalars'])) {
             foreach ($data['acf_scalars'] as $key => $value) {
                 if (is_string($key) && (str_starts_with($key, 'cal_') || str_starts_with($key, 'ca_'))) {
                     PostMetaWriter::set($post->ID, $key, $value);
@@ -228,7 +230,7 @@ class PostAdminService
             }
         }
 
-        if (!empty($data['acf_repeaters']) && is_array($data['acf_repeaters'])) {
+        if (! empty($data['acf_repeaters']) && is_array($data['acf_repeaters'])) {
             foreach ($data['acf_repeaters'] as $key => $rows) {
                 if (is_string($key) && (str_starts_with($key, 'cal_') || str_starts_with($key, 'ca_'))) {
                     PostMetaWriter::setRepeater($post->ID, $key, is_array($rows) ? $rows : []);
@@ -241,7 +243,7 @@ class PostAdminService
     {
         return DB::table('wp_postmeta')
             ->where('post_id', $postId)
-            ->where('meta_key', 'like', $fieldName . '_0_%')
+            ->where('meta_key', 'like', $fieldName.'_0_%')
             ->exists();
     }
 }

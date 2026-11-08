@@ -4,25 +4,29 @@ namespace App\Services;
 
 use App\Models\Booking;
 use Illuminate\Support\Facades\Log;
+use Stripe\Checkout\Session;
+use Stripe\Event;
+use Stripe\Exception\SignatureVerificationException;
+use Stripe\Stripe;
+use Stripe\Webhook;
 
 class StripeService
 {
     /**
      * Create a Stripe Checkout Session for a booking deposit.
      *
-     * @param  Booking  $booking
      * @param  int  $amountCents  Amount in pence/cents
      * @param  string  $currency  e.g. 'gbp'
-     * @return string|null  The checkout session URL (redirect user here), or null on failure
+     * @return string|null The checkout session URL (redirect user here), or null on failure
      */
     public static function createCheckoutSession(Booking $booking, int $amountCents = 50000, string $currency = 'gbp'): ?string
     {
         try {
-            \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+            Stripe::setApiKey(config('services.stripe.secret'));
 
             $courseName = $booking->course?->post_title ?? 'Culina Academy Course';
 
-            $session = \Stripe\Checkout\Session::create([
+            $session = Session::create([
                 'payment_method_types' => ['card'],
                 'mode' => 'payment',
                 'customer_email' => $booking->email,
@@ -32,14 +36,14 @@ class StripeService
                         'currency' => $currency,
                         'unit_amount' => $amountCents,
                         'product_data' => [
-                            'name' => 'Course Deposit — ' . $courseName,
-                            'description' => 'Deposit payment for ' . $courseName . ($booking->intake_date ? ' (Intake: ' . $booking->intake_date . ')' : ''),
+                            'name' => 'Course Deposit — '.$courseName,
+                            'description' => 'Deposit payment for '.$courseName.($booking->intake_date ? ' (Intake: '.$booking->intake_date.')' : ''),
                         ],
                     ],
                     'quantity' => 1,
                 ]],
-                'success_url' => url('/booking/success') . '?session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => url('/booking/cancelled') . '?booking_id=' . $booking->id,
+                'success_url' => url('/booking/success').'?session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => url('/booking/cancelled').'?booking_id='.$booking->id,
                 'metadata' => [
                     'booking_id' => $booking->id,
                     'course_id' => $booking->course_id,
@@ -56,9 +60,10 @@ class StripeService
 
             return $session->url;
         } catch (\Throwable $e) {
-            Log::error('Stripe checkout session creation failed: ' . $e->getMessage(), [
+            Log::error('Stripe checkout session creation failed: '.$e->getMessage(), [
                 'booking_id' => $booking->id,
             ]);
+
             return null;
         }
     }
@@ -68,13 +73,12 @@ class StripeService
      *
      * @param  string  $payload  Raw request body
      * @param  string  $sigHeader  Stripe-Signature header
-     * @return \Stripe\Event
      *
-     * @throws \Stripe\Exception\SignatureVerificationException
+     * @throws SignatureVerificationException
      */
-    public static function constructWebhookEvent(string $payload, string $sigHeader): \Stripe\Event
+    public static function constructWebhookEvent(string $payload, string $sigHeader): Event
     {
-        return \Stripe\Webhook::constructEvent(
+        return Webhook::constructEvent(
             $payload,
             $sigHeader,
             config('services.stripe.webhook_secret')
@@ -84,13 +88,15 @@ class StripeService
     /**
      * Retrieve a checkout session from Stripe.
      */
-    public static function retrieveSession(string $sessionId): ?\Stripe\Checkout\Session
+    public static function retrieveSession(string $sessionId): ?Session
     {
         try {
-            \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
-            return \Stripe\Checkout\Session::retrieve($sessionId);
+            Stripe::setApiKey(config('services.stripe.secret'));
+
+            return Session::retrieve($sessionId);
         } catch (\Throwable $e) {
-            Log::error('Stripe session retrieval failed: ' . $e->getMessage());
+            Log::error('Stripe session retrieval failed: '.$e->getMessage());
+
             return null;
         }
     }

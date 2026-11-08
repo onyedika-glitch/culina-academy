@@ -47,12 +47,14 @@ class ImageOptimizerService
                 $result = $this->optimizeFile($path);
             } catch (\Throwable $e) {
                 $stats['failed']++;
-                $stats['errors'][] = $this->relativeUploadPath($path) . ': ' . $e->getMessage();
+                $stats['errors'][] = $this->relativeUploadPath($path).': '.$e->getMessage();
+
                 continue;
             }
 
             if ($result === 'skipped') {
                 $stats['skipped']++;
+
                 continue;
             }
 
@@ -83,7 +85,7 @@ class ImageOptimizerService
     protected function collectUploadFiles(): array
     {
         $root = $this->uploadsRoot();
-        if (!is_dir($root)) {
+        if (! is_dir($root)) {
             return [];
         }
 
@@ -93,11 +95,11 @@ class ImageOptimizerService
         );
 
         foreach ($iterator as $file) {
-            if (!$file instanceof SplFileInfo || !$file->isFile() || !$this->isSourceImage($file->getPathname())) {
+            if (! $file instanceof SplFileInfo || ! $file->isFile() || ! $this->isSourceImage($file->getPathname())) {
                 continue;
             }
 
-            if ($this->subdir !== null && !str_starts_with($this->relativeUploadPath($file->getPathname()), trim($this->subdir, '/'))) {
+            if ($this->subdir !== null && ! str_starts_with($this->relativeUploadPath($file->getPathname()), trim($this->subdir, '/'))) {
                 continue;
             }
 
@@ -119,11 +121,11 @@ class ImageOptimizerService
             ->pluck('meta_value');
 
         foreach ($attachedFiles as $relative) {
-            if (!is_string($relative) || $relative === '') {
+            if (! is_string($relative) || $relative === '') {
                 continue;
             }
 
-            $absolute = $this->uploadsRoot() . '/' . ltrim($relative, '/');
+            $absolute = $this->uploadsRoot().'/'.ltrim($relative, '/');
             if (is_file($absolute) && $this->isSourceImage($absolute)) {
                 $paths[$absolute] = $absolute;
             }
@@ -155,18 +157,18 @@ class ImageOptimizerService
     {
         $paths = [];
         $frontPage = PolylangService::getFrontPage('en');
-        if (!$frontPage) {
+        if (! $frontPage) {
             return $paths;
         }
 
         AcfFieldService::hydratePostMeta($frontPage);
         $slides = AcfFieldService::getField($frontPage->ID, 'cal_home_slides', []);
-        if (!is_array($slides)) {
+        if (! is_array($slides)) {
             return $paths;
         }
 
         foreach ($slides as $slide) {
-            if (!is_array($slide)) {
+            if (! is_array($slide)) {
                 continue;
             }
 
@@ -178,7 +180,7 @@ class ImageOptimizerService
 
             if (is_array($metadata)) {
                 foreach (($metadata['sizes'] ?? []) as $size) {
-                    if (!is_array($size) || empty($size['file'])) {
+                    if (! is_array($size) || empty($size['file'])) {
                         continue;
                     }
 
@@ -186,9 +188,9 @@ class ImageOptimizerService
                     $file = (string) $size['file'];
                     $relative = str_contains($file, '/')
                         ? $file
-                        : ($baseDir !== '.' && $baseDir !== '' ? $baseDir . '/' . $file : $file);
+                        : ($baseDir !== '.' && $baseDir !== '' ? $baseDir.'/'.$file : $file);
 
-                    $absolute = $this->uploadsRoot() . '/' . ltrim($relative, '/');
+                    $absolute = $this->uploadsRoot().'/'.ltrim($relative, '/');
                     if (is_file($absolute)) {
                         $paths[$absolute] = $absolute;
                     }
@@ -206,7 +208,7 @@ class ImageOptimizerService
     protected function addImagePathsFromMeta(array &$paths, mixed $image): void
     {
         $src = AcfFieldService::attachmentSrc($image, 'full');
-        if ($src === null || $src['url'] === '' || !str_starts_with($src['url'], '/uploads/')) {
+        if ($src === null || $src['url'] === '' || ! str_starts_with($src['url'], '/uploads/')) {
             return;
         }
 
@@ -217,7 +219,7 @@ class ImageOptimizerService
 
         foreach (['large', 'medium_large', 'medium'] as $size) {
             $sized = AcfFieldService::attachmentSrc($image, $size);
-            if ($sized === null || $sized['url'] === '' || !str_starts_with($sized['url'], '/uploads/')) {
+            if ($sized === null || $sized['url'] === '' || ! str_starts_with($sized['url'], '/uploads/')) {
                 continue;
             }
 
@@ -230,10 +232,10 @@ class ImageOptimizerService
 
     protected function optimizeFile(string $sourcePath): string|int
     {
-        $webpPath = $sourcePath . '.webp';
+        $webpPath = $sourcePath.'.webp';
 
         if (
-            !$this->force
+            ! $this->force
             && is_file($webpPath)
             && filemtime($webpPath) >= filemtime($sourcePath)
         ) {
@@ -279,7 +281,7 @@ class ImageOptimizerService
             throw new RuntimeException('GD could not read the source image.');
         }
 
-        if (!imagewebp($image, $webpPath, $this->quality)) {
+        if (! imagewebp($image, $webpPath, $this->quality)) {
             imagedestroy($image);
             throw new RuntimeException('GD failed to write WebP output.');
         }
@@ -358,7 +360,7 @@ class ImageOptimizerService
 
         exec($command, $output, $exitCode);
         if ($exitCode !== 0) {
-            throw new RuntimeException('cwebp failed with exit code ' . $exitCode);
+            throw new RuntimeException('cwebp failed with exit code '.$exitCode);
         }
     }
 
@@ -407,7 +409,7 @@ class ImageOptimizerService
 
     protected function relativeUploadPath(string $absolutePath): string
     {
-        $root = rtrim($this->uploadsRoot(), '/') . '/';
+        $root = rtrim($this->uploadsRoot(), '/').'/';
 
         return str_starts_with($absolutePath, $root)
             ? substr($absolutePath, strlen($root))

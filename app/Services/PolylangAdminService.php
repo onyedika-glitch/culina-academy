@@ -11,7 +11,7 @@ class PolylangAdminService
         $langCode = PolylangService::normalizeCode($langCode);
         $language = PolylangService::getLanguage($langCode);
 
-        if (!$language) {
+        if (! $language) {
             return;
         }
 
@@ -20,7 +20,7 @@ class PolylangAdminService
             ->where('taxonomy', 'language')
             ->value('term_taxonomy_id');
 
-        if (!$termTaxonomyId) {
+        if (! $termTaxonomyId) {
             return;
         }
 
@@ -58,8 +58,8 @@ class PolylangAdminService
                 ->update(['description' => serialize($normalized)]);
         } else {
             $termId = DB::table('wp_terms')->insertGetId([
-                'name' => 'pll_' . min($postIds),
-                'slug' => 'pll_' . min($postIds),
+                'name' => 'pll_'.min($postIds),
+                'slug' => 'pll_'.min($postIds),
                 'term_group' => 0,
             ]);
 

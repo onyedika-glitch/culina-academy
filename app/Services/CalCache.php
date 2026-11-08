@@ -85,6 +85,6 @@ class CalCache
         $locale = (string) ($request->route('locale') ?? 'en');
         $version = static::responseVersion();
 
-        return 'cal.response.v' . $version . '.' . sha1($path . '|' . $locale);
+        return 'cal.response.v'.$version.'.'.sha1($path.'|'.$locale);
     }
 }

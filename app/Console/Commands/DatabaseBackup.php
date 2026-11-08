@@ -3,8 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class DatabaseBackup extends Command
 {
@@ -54,16 +52,17 @@ class DatabaseBackup extends Command
 
         if ($exitCode !== 0) {
             $this->error("Database backup failed (exit code: $exitCode)");
+
             return self::FAILURE;
         }
 
         $dbSize = filesize($dbFile);
-        $this->info("Database backup saved: {$dbFile} (" . round($dbSize / 1024 / 1024, 2) . " MB)");
+        $this->info("Database backup saved: {$dbFile} (".round($dbSize / 1024 / 1024, 2).' MB)');
 
         // Backup uploads directory
         $publicPath = public_path('uploads');
         if (is_dir($publicPath)) {
-            $this->info("Backing up uploads directory...");
+            $this->info('Backing up uploads directory...');
             $tarCmd = sprintf(
                 'tar -czf %s -C %s . 2>/dev/null',
                 escapeshellarg($uploadsFile),
@@ -73,7 +72,7 @@ class DatabaseBackup extends Command
 
             if ($exitCode === 0) {
                 $uploadsSize = filesize($uploadsFile);
-                $this->info("Uploads backup saved: {$uploadsFile} (" . round($uploadsSize / 1024 / 1024, 2) . " MB)");
+                $this->info("Uploads backup saved: {$uploadsFile} (".round($uploadsSize / 1024 / 1024, 2).' MB)');
             } else {
                 $this->warn('Uploads backup failed, continuing...');
             }
@@ -84,13 +83,16 @@ class DatabaseBackup extends Command
         $this->cleanOldBackups($uploadsDir, $retention, '*.tar.gz');
 
         $this->info('Backup completed successfully.');
+
         return self::SUCCESS;
     }
 
     private function cleanOldBackups(string $dir, int $days, string $pattern): void
     {
         $files = glob("$dir/$pattern");
-        if (!$files) return;
+        if (! $files) {
+            return;
+        }
 
         $cutoff = now()->subDays($days)->timestamp;
         $deleted = 0;

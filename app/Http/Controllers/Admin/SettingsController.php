@@ -49,7 +49,7 @@ class SettingsController extends Controller
             );
         }
 
-        if (!empty($data['acf_scalars'])) {
+        if (! empty($data['acf_scalars'])) {
             foreach ($data['acf_scalars'] as $key => $value) {
                 if (is_string($key) && str_starts_with($key, 'cal_')) {
                     OptionWriter::set($key, $value);
@@ -57,7 +57,7 @@ class SettingsController extends Controller
             }
         }
 
-        if (!empty($data['acf_repeaters'])) {
+        if (! empty($data['acf_repeaters'])) {
             foreach ($data['acf_repeaters'] as $key => $rows) {
                 if (is_string($key) && str_starts_with($key, 'cal_')) {
                     OptionWriter::setRepeater($key, is_array($rows) ? $rows : []);

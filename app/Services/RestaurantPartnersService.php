@@ -11,13 +11,13 @@ class RestaurantPartnersService
     public static function getRestaurants(int $postId): array
     {
         $rows = AcfFieldService::getField($postId, 'cal_rp_restaurants', []);
-        if (!is_array($rows)) {
+        if (! is_array($rows)) {
             return [];
         }
 
         $restaurants = [];
         foreach ($rows as $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
 
@@ -30,7 +30,7 @@ class RestaurantPartnersService
             if ($address !== '') {
                 $lines = preg_split('/\R/u', $address) ?: [];
                 $firstLine = trim((string) ($lines[0] ?? ''));
-                if (strcasecmp($firstLine, $name) === 0 || stripos($firstLine, $name . ' Restaurant') === 0) {
+                if (strcasecmp($firstLine, $name) === 0 || stripos($firstLine, $name.' Restaurant') === 0) {
                     array_shift($lines);
                     $address = trim(implode("\n", $lines));
                 }

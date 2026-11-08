@@ -41,7 +41,7 @@ class MenuService
             ->first();
 
         // Do not fall back to another language's menu — each locale must have its own.
-        if (!$menuTerm) {
+        if (! $menuTerm) {
             return [];
         }
 
@@ -143,20 +143,20 @@ class MenuService
         }
 
         $path = parse_url($url, PHP_URL_PATH);
-        if (!is_string($path) || $path === '') {
+        if (! is_string($path) || $path === '') {
             return null;
         }
 
-        $path = '/' . trim($path, '/');
+        $path = '/'.trim($path, '/');
 
         // Strip locale prefix if present.
         if (preg_match('#^/(en|fr|es|it|zh|zh-tw)(/|$)#i', $path, $m)) {
             $path = substr($path, strlen($m[1]) + 1) ?: '/';
-            $path = '/' . ltrim($path, '/');
+            $path = '/'.ltrim($path, '/');
         }
 
         // /course/{slug} or /courses/{slug}
-        if (!preg_match('#^/courses?/([^/]+)/?$#i', $path, $m)) {
+        if (! preg_match('#^/courses?/([^/]+)/?$#i', $path, $m)) {
             return null;
         }
 
@@ -177,19 +177,19 @@ class MenuService
         }
 
         $path = parse_url($url, PHP_URL_PATH);
-        if (!is_string($path) || $path === '') {
+        if (! is_string($path) || $path === '') {
             return null;
         }
 
-        $path = '/' . trim($path, '/');
+        $path = '/'.trim($path, '/');
 
         if (preg_match('#^/(en|fr|es|it|zh|zh-tw)(/|$)#i', $path, $m)) {
             $path = substr($path, strlen($m[1]) + 1) ?: '/';
-            $path = '/' . ltrim($path, '/');
+            $path = '/'.ltrim($path, '/');
         }
 
         // Single-segment site pages only (not /blog/x, /courses/x, home).
-        if (!preg_match('#^/([a-z0-9\-]+)/?$#i', $path, $m)) {
+        if (! preg_match('#^/([a-z0-9\-]+)/?$#i', $path, $m)) {
             return null;
         }
 
@@ -227,24 +227,24 @@ class MenuService
     {
         // External hosts that are not this site stay as-is (e.g. online course platform).
         $host = parse_url($url, PHP_URL_HOST);
-        if (is_string($host) && $host !== '' && !str_contains($host, 'example.com')) {
+        if (is_string($host) && $host !== '' && ! str_contains($host, 'example.com')) {
             return $url;
         }
 
         $path = parse_url($url, PHP_URL_PATH);
-        if (!is_string($path) || $path === '' || $path === '/') {
+        if (! is_string($path) || $path === '' || $path === '/') {
             return PolylangService::localizedPath('/', $lang);
         }
 
         // Strip any existing locale, then re-prefix with the active language.
-        $path = '/' . trim($path, '/');
+        $path = '/'.trim($path, '/');
         if (preg_match('#^/(en|fr|es|it|zh|zh-tw)(/|$)#i', $path, $m)) {
             $path = substr($path, strlen($m[1]) + 1) ?: '/';
-            $path = '/' . ltrim($path, '/');
+            $path = '/'.ltrim($path, '/');
         }
 
         if (preg_match('#^/courses?/([^/]+)/?$#i', $path, $m)) {
-            $path = '/courses/' . cal_normalize_course_slug(rawurldecode($m[1]));
+            $path = '/courses/'.cal_normalize_course_slug(rawurldecode($m[1]));
         }
 
         return PolylangService::localizedPath($path === '/' ? '/' : $path, $lang);
@@ -274,18 +274,18 @@ class MenuService
         $html = '<ul id="menu-primary-menu" class="crisp-nav-list">';
 
         foreach ($items as $item) {
-            $hasChildren = !empty($item['children']);
+            $hasChildren = ! empty($item['children']);
             $itemPath = rtrim(parse_url($item['url'], PHP_URL_PATH) ?: '/', '/') ?: '/';
             $isActive = $itemPath === $currentPath;
-            $itemClass = 'crisp-nav-item' . ($isActive ? ' current-menu-item' : '');
-            $linkClass = 'crisp-nav-link' . ($isActive ? ' active' : '');
+            $itemClass = 'crisp-nav-item'.($isActive ? ' current-menu-item' : '');
+            $linkClass = 'crisp-nav-link'.($isActive ? ' active' : '');
 
-            $html .= '<li class="' . $itemClass . '">';
-            $html .= '<a href="' . htmlspecialchars($item['url'], ENT_QUOTES, 'UTF-8') . '" class="' . $linkClass . '"';
+            $html .= '<li class="'.$itemClass.'">';
+            $html .= '<a href="'.htmlspecialchars($item['url'], ENT_QUOTES, 'UTF-8').'" class="'.$linkClass.'"';
             if ($isActive) {
                 $html .= ' aria-current="page"';
             }
-            $html .= '>' . htmlspecialchars($item['title'], ENT_QUOTES, 'UTF-8');
+            $html .= '>'.htmlspecialchars($item['title'], ENT_QUOTES, 'UTF-8');
 
             if ($hasChildren) {
                 $html .= '<span class="crisp-nav-dropdown-icon"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg></span>';
@@ -298,12 +298,12 @@ class MenuService
                 foreach ($item['children'] as $child) {
                     $childPath = rtrim(parse_url($child['url'], PHP_URL_PATH) ?: '/', '/') ?: '/';
                     $childActive = $childPath === $currentPath;
-                    $childClass = 'crisp-nav-dropdown-item' . ($childActive ? ' active current-menu-item' : '');
-                    $html .= '<a href="' . htmlspecialchars($child['url'], ENT_QUOTES, 'UTF-8') . '" class="' . $childClass . '"';
+                    $childClass = 'crisp-nav-dropdown-item'.($childActive ? ' active current-menu-item' : '');
+                    $html .= '<a href="'.htmlspecialchars($child['url'], ENT_QUOTES, 'UTF-8').'" class="'.$childClass.'"';
                     if ($childActive) {
                         $html .= ' aria-current="page"';
                     }
-                    $html .= '>' . htmlspecialchars($child['title'], ENT_QUOTES, 'UTF-8') . '</a>';
+                    $html .= '>'.htmlspecialchars($child['title'], ENT_QUOTES, 'UTF-8').'</a>';
                 }
                 $html .= '</div>';
             }

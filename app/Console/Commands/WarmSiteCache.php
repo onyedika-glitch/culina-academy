@@ -57,7 +57,7 @@ class WarmSiteCache extends Command
         ];
 
         foreach ($paths as $path) {
-            $url = $baseUrl . $path;
+            $url = $baseUrl.$path;
             try {
                 $response = Http::timeout(90)
                     ->withHeaders([

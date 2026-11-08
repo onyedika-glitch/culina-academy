@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\IntakeDate;
 use App\Models\Post;
 use App\Models\PostMeta;
 
@@ -20,16 +21,16 @@ class CourseIntakeService
     public static function displayRanges(int $courseId): array
     {
         $ranges = AcfFieldService::getField($courseId, 'ca_display_date_ranges', []);
-        if (!is_array($ranges)) {
+        if (! is_array($ranges)) {
             $ranges = [];
         }
 
         // Get DB intakes for this course
-        $dbIntakes = \App\Models\IntakeDate::where('course_id', $courseId)
+        $dbIntakes = IntakeDate::where('course_id', $courseId)
             ->where('intake_date', '>=', now()->startOfDay())
             ->get()->keyBy(function ($item) {
-            return $item->intake_date?->format('Y-m-d');
-        });
+                return $item->intake_date?->format('Y-m-d');
+            });
 
         $processedDates = [];
         foreach ($ranges as &$range) {
@@ -46,7 +47,7 @@ class CourseIntakeService
 
         // Dynamically add DB intakes that are not in the ACF list
         foreach ($dbIntakes as $dateStr => $dbIntake) {
-            if (!isset($processedDates[$dateStr])) {
+            if (! isset($processedDates[$dateStr])) {
                 $ranges[] = [
                     'start' => $dateStr,
                     'end' => '',
@@ -56,19 +57,20 @@ class CourseIntakeService
         }
 
         return array_values(array_filter($ranges, static function ($range) {
-            if (!is_array($range)) {
+            if (! is_array($range)) {
                 return false;
             }
             if (empty($range['start']) && empty($range['end'])) {
                 return false;
             }
             // Exclude ranges where the start date has already passed
-            if (!empty($range['start'])) {
+            if (! empty($range['start'])) {
                 $startTs = strtotime($range['start']);
                 if ($startTs !== false && $startTs < strtotime('today')) {
                     return false;
                 }
             }
+
             return true;
         }));
     }
@@ -89,7 +91,7 @@ class CourseIntakeService
             }
 
             $status = (string) ($range['status'] ?? 'available');
-            if (!in_array($status, ['available', 'few', 'full'], true)) {
+            if (! in_array($status, ['available', 'few', 'full'], true)) {
                 $status = 'available';
             }
 
@@ -103,22 +105,22 @@ class CourseIntakeService
             $enrollUrl = static::enrollmentUrl($courseId, $start, $status);
             $buttonText = $status === 'full' ? UiTranslationService::translate('Join Waiting List') : UiTranslationService::translate('Book Now');
             $courseUrl = AcfFieldService::migrateUrl(
-                (string) AcfFieldService::getField($courseId, 'ca_course_url', '') ?: '/courses/' . (Post::find($courseId)?->post_name ?? '')
+                (string) AcfFieldService::getField($courseId, 'ca_course_url', '') ?: '/courses/'.(Post::find($courseId)?->post_name ?? '')
             );
 
             $html .= '<div class="ca-dr">';
-            $html .= '<div class="ca-dl">' . esc_html($label) . '</div>';
+            $html .= '<div class="ca-dl">'.esc_html($label).'</div>';
             $html .= '<div class="ca-da">';
-            $html .= '<span class="ca-chip ' . esc_attr($chipClass) . '">' . esc_html($chipText) . '</span>';
+            $html .= '<span class="ca-chip '.esc_attr($chipClass).'">'.esc_html($chipText).'</span>';
             if ($enrollUrl) {
-                $html .= '<a href="' . esc_url($enrollUrl) . '" class="ca-btn ca-view-btn">' . esc_html($buttonText) . '</a>';
+                $html .= '<a href="'.esc_url($enrollUrl).'" class="ca-btn ca-view-btn">'.esc_html($buttonText).'</a>';
             } else {
-                $html .= '<a href="' . esc_url($courseUrl) . '" class="ca-btn ca-view-btn">View Course</a>';
+                $html .= '<a href="'.esc_url($courseUrl).'" class="ca-btn ca-view-btn">View Course</a>';
             }
             $html .= '</div></div>';
         }
 
-        $html .= '<p style="margin-top:12px;color:#666;font-size:.9rem">' . count($ranges) . ' upcoming intake(s) available.</p>';
+        $html .= '<p style="margin-top:12px;color:#666;font-size:.9rem">'.count($ranges).' upcoming intake(s) available.</p>';
 
         return $html;
     }
@@ -143,7 +145,7 @@ class CourseIntakeService
     protected static function formatRangeLabel(string $start, string $end): string
     {
         if ($start && $end) {
-            return static::formatDate($start) . ' – ' . static::formatDate($end);
+            return static::formatDate($start).' – '.static::formatDate($end);
         }
 
         return static::formatDate($start ?: $end);
@@ -153,7 +155,7 @@ class CourseIntakeService
     {
         $ranges = static::displayRanges($courseId);
         if (empty($ranges)) {
-            return '<p class="cal-course-no-intakes">' . UiTranslationService::translate('Please contact us for upcoming course dates.') . '</p>';
+            return '<p class="cal-course-no-intakes">'.UiTranslationService::translate('Please contact us for upcoming course dates.').'</p>';
         }
 
         $html = '<div class="ca-course-intakes">';
@@ -161,7 +163,7 @@ class CourseIntakeService
             $start = (string) ($range['start'] ?? '');
             $end = (string) ($range['end'] ?? '');
             $status = (string) ($range['status'] ?? 'available');
-            if (!in_array($status, ['available', 'few', 'full'], true)) {
+            if (! in_array($status, ['available', 'few', 'full'], true)) {
                 $status = 'available';
             }
 
@@ -179,18 +181,18 @@ class CourseIntakeService
             $html .= '<div class="ca-dr">';
             if ($startLabel && $endLabel) {
                 $html .= '<div class="ca-dates">';
-                $html .= '<div class="ca-dl ca-dl-start"><strong>' . UiTranslationService::translate('Start:') . '</strong> ' . esc_html($startLabel) . '</div>';
-                $html .= '<div class="ca-dl ca-dl-end"><strong>' . UiTranslationService::translate('End:') . '</strong> ' . esc_html($endLabel) . '</div>';
+                $html .= '<div class="ca-dl ca-dl-start"><strong>'.UiTranslationService::translate('Start:').'</strong> '.esc_html($startLabel).'</div>';
+                $html .= '<div class="ca-dl ca-dl-end"><strong>'.UiTranslationService::translate('End:').'</strong> '.esc_html($endLabel).'</div>';
                 $html .= '</div>';
             } else {
-                $label = trim($startLabel . ($startLabel && $endLabel ? ' – ' : '') . $endLabel);
-                $html .= '<div class="ca-dates ca-dates-single"><div class="ca-dl">' . esc_html($label) . '</div></div>';
+                $label = trim($startLabel.($startLabel && $endLabel ? ' – ' : '').$endLabel);
+                $html .= '<div class="ca-dates ca-dates-single"><div class="ca-dl">'.esc_html($label).'</div></div>';
             }
 
             $html .= '<div class="ca-da">';
-            $html .= '<span class="ca-chip ' . esc_attr($chipClass) . '">' . esc_html($chipText) . '</span>';
+            $html .= '<span class="ca-chip '.esc_attr($chipClass).'">'.esc_html($chipText).'</span>';
             if ($enrollUrl) {
-                $html .= '<a href="' . esc_url($enrollUrl) . '" class="ca-btn ca-view-btn">' . esc_html($buttonText) . '</a>';
+                $html .= '<a href="'.esc_url($enrollUrl).'" class="ca-btn ca-view-btn">'.esc_html($buttonText).'</a>';
             }
             $html .= '</div></div>';
         }
@@ -202,6 +204,7 @@ class CourseIntakeService
     protected static function formatDate(string $date): string
     {
         $ts = strtotime($date);
+
         return $ts ? date('d / m / Y', $ts) : $date;
     }
 
@@ -215,7 +218,7 @@ class CourseIntakeService
             $params['waitlist'] = 1;
         }
 
-        return cal_localized_path('/course-enrollment') . '?' . http_build_query($params);
+        return cal_localized_path('/course-enrollment').'?'.http_build_query($params);
     }
 
     /** @param array<int, array{start?:string,end?:string,status?:string}> $ranges */
@@ -223,7 +226,7 @@ class CourseIntakeService
     {
         $normalized = [];
         foreach ($ranges as $range) {
-            if (!is_array($range)) {
+            if (! is_array($range)) {
                 continue;
             }
 
@@ -234,7 +237,7 @@ class CourseIntakeService
             }
 
             $status = (string) ($range['status'] ?? 'available');
-            if (!in_array($status, ['available', 'few', 'full'], true)) {
+            if (! in_array($status, ['available', 'few', 'full'], true)) {
                 $status = 'available';
             }
 
@@ -296,6 +299,7 @@ class CourseIntakeService
             $current = static::displayRanges($courseId);
             if ($current === $ranges) {
                 $skipped++;
+
                 continue;
             }
 

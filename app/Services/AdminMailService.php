@@ -28,7 +28,7 @@ class AdminMailService
 
             return true;
         } catch (\Throwable $e) {
-            Log::error('Mail send failed: ' . $e->getMessage(), [
+            Log::error('Mail send failed: '.$e->getMessage(), [
                 'mailable' => $mailableClass,
             ]);
 

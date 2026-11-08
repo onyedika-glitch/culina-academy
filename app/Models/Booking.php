@@ -53,6 +53,7 @@ class Booking extends Model
         if ($intakeDate) {
             $query->where('intake_date', $intakeDate);
         }
+
         return $query;
     }
 
@@ -60,14 +61,15 @@ class Booking extends Model
 
     public function fullName(): string
     {
-        return trim($this->first_name . ' ' . $this->last_name);
+        return trim($this->first_name.' '.$this->last_name);
     }
 
     public function depositFormatted(): string
     {
         $amount = $this->deposit_amount_cents / 100;
         $symbol = strtoupper($this->currency ?? 'gbp') === 'GBP' ? '£' : strtoupper($this->currency ?? '');
-        return $symbol . number_format($amount, 2);
+
+        return $symbol.number_format($amount, 2);
     }
 
     /**
@@ -79,6 +81,7 @@ class Booking extends Model
         if ($intakeDate) {
             $query->where('intake_date', $intakeDate);
         }
+
         return $query->count();
     }
 }

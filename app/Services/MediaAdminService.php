@@ -3,13 +3,14 @@
 namespace App\Services;
 
 use App\Models\Post;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class MediaAdminService
 {
-    /** @return \Illuminate\Contracts\Pagination\LengthAwarePaginator */
+    /** @return LengthAwarePaginator */
     public static function paginate(int $perPage = 30, ?string $search = null)
     {
         $query = Post::query()
@@ -52,11 +53,11 @@ class MediaAdminService
         $dir = "uploads/{$year}/{$month}";
         $filename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
         $ext = $file->getClientOriginalExtension() ?: $file->extension();
-        $storedName = $filename . '-' . uniqid() . '.' . $ext;
+        $storedName = $filename.'-'.uniqid().'.'.$ext;
 
         $file->move(public_path($dir), $storedName);
         $relativePath = "{$year}/{$month}/{$storedName}";
-        $publicUrl = '/' . $dir . '/' . $storedName;
+        $publicUrl = '/'.$dir.'/'.$storedName;
 
         $id = DB::table('wp_posts')->insertGetId([
             'post_author' => auth('admin')->id() ?: 1,
@@ -102,7 +103,7 @@ class MediaAdminService
             ->value('meta_value');
 
         if ($file) {
-            $path = public_path('uploads/' . ltrim($file, '/'));
+            $path = public_path('uploads/'.ltrim($file, '/'));
             if (is_file($path)) {
                 @unlink($path);
             }

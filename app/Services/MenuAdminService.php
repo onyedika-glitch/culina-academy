@@ -93,6 +93,7 @@ class MenuAdminService
                 ]);
                 static::setMenuItemMeta($itemId, $type, $object, $objectId, $url, $parent, $target);
                 $keptIds[] = $itemId;
+
                 continue;
             }
 
@@ -107,7 +108,7 @@ class MenuAdminService
                 'comment_status' => 'closed',
                 'ping_status' => 'closed',
                 'post_password' => '',
-                'post_name' => 'menu-item-' . uniqid(),
+                'post_name' => 'menu-item-'.uniqid(),
                 'to_ping' => '',
                 'pinged' => '',
                 'post_modified' => $now,

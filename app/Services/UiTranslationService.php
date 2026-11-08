@@ -136,7 +136,7 @@ class UiTranslationService
             'Intensive Professional Pastry Programme (80 Hours)' => 'Programme Intensif de Pâtisserie Professionnelle (80 heures)',
             'Restaurant Management and Food Science (600 hours)' => 'Gestion de Restaurant et Sciences Alimentaires (600 heures)',
             'Vegetarian and Vegan Cooking Course (80 Hours)' => 'Cours de Cuisine Végétarienne et Végane (80 heures)',
-            'Introduction to the Professional Chef Online Course' => "Introduction au cours de chef professionnel en ligne",
+            'Introduction to the Professional Chef Online Course' => 'Introduction au cours de chef professionnel en ligne',
             'Advanced Techniques Online Course' => 'Cours en ligne de techniques avancées',
             'Advanced Techniques Online Course' => 'Cours en ligne de techniques avancées',
             'Download programme' => 'Télécharger le programme',
@@ -264,7 +264,7 @@ class UiTranslationService
             'Sviluppo alberghiero' => 'Collabora con noi',
             'Careers' => 'Percorsi Professionali',
             'Carriere' => 'Percorsi Professionali',
-            
+
             // Refined Professional Course Titles — using natural Italian phrasing
             'Advanced Professional Chef Course' => 'Corso Avanzato per Chef Professionista',
             'Corso Cuoco Professionista Avanzato' => 'Corso Avanzato per Chef Professionista',

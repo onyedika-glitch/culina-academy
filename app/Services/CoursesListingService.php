@@ -19,7 +19,7 @@ class CoursesListingService
             ->get();
 
         if ($courses->isEmpty()) {
-            return '<div class="ca-wrap"><p>' . esc_html(cal_i18n_text('No courses available right now.')) . '</p></div>';
+            return '<div class="ca-wrap"><p>'.esc_html(cal_i18n_text('No courses available right now.')).'</p></div>';
         }
 
         foreach ($courses as $course) {
@@ -30,7 +30,7 @@ class CoursesListingService
         ?>
         <div class="ca-wrap">
             <main class="ca-grid">
-                <?php foreach ($courses as $course):
+                <?php foreach ($courses as $course) {
                     $id = $course->ID;
                     // Always use this language's course permalink (ignore cross-language ca_course_url).
                     $url = PolylangService::buildPostUrl((int) $id, $lang);
@@ -41,17 +41,17 @@ class CoursesListingService
                     $badge = CourseDisplayService::badge((string) AcfFieldService::getField($id, 'ca_badge'), $lang);
                     $price = CulinaAcademy::formatPrice($id);
                     $durationLine = CulinaAcademy::formatCourseDuration($hours, $duration, $lang);
-                ?>
+                    ?>
                 <article class="ca-card">
-                    <?php if ($badge): ?><div class="ca-badge"><?= esc_html($badge) ?></div><?php endif; ?>
+                    <?php if ($badge) { ?><div class="ca-badge"><?= esc_html($badge) ?></div><?php } ?>
                     <div class="ca-ci">
-                        <?php if ($image): ?><img src="<?= esc_url($image) ?>" alt="<?= esc_attr($course->post_title) ?>" loading="lazy"><?php endif; ?>
+                        <?php if ($image) { ?><img src="<?= esc_url($image) ?>" alt="<?= esc_attr($course->post_title) ?>" loading="lazy"><?php } ?>
                     </div>
                     <div class="ca-cb">
                         <h2 class="ca-ct"><a href="<?= esc_url($url) ?>"><?= esc_html($course->post_title) ?></a></h2>
                         <div class="ca-cm">
-                            <?php if ($location): ?><span><?= esc_html(cal_i18n_text('Location:')) ?> <?= esc_html($location) ?></span><?php endif; ?>
-                            <?php if ($durationLine): ?><span><?= esc_html(cal_i18n_text('Duration:')) ?> <?= esc_html($durationLine) ?></span><?php endif; ?>
+                            <?php if ($location) { ?><span><?= esc_html(cal_i18n_text('Location:')) ?> <?= esc_html($location) ?></span><?php } ?>
+                            <?php if ($durationLine) { ?><span><?= esc_html(cal_i18n_text('Duration:')) ?> <?= esc_html($durationLine) ?></span><?php } ?>
                         </div>
                         <div class="ca-cf">
                             <div class="ca-price"><?= $price ?></div>
@@ -59,7 +59,7 @@ class CoursesListingService
                         </div>
                     </div>
                 </article>
-                <?php endforeach; ?>
+                <?php } ?>
             </main>
         </div>
         <div id="caOv" class="ca-ov" role="dialog" aria-modal="true">

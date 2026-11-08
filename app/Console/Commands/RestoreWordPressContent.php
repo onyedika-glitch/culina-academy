@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\CourseDisplayService;
 use App\Services\WordPressSourceSyncService;
 use Illuminate\Console\Command;
 
@@ -16,8 +17,8 @@ class RestoreWordPressContent extends Command
     {
         $sqlPath = $this->option('sql') ?: WordPressSourceSyncService::defaultSqlPath();
 
-        $this->info('Restoring content from WordPress export: ' . $sqlPath);
-        $this->warn('Source: ' . WordPressSourceSyncService::SOURCE_BASE_URL);
+        $this->info('Restoring content from WordPress export: '.$sqlPath);
+        $this->warn('Source: '.WordPressSourceSyncService::SOURCE_BASE_URL);
         $this->newLine();
 
         try {
@@ -33,7 +34,7 @@ class RestoreWordPressContent extends Command
 
         $this->newLine();
         $this->info('Repairing course descriptions ...');
-        $descriptions = \App\Services\CourseDisplayService::fixCourseDescriptions();
+        $descriptions = CourseDisplayService::fixCourseDescriptions();
         $this->info("Course descriptions: {$descriptions['updated']} repaired.");
 
         return $result['failed'] > 0 ? self::FAILURE : self::SUCCESS;

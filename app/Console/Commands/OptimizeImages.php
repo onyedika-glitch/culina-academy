@@ -41,7 +41,7 @@ class OptimizeImages extends Command
         }
 
         $mode = $this->option('priority') ? 'priority images' : 'uploads directory';
-        $this->info('Scanning ' . $mode . ' in ' . $optimizer->uploadsRoot());
+        $this->info('Scanning '.$mode.' in '.$optimizer->uploadsRoot());
 
         if ($this->option('dry-run')) {
             $this->warn('Dry run only — no files will be written.');
@@ -50,28 +50,28 @@ class OptimizeImages extends Command
         $stats = $optimizer->run();
 
         $this->newLine();
-        $this->line('Processed: ' . $stats['processed']);
-        $this->line('Skipped:   ' . $stats['skipped']);
-        $this->line('Failed:    ' . $stats['failed']);
-        $this->line('Saved:     ' . $this->formatBytes($stats['saved_bytes']));
+        $this->line('Processed: '.$stats['processed']);
+        $this->line('Skipped:   '.$stats['skipped']);
+        $this->line('Failed:    '.$stats['failed']);
+        $this->line('Saved:     '.$this->formatBytes($stats['saved_bytes']));
 
         if ($stats['errors'] !== []) {
             $this->newLine();
             $this->warn('Errors:');
             foreach (array_slice($stats['errors'], 0, 20) as $error) {
-                $this->line(' - ' . $error);
+                $this->line(' - '.$error);
             }
 
             if (count($stats['errors']) > 20) {
-                $this->line(' - ... and ' . (count($stats['errors']) - 20) . ' more');
+                $this->line(' - ... and '.(count($stats['errors']) - 20).' more');
             }
         }
 
-        if (!$this->option('dry-run') && $stats['processed'] > 0) {
+        if (! $this->option('dry-run') && $stats['processed'] > 0) {
             AcfFieldService::clearCache();
             SiteCacheService::clearAll();
             $this->info('Cleared site caches so WebP URLs are picked up immediately.');
-            $this->line('Next: php artisan cal:warm-cache --url=' . config('app.url'));
+            $this->line('Next: php artisan cal:warm-cache --url='.config('app.url'));
         }
 
         return $stats['failed'] > 0 ? self::FAILURE : self::SUCCESS;
@@ -80,13 +80,13 @@ class OptimizeImages extends Command
     protected function formatBytes(int $bytes): string
     {
         if ($bytes < 1024) {
-            return $bytes . ' B';
+            return $bytes.' B';
         }
 
         if ($bytes < 1024 * 1024) {
-            return round($bytes / 1024, 1) . ' KB';
+            return round($bytes / 1024, 1).' KB';
         }
 
-        return round($bytes / (1024 * 1024), 2) . ' MB';
+        return round($bytes / (1024 * 1024), 2).' MB';
     }
 }

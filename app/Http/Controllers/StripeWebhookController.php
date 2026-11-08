@@ -10,6 +10,7 @@ use App\Services\StripeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Stripe\Exception\SignatureVerificationException;
 
 class StripeWebhookController extends Controller
 {
@@ -30,13 +31,15 @@ class StripeWebhookController extends Controller
 
         try {
             $event = StripeService::constructWebhookEvent($payload, $sigHeader);
-        } catch (\Stripe\Exception\SignatureVerificationException $e) {
+        } catch (SignatureVerificationException $e) {
             Log::warning('Stripe webhook signature verification failed.', [
                 'error' => $e->getMessage(),
             ]);
+
             return response('Invalid signature.', 400);
         } catch (\Throwable $e) {
-            Log::error('Stripe webhook error: ' . $e->getMessage());
+            Log::error('Stripe webhook error: '.$e->getMessage());
+
             return response('Webhook error.', 400);
         }
 
@@ -51,7 +54,7 @@ class StripeWebhookController extends Controller
                 break;
 
             default:
-                Log::info('Unhandled Stripe event: ' . $event->type);
+                Log::info('Unhandled Stripe event: '.$event->type);
                 break;
         }
 
@@ -65,15 +68,17 @@ class StripeWebhookController extends Controller
     {
         $booking = Booking::where('stripe_checkout_session_id', $session->id)->first();
 
-        if (!$booking) {
+        if (! $booking) {
             Log::warning('Stripe checkout.session.completed: no booking found.', [
                 'session_id' => $session->id,
             ]);
+
             return;
         }
 
         if ($booking->status === 'confirmed') {
-            Log::info('Booking #' . $booking->id . ' already confirmed, skipping.');
+            Log::info('Booking #'.$booking->id.' already confirmed, skipping.');
+
             return;
         }
 
@@ -98,13 +103,13 @@ class StripeWebhookController extends Controller
             $courseTitle = $booking->course?->post_title ?? 'Culina Academy Course';
             Mail::to($booking->email)->send(new BookingConfirmed($booking, $courseTitle));
         } catch (\Throwable $e) {
-            Log::error('Booking confirmation email failed: ' . $e->getMessage());
+            Log::error('Booking confirmation email failed: '.$e->getMessage());
         }
 
         // Notify admin
         AdminMailService::send(BookingConfirmed::class, $booking, $booking->course?->post_title);
 
-        Log::info('Booking #' . $booking->id . ' confirmed via Stripe webhook.');
+        Log::info('Booking #'.$booking->id.' confirmed via Stripe webhook.');
     }
 
     /**
@@ -116,7 +121,7 @@ class StripeWebhookController extends Controller
 
         if ($booking && $booking->status === 'pending') {
             $booking->update(['status' => 'expired']);
-            Log::info('Booking #' . $booking->id . ' expired (Stripe session expired).');
+            Log::info('Booking #'.$booking->id.' expired (Stripe session expired).');
         }
     }
 }

@@ -32,9 +32,9 @@ class AuthController extends Controller
             ->first();
 
         if (
-            !$user
-            || !WordPressPasswordHasher::check($credentials['password'], $user->user_pass)
-            || !$user->isAdministrator()
+            ! $user
+            || ! WordPressPasswordHasher::check($credentials['password'], $user->user_pass)
+            || ! $user->isAdministrator()
         ) {
             return back()
                 ->withInput($request->only('username'))

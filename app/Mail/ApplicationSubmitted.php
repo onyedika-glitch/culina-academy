@@ -17,10 +17,10 @@ class ApplicationSubmitted extends Mailable
 
     public function envelope(): Envelope
     {
-        $name = trim($this->application->first_name . ' ' . $this->application->surname);
+        $name = trim($this->application->first_name.' '.$this->application->surname);
 
         return new Envelope(
-            subject: 'New Course Application from ' . $name,
+            subject: 'New Course Application from '.$name,
             replyTo: [$this->application->email],
         );
     }

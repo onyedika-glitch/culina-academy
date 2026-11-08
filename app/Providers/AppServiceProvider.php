@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Services\SeoService;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,13 +25,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if (config('app.env') === 'production') {
-            \Illuminate\Support\Facades\URL::forceScheme('https');
+            URL::forceScheme('https');
         }
 
         Paginator::defaultView('admin.pagination');
         Paginator::defaultSimpleView('admin.pagination');
 
-        \Illuminate\Support\Facades\Gate::define('view-404-monitor', function ($user) {
+        Gate::define('view-404-monitor', function ($user) {
             return $user && $user->isAdministrator();
         });
 

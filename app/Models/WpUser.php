@@ -87,7 +87,7 @@ class WpUser extends Authenticatable
     {
         unset($this->attributes[static::REMEMBER_TOKEN_META], $this->attributes['remember_token']);
 
-        if (!$this->isDirty()) {
+        if (! $this->isDirty()) {
             return true;
         }
 
@@ -101,12 +101,12 @@ class WpUser extends Authenticatable
             ->whereIn('meta_key', ['wp_capabilities', 'SERVMASK_PREFIX_capabilities'])
             ->value('meta_value');
 
-        if (!$raw) {
+        if (! $raw) {
             return false;
         }
 
         $caps = @unserialize($raw, ['allowed_classes' => false]);
 
-        return is_array($caps) && !empty($caps['administrator']);
+        return is_array($caps) && ! empty($caps['administrator']);
     }
 }

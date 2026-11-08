@@ -77,13 +77,13 @@ abstract class PostResourceController extends Controller
     {
         $data = $this->validated($request);
         $post = PostAdminService::create($data);
-        if (!empty($data['seo'])) {
+        if (! empty($data['seo'])) {
             SeoService::saveForPost($post->ID, $data['seo']);
         }
 
         return redirect()
             ->route($this->editRoute(), $post->ID)
-            ->with('success', $this->resourceLabel() . ' created.');
+            ->with('success', $this->resourceLabel().' created.');
     }
 
     public function edit(int $id)
@@ -98,13 +98,13 @@ abstract class PostResourceController extends Controller
         $post = Post::with('meta')->where('post_type', $this->postType())->findOrFail($id);
         $data = $this->validated($request);
         PostAdminService::update($post, $data);
-        if (!empty($data['seo'])) {
+        if (! empty($data['seo'])) {
             SeoService::saveForPost($post->ID, $data['seo']);
         }
 
         return redirect()
             ->route($this->editRoute(), $post->ID)
-            ->with('success', $this->resourceLabel() . ' saved.');
+            ->with('success', $this->resourceLabel().' saved.');
     }
 
     public function destroy(int $id)
@@ -114,7 +114,7 @@ abstract class PostResourceController extends Controller
 
         return redirect()
             ->route($this->indexRoute())
-            ->with('success', $this->resourceLabel() . ' moved to trash.');
+            ->with('success', $this->resourceLabel().' moved to trash.');
     }
 
     protected function editViewData(Post $post, bool $isNew): array
@@ -148,7 +148,7 @@ abstract class PostResourceController extends Controller
         $validated = $request->validate([
             'post_title' => ['required', 'string', 'max:500'],
             'post_name' => ['nullable', 'string', 'max:200'],
-            'post_status' => ['required', 'in:' . implode(',', PostAdminService::statuses())],
+            'post_status' => ['required', 'in:'.implode(',', PostAdminService::statuses())],
             'post_content' => ['nullable', 'string'],
             'post_excerpt' => ['nullable', 'string'],
             'menu_order' => ['nullable', 'integer'],

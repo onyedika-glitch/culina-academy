@@ -27,10 +27,10 @@ class LegacySiteSyncService
 
     public static function fetchLegacyCourseHtml(string $legacyPath): ?string
     {
-        $url = static::LEGACY_BASE_URL . '/en/cooking-courses/' . trim($legacyPath, '/') . '.html';
+        $url = static::LEGACY_BASE_URL.'/en/cooking-courses/'.trim($legacyPath, '/').'.html';
 
         $response = Http::timeout(30)->get($url);
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             return null;
         }
 
@@ -55,7 +55,7 @@ class LegacySiteSyncService
         $text = html_entity_decode(strip_tags($snippet), ENT_QUOTES | ENT_HTML5, 'UTF-8');
         $text = preg_replace('/\s+/u', ' ', $text) ?? $text;
 
-        if (!preg_match_all('/Start:\s*(\d{2}\s*\/\s*\d{2}\s*\/\s*\d{4})\s*-\s*End:\s*(\d{2}\s*\/\s*\d{2}\s*\/\s*\d{4})/u', $text, $matches, PREG_SET_ORDER)) {
+        if (! preg_match_all('/Start:\s*(\d{2}\s*\/\s*\d{2}\s*\/\s*\d{4})\s*-\s*End:\s*(\d{2}\s*\/\s*\d{2}\s*\/\s*\d{4})/u', $text, $matches, PREG_SET_ORDER)) {
             return null;
         }
 
@@ -87,7 +87,7 @@ class LegacySiteSyncService
 
         $price = null;
         if (preg_match('/Fees:\s*(?:£|&pound;)?\s*([0-9,]+)/u', $text, $feeMatch)) {
-            $price = '£' . str_replace(',', '', $feeMatch[1]);
+            $price = '£'.str_replace(',', '', $feeMatch[1]);
         }
 
         $location = null;
@@ -107,7 +107,7 @@ class LegacySiteSyncService
     public static function normalizeLegacyDate(string $value): string
     {
         $value = preg_replace('/\s+/u', ' ', trim($value)) ?? '';
-        if (!preg_match('/^(\d{2})\s*\/\s*(\d{2})\s*\/\s*(\d{4})$/', $value, $match)) {
+        if (! preg_match('/^(\d{2})\s*\/\s*(\d{2})\s*\/\s*(\d{4})$/', $value, $match)) {
             return '';
         }
 
@@ -229,7 +229,7 @@ class LegacySiteSyncService
             'path' => $legacyPath,
             'course_id' => $englishCourseId,
             'updated' => $changed,
-            'skipped' => !$changed,
+            'skipped' => ! $changed,
             'error' => null,
             'ranges' => count($parsed['ranges']),
         ];
@@ -247,7 +247,7 @@ class LegacySiteSyncService
             $result = static::syncLegacyCoursePath($legacyPath, $englishCourseId);
             $results[] = $result;
 
-            if (!empty($result['error'])) {
+            if (! empty($result['error'])) {
                 $failed++;
             } elseif ($result['updated']) {
                 $updated++;
