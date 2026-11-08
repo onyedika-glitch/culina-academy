@@ -355,10 +355,12 @@ class BookingController extends Controller
             'intake_id' => 'nullable|string|max:50',
         ]);
 
-        $fullName = trim((string) ($data['user_name'] ?? ''));
-        $parts = preg_split('/\s+/', $fullName, 2);
-        $firstName = $parts[0] ?? 'Guest';
-        $lastName = $parts[1] ?? '';
+        $course = Post::find((int) $data['course_id']);
+        if (!$course || $course->post_type !== 'ca_course') {
+            return response()->json(['success' => false, 'data' => 'Course not found.'], 404);
+        }
+
+        [$firstName, $lastName] = static::splitFullName((string) ($data['user_name'] ?? ''));
 
         $entry = Waitlist::create([
             'course_id' => (int) $data['course_id'],
@@ -372,8 +374,7 @@ class BookingController extends Controller
             'page_url' => (string) $request->input('page_url', $request->headers->get('referer', '')),
         ]);
 
-        $course = Post::find($entry->course_id);
-        AdminMailService::send(WaitlistJoined::class, $entry, $course?->post_title);
+        AdminMailService::send(WaitlistJoined::class, $entry, $course->post_title);
 
         return response()->json([
             'success' => true,
@@ -383,5 +384,23 @@ class BookingController extends Controller
                 ),
             ],
         ]);
+    }
+
+    /**
+     * Split a single "full name" field into first and last name.
+     * A blank name becomes "Guest" so admin lists never show an empty name.
+     *
+     * @return array{0:string,1:string}
+     */
+    protected static function splitFullName(string $fullName): array
+    {
+        $fullName = trim($fullName);
+        if ($fullName === '') {
+            return ['Guest', ''];
+        }
+
+        $parts = preg_split('/\s+/', $fullName, 2) ?: [$fullName];
+
+        return [$parts[0], $parts[1] ?? ''];
     }
 }
